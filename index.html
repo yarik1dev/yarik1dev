@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Yarik1 — System Engineer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' rx='4' fill='none' stroke='%23e6b800' stroke-width='2' transform='rotate(45,16,16)'/><polygon points='16,6 22,26 10,26' fill='%23e6b800' opacity='0.8'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -39,6 +40,18 @@
             cursor: none;
         }
         body.mobile { cursor: auto; }
+        body.bare-metal .holo-corner,
+        body.bare-metal .holo-ring,
+        body.bare-metal #holoCanvas,
+        body.bare-metal .scanlines,
+        body.bare-metal #cursor,
+        body.bare-metal .terminal-ticker,
+        body.bare-metal #particlesContainer,
+        body.bare-metal #backToTop { display: none !important; }
+        body.bare-metal { cursor: auto !important; }
+        body.bare-metal section { padding: 60px 3rem; }
+        body.bare-metal nav { background: #040408; border-bottom: 1px solid #222; }
+        body.bare-metal .bg-grid { opacity: 0.3; }
 
         /* === CUSTOM CURSOR === */
         #cursor {
@@ -73,50 +86,25 @@
         #cursor.hover .cursor-corner { border-color: #fff; }
         #cursor.hover .cursor-dot { background: #fff; box-shadow: 0 0 8px #fff, 0 0 16px #fff; }
 
-        /* === BACKGROUND: HOLOGRAPHIC GRID === */
-        #holoCanvas {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.75;
-        }
-
-        /* === SCANLINES === */
+        /* === BACKGROUND === */
+        #holoCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.75; }
         .scanlines {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
+            position: fixed; inset: 0; z-index: 1; pointer-events: none;
             background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
         }
-
-        /* === PARTICLES === */
-        #particlesContainer {
-            position: fixed;
-            inset: 0;
-            z-index: 998;
-            pointer-events: none;
-        }
+        #particlesContainer { position: fixed; inset: 0; z-index: 998; pointer-events: none; }
         .click-particle {
-            position: absolute;
-            width: 4px; height: 4px;
-            background: var(--gold-bright);
-            box-shadow: 0 0 6px var(--gold);
-            animation: particleBurst 0.7s ease-out forwards;
-            pointer-events: none;
+            position: absolute; width: 4px; height: 4px;
+            background: var(--gold-bright); box-shadow: 0 0 6px var(--gold);
+            animation: particleBurst 0.7s ease-out forwards; pointer-events: none;
         }
         @keyframes particleBurst {
             0% { transform: translate(0,0) scale(1); opacity: 1; }
             100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
         }
 
-        /* === CORNER HOLOGRAMS === */
-        .holo-corner {
-            position: fixed;
-            z-index: 3;
-            pointer-events: none;
-        }
+        /* === HOLO CORNERS === */
+        .holo-corner { position: fixed; z-index: 3; pointer-events: none; }
         .holo-corner-tl { top: 80px; left: 2rem; width: 100px; height: 100px; border-top: 1px solid rgba(230,184,0,0.5); border-left: 1px solid rgba(230,184,0,0.5); animation: cornerPulse 4s ease-in-out infinite; }
         .holo-corner-tr { top: 80px; right: 2rem; width: 100px; height: 100px; border-top: 1px solid rgba(230,184,0,0.5); border-right: 1px solid rgba(230,184,0,0.5); animation: cornerPulse 4s ease-in-out 1.5s infinite; }
         .holo-corner-bl { bottom: 2rem; left: 2rem; width: 100px; height: 100px; border-bottom: 1px solid rgba(230,184,0,0.5); border-left: 1px solid rgba(230,184,0,0.5); animation: cornerPulse 4s ease-in-out 0.8s infinite; }
@@ -128,215 +116,68 @@
         .holo-corner-br::after { bottom: -3px; right: -3px; }
         @keyframes cornerPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 0.9; } }
 
-        /* === FLOATING HOLO RINGS === */
-        .holo-ring {
-            position: fixed;
-            z-index: 2;
-            pointer-events: none;
-            border-radius: 50%;
-            border: 1px solid rgba(230,184,0,0.2);
-            animation: ringFloat 6s ease-in-out infinite;
-        }
+        .holo-ring { position: fixed; z-index: 2; pointer-events: none; border-radius: 50%; border: 1px solid rgba(230,184,0,0.2); animation: ringFloat 6s ease-in-out infinite; }
         .holo-ring:nth-child(1) { width: 140px; height: 140px; top: 12%; left: -5%; animation-delay: 0s; }
         .holo-ring:nth-child(2) { width: 100px; height: 100px; top: 75%; right: -3%; animation-delay: 2s; }
         @keyframes ringFloat { 0%,100% { transform: translate(0, 0) scale(1); opacity: 0.25; } 25% { transform: translate(15px, -20px) scale(1.05); opacity: 0.5; } 50% { transform: translate(-10px, -10px) scale(0.95); opacity: 0.35; } 75% { transform: translate(10px, 15px) scale(1.02); opacity: 0.45; } }
 
-        /* === PRELOADER === */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background: var(--bg-void);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10001;
-            transition: opacity 0.5s ease, visibility 0.5s;
-            gap: 2.5rem;
-        }
+        /* === LOADER === */
+        #loader { position: fixed; inset: 0; background: var(--bg-void); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10001; transition: opacity 0.5s ease, visibility 0.5s; gap: 2.5rem; }
         #loader.hidden { opacity: 0; visibility: hidden; }
-        .loader-geo {
-            width: 80px; height: 80px;
-            position: relative;
-        }
-        .loader-piece {
-            position: absolute;
-            width: 25px; height: 25px;
-            border: 2px solid var(--gold);
-            opacity: 0;
-            animation: pieceAssemble 1.5s ease-in-out infinite;
-        }
+        .loader-geo { width: 80px; height: 80px; position: relative; }
+        .loader-piece { position: absolute; width: 25px; height: 25px; border: 2px solid var(--gold); opacity: 0; animation: pieceAssemble 1.5s ease-in-out infinite; }
         .loader-piece:nth-child(1) { top: 0; left: 0; animation-delay: 0s; }
         .loader-piece:nth-child(2) { top: 0; right: 0; animation-delay: 0.2s; }
         .loader-piece:nth-child(3) { bottom: 0; left: 0; animation-delay: 0.4s; }
         .loader-piece:nth-child(4) { bottom: 0; right: 0; animation-delay: 0.6s; }
-        @keyframes pieceAssemble {
-            0% { transform: scale(0) rotate(0deg); opacity: 0; }
-            40% { transform: scale(1.2) rotate(90deg); opacity: 1; box-shadow: 0 0 15px rgba(230,184,0,0.5); }
-            60% { transform: scale(1) rotate(90deg); opacity: 1; }
-            100% { transform: scale(1) rotate(90deg); opacity: 0.3; }
-        }
-        .loader-text {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            letter-spacing: 6px;
-            color: var(--gold-pale);
-        }
-        .loader-text span {
-            display: inline-block;
-            opacity: 0;
-            animation: charAppear 1.8s ease-in-out infinite;
-        }
-        .loader-text span:nth-child(1) { animation-delay: 0s; }
-        .loader-text span:nth-child(2) { animation-delay: 0.1s; }
-        .loader-text span:nth-child(3) { animation-delay: 0.2s; }
-        .loader-text span:nth-child(4) { animation-delay: 0.3s; }
-        .loader-text span:nth-child(5) { animation-delay: 0.4s; }
-        .loader-text span:nth-child(6) { animation-delay: 0.5s; }
-        .loader-text span:nth-child(7) { animation-delay: 0.6s; }
-        .loader-text span:nth-child(8) { animation-delay: 0.7s; }
-        .loader-text span:nth-child(9) { animation-delay: 0.8s; }
-        .loader-text span:nth-child(10) { animation-delay: 0.9s; }
-        .loader-text span:nth-child(11) { animation-delay: 1.0s; }
-        @keyframes charAppear {
-            0%, 100% { opacity: 0.2; text-shadow: none; }
-            30% { opacity: 1; text-shadow: 0 0 10px var(--gold); }
-            60% { opacity: 0.3; }
-        }
+        @keyframes pieceAssemble { 0% { transform: scale(0) rotate(0deg); opacity: 0; } 40% { transform: scale(1.2) rotate(90deg); opacity: 1; box-shadow: 0 0 15px rgba(230,184,0,0.5); } 60% { transform: scale(1) rotate(90deg); opacity: 1; } 100% { transform: scale(1) rotate(90deg); opacity: 0.3; } }
+        .loader-text { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 6px; color: var(--gold-pale); }
+        .loader-text span { display: inline-block; opacity: 0; animation: charAppear 1.8s ease-in-out infinite; }
+        .loader-text span:nth-child(1) { animation-delay: 0s; } .loader-text span:nth-child(2) { animation-delay: 0.1s; } .loader-text span:nth-child(3) { animation-delay: 0.2s; } .loader-text span:nth-child(4) { animation-delay: 0.3s; } .loader-text span:nth-child(5) { animation-delay: 0.4s; } .loader-text span:nth-child(6) { animation-delay: 0.5s; } .loader-text span:nth-child(7) { animation-delay: 0.6s; } .loader-text span:nth-child(8) { animation-delay: 0.7s; } .loader-text span:nth-child(9) { animation-delay: 0.8s; } .loader-text span:nth-child(10) { animation-delay: 0.9s; } .loader-text span:nth-child(11) { animation-delay: 1.0s; }
+        @keyframes charAppear { 0%,100% { opacity: 0.2; text-shadow: none; } 30% { opacity: 1; text-shadow: 0 0 10px var(--gold); } 60% { opacity: 0.3; } }
 
-        /* === BACK TO TOP === */
-        #backToTop {
-            position: fixed;
-            bottom: 3rem; right: 2rem;
-            z-index: 999;
-            width: 40px; height: 40px;
-            border: 1px solid var(--border-gold);
-            background: rgba(4,4,8,0.8);
-            backdrop-filter: blur(10px);
-            cursor: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s;
-            pointer-events: none;
-        }
-        #backToTop.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        #backToTop:hover {
-            border-color: var(--gold-bright);
-            box-shadow: 0 0 20px rgba(230,184,0,0.3);
-        }
-        #backToTop::after {
-            content: '';
-            width: 10px; height: 10px;
-            border-top: 2px solid var(--gold);
-            border-right: 2px solid var(--gold);
-            transform: rotate(-45deg) translateY(2px);
-            transition: all 0.3s;
-        }
-        #backToTop:hover::after {
-            border-color: var(--gold-bright);
-            box-shadow: 0 0 8px var(--gold);
-        }
+        #backToTop { position: fixed; bottom: 3rem; right: 2rem; z-index: 999; width: 40px; height: 40px; border: 1px solid var(--border-gold); background: rgba(4,4,8,0.8); backdrop-filter: blur(10px); cursor: none; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(20px); transition: all 0.4s; pointer-events: none; }
+        #backToTop.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        #backToTop:hover { border-color: var(--gold-bright); box-shadow: 0 0 20px rgba(230,184,0,0.3); }
+        #backToTop::after { content: ''; width: 10px; height: 10px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); transform: rotate(-45deg) translateY(2px); transition: all 0.3s; }
+        #backToTop:hover::after { border-color: var(--gold-bright); box-shadow: 0 0 8px var(--gold); }
 
-        /* === EXPORT BUTTON === */
-        .export-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: transparent;
-            border: 1px solid var(--border-gold);
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 0.5rem 1.2rem;
-            cursor: none;
-            transition: all 0.3s;
-            margin-top: 1rem;
-        }
-        .export-btn:hover {
-            border-color: var(--gold-bright);
-            color: var(--gold-bright);
-            box-shadow: 0 0 20px rgba(230,184,0,0.2);
-        }
+        .export-btn { display: inline-flex; align-items: center; gap: 0.6rem; background: transparent; border: 1px solid var(--border-gold); color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; padding: 0.5rem 1.2rem; cursor: none; transition: all 0.3s; margin-top: 1rem; }
+        .export-btn:hover { border-color: var(--gold-bright); color: var(--gold-bright); box-shadow: 0 0 20px rgba(230,184,0,0.2); }
 
-        /* === NAVIGATION === */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            background: rgba(4,4,8,0.9);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid var(--border-gold);
-            padding: 0 3rem;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .nav-brand {
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--gold-bright);
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(230,184,0,0.4);
-        }
-        .nav-brand span { font-weight: 400; color: var(--text-dim); font-size: 0.6rem; letter-spacing: 2px; margin-left: 0.5rem; text-shadow: none; }
-        .nav-links { display: flex; list-style: none; gap: 0; }
-        .nav-links a {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 0.5rem 1.2rem;
-            transition: all 0.3s;
-            border: 1px solid transparent;
-            cursor: none;
-        }
+        .bare-metal-toggle { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-dim); background: none; border: 1px solid transparent; padding: 0.3rem 0.6rem; cursor: none; transition: all 0.3s; letter-spacing: 1px; }
+        .bare-metal-toggle:hover { border-color: var(--border-gold); color: var(--gold-pale); }
+
+        /* === NAV === */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(4,4,8,0.9); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-bottom: 1px solid var(--border-gold); padding: 0 3rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-brand { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; color: var(--gold-bright); letter-spacing: 2px; text-shadow: 0 0 15px rgba(230,184,0,0.4); display: flex; align-items: center; gap: 0.6rem; }
+        .nav-brand span { font-weight: 400; color: var(--text-dim); font-size: 0.6rem; letter-spacing: 2px; text-shadow: none; }
+        .nav-brand .typing-cursor { display: inline-block; width: 1px; height: 1em; background: var(--gold-bright); animation: cursorBlink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
+        @keyframes cursorBlink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+        .nav-links { display: flex; list-style: none; gap: 0; align-items: center; }
+        .nav-links a { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 500; color: var(--text-secondary); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; padding: 0.5rem 1.2rem; transition: all 0.3s; border: 1px solid transparent; cursor: none; }
         .nav-links a:hover { color: var(--gold-bright); border-color: rgba(230,184,0,0.3); background: rgba(230,184,0,0.04); box-shadow: 0 0 15px rgba(230,184,0,0.1); }
         .nav-links a.active { color: var(--gold); border-color: var(--border-gold); background: rgba(230,184,0,0.06); }
         .mobile-toggle { display: none; background: none; border: 1px solid var(--border-gold); color: var(--gold); font-size: 1rem; width: 38px; height: 38px; cursor: pointer; align-items: center; justify-content: center; font-family: var(--font-mono); transition: all 0.3s; }
         .mobile-toggle:hover { border-color: var(--gold-bright); box-shadow: 0 0 15px rgba(230,184,0,0.25); }
 
         /* === SECTIONS === */
-        section {
-            position: relative;
-            z-index: 4;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 100px 3rem;
-            transition: transform 0.1s linear;
-            will-change: transform;
-        }
-        #process { min-height: auto; padding: 100px 3rem 80px; }
+        section { position: relative; z-index: 4; min-height: 100vh; display: flex; align-items: center; padding: 100px 3rem; transition: transform 0.1s linear; will-change: transform; }
+        #process, #metrics { min-height: auto; padding: 100px 3rem 80px; }
         .container { max-width: 1200px; width: 100%; margin: 0 auto; }
 
-        /* === HERO === */
         #home .container { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
         .hero-content { display: flex; flex-direction: column; gap: 1.5rem; }
         .hero-eyebrow { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 5px; color: var(--gold-pale); text-transform: uppercase; }
-        .hero-title { font-size: 5.5rem; font-weight: 800; line-height: 0.95; letter-spacing: -2px; }
-        .hero-title em { font-style: normal; color: var(--gold-bright); text-shadow: 0 0 50px rgba(230,184,0,0.4); }
+        .hero-title { font-size: 5.5rem; font-weight: 800; line-height: 0.95; letter-spacing: -2px; background: linear-gradient(135deg, #fff8d6 0%, var(--gold-bright) 30%, #fff8d6 60%, var(--gold-bright) 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: goldShimmer 4s ease-in-out infinite; }
+        .hero-title em { font-style: normal; text-shadow: 0 0 50px rgba(230,184,0,0.4); }
+        @keyframes goldShimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         .hero-divider { width: 80px; height: 2px; background: var(--gold); box-shadow: 0 0 15px rgba(230,184,0,0.4); }
         .hero-description { font-size: 1rem; font-weight: 300; color: var(--text-secondary); max-width: 480px; line-height: 1.7; }
         .hero-meta { display: flex; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
         .hero-meta-item { padding: 0.4rem 1rem; border: 1px solid rgba(230,184,0,0.2); transition: all 0.3s; cursor: none; }
         .hero-meta-item:hover { border-color: var(--gold-bright); color: var(--gold-pale); box-shadow: 0 0 12px rgba(230,184,0,0.2); }
 
-        /* === 3D AVATAR === */
         .avatar-scene { display: flex; justify-content: center; align-items: center; perspective: 900px; }
         .avatar-card { width: 320px; height: 380px; position: relative; transform-style: preserve-3d; transition: transform 0.1s ease-out; will-change: transform; cursor: none; }
         .avatar-front { position: absolute; inset: 0; backface-visibility: hidden; clip-path: polygon(0 0, 86% 0, 100% 7%, 100% 100%, 14% 100%, 0 93%); }
@@ -353,178 +194,48 @@
         .section-line { width: 50px; height: 2px; background: var(--gold); margin: 0.9rem auto 0; box-shadow: 0 0 10px rgba(230,184,0,0.3); }
 
         /* === HOW I WORK === */
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .process-step {
-            background: #05050a;
-            border: 1px solid var(--border-gold);
-            padding: 2rem 1.5rem;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: none;
-            position: relative;
-        }
-        .process-step:hover {
-            border-color: var(--border-bright);
-            box-shadow: 0 0 25px rgba(230,184,0,0.2);
-            transform: translateY(-3px);
-        }
-        .process-icon {
-            width: 40px; height: 40px;
-            margin: 0 auto 1rem;
-            border: 2px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            color: var(--gold);
-            transition: all 0.3s;
-        }
-        .process-step:hover .process-icon {
-            box-shadow: 0 0 20px rgba(230,184,0,0.4);
-            background: rgba(230,184,0,0.05);
-        }
-        .process-label {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: var(--gold-pale);
-            text-transform: uppercase;
-            margin-bottom: 0.4rem;
-        }
-        .process-desc {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            line-height: 1.4;
-        }
+        .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+        .process-step { background: #05050a; border: 1px solid var(--border-gold); padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; cursor: none; position: relative; }
+        .process-step:hover { border-color: var(--border-bright); box-shadow: 0 0 25px rgba(230,184,0,0.2); transform: translateY(-3px); }
+        .process-icon { width: 40px; height: 40px; margin: 0 auto 1rem; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 1rem; color: var(--gold); transition: all 0.3s; }
+        .process-step:hover .process-icon { box-shadow: 0 0 20px rgba(230,184,0,0.4); background: rgba(230,184,0,0.05); }
+        .process-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 2px; color: var(--gold-pale); text-transform: uppercase; margin-bottom: 0.4rem; }
+        .process-desc { font-size: 0.75rem; color: var(--text-dim); line-height: 1.4; }
+
+        /* === METRICS === */
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto; }
+        .metric-card { background: #05050a; border: 1px solid var(--border-gold); padding: 2.5rem 1.5rem; text-align: center; transition: all 0.3s; cursor: none; }
+        .metric-card:hover { border-color: var(--border-bright); box-shadow: 0 0 30px rgba(230,184,0,0.2); }
+        .metric-value { font-family: var(--font-mono); font-size: 3.5rem; font-weight: 700; color: var(--gold-bright); line-height: 1; text-shadow: 0 0 20px rgba(230,184,0,0.3); }
+        .metric-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; margin-top: 0.5rem; }
 
         /* === SKILLS === */
-        .skills-terminal {
-            max-width: 780px;
-            margin: 0 auto;
-            border: 1px solid var(--border-gold);
-            background: #05050a;
-        }
-        .skill-row {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            padding: 1.1rem 2rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            transition: all 0.3s;
-            cursor: none;
-            border-left: 2px solid transparent;
-            border-bottom: 1px solid rgba(230,184,0,0.08);
-            position: relative;
-        }
+        .skills-terminal { max-width: 780px; margin: 0 auto; border: 1px solid var(--border-gold); background: #05050a; }
+        .skill-row { display: flex; align-items: center; gap: 1.2rem; padding: 1.1rem 2rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; color: var(--text-secondary); transition: all 0.3s; cursor: none; border-left: 2px solid transparent; border-bottom: 1px solid rgba(230,184,0,0.08); }
         .skill-row:last-child { border-bottom: none; }
-        .skill-row:hover {
-            background: rgba(230,184,0,0.04);
-            color: var(--gold-bright);
-            border-left-color: var(--gold);
-        }
-        .skill-index {
-            color: var(--gold-dim);
-            min-width: 24px;
-            font-weight: 500;
-            transition: all 0.3s;
-            font-size: 0.7rem;
-        }
-        .skill-row:hover .skill-index {
-            color: var(--gold-bright);
-            text-shadow: 0 0 10px rgba(230,184,0,0.5);
-        }
-        .skill-name {
-            flex: 1;
-            font-weight: 500;
-        }
-        .skill-tag {
-            font-size: 0.55rem;
-            padding: 0.2rem 0.6rem;
-            border: 1px solid var(--border-gold);
-            color: var(--text-dim);
-            letter-spacing: 1.5px;
-            transition: all 0.3s;
-        }
-        .skill-row:hover .skill-tag {
-            border-color: var(--gold-pale);
-            color: var(--gold-pale);
-        }
+        .skill-row:hover { background: rgba(230,184,0,0.04); color: var(--gold-bright); border-left-color: var(--gold); }
+        .skill-index { color: var(--gold-dim); min-width: 24px; font-weight: 500; transition: all 0.3s; font-size: 0.7rem; }
+        .skill-row:hover .skill-index { color: var(--gold-bright); text-shadow: 0 0 10px rgba(230,184,0,0.5); }
+        .skill-name { flex: 1; font-weight: 500; }
+        .skill-tag { font-size: 0.55rem; padding: 0.2rem 0.6rem; border: 1px solid var(--border-gold); color: var(--text-dim); letter-spacing: 1.5px; transition: all 0.3s; }
+        .skill-row:hover .skill-tag { border-color: var(--gold-pale); color: var(--gold-pale); }
 
-        /* === ARCHITECTURE SCHEMA === */
-        .arch-schema {
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .arch-svg-container {
-            width: 100%;
-            overflow: visible;
-        }
-        .arch-svg-container svg {
-            width: 100%;
-            height: auto;
-        }
-        .arch-node-rect {
-            fill: #05050a;
-            stroke: rgba(230,184,0,0.3);
-            stroke-width: 1;
-            transition: all 0.3s;
-        }
-        .arch-node-text {
-            font-family: var(--font-mono);
-            font-size: 8px;
-            fill: #b0b0c8;
-            text-anchor: middle;
-            dominant-baseline: central;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-        }
-        .arch-node-sub {
-            font-family: var(--font-mono);
-            font-size: 6px;
-            fill: #6a6a85;
-            text-anchor: middle;
-            dominant-baseline: central;
-            letter-spacing: 0.5px;
-            transition: all 0.3s;
-        }
-        .arch-link {
-            stroke: rgba(230,184,0,0.2);
-            stroke-width: 1.2;
-            fill: none;
-            transition: all 0.3s;
-        }
-        .arch-link-label {
-            font-family: var(--font-mono);
-            font-size: 5.5px;
-            fill: #5c4a00;
-            text-anchor: middle;
-            letter-spacing: 0.5px;
-            transition: all 0.3s;
-        }
-        .arch-group:hover .arch-node-rect {
-            stroke: rgba(255,224,0,0.6);
-            fill: #0a0a14;
-            filter: drop-shadow(0 0 6px rgba(230,184,0,0.3));
-        }
-        .arch-group:hover .arch-node-text {
-            fill: #ffe000;
-        }
-        .arch-group:hover .arch-node-sub {
-            fill: #b89400;
-        }
+        /* === ARCHITECTURE SCHEMA (LARGE) === */
+        .arch-schema { max-width: 1000px; margin: 0 auto; }
+        .arch-svg-container { width: 100%; overflow: visible; }
+        .arch-svg-container svg { width: 100%; height: auto; min-height: 500px; }
+        .arch-node-rect { fill: #05050a; stroke: rgba(230,184,0,0.3); stroke-width: 1.2; transition: all 0.3s; }
+        .arch-node-text { font-family: var(--font-mono); font-size: 10px; fill: #b0b0c8; text-anchor: middle; dominant-baseline: central; letter-spacing: 1px; transition: all 0.3s; }
+        .arch-node-sub { font-family: var(--font-mono); font-size: 7px; fill: #6a6a85; text-anchor: middle; dominant-baseline: central; letter-spacing: 0.5px; transition: all 0.3s; }
+        .arch-link { stroke: rgba(230,184,0,0.25); stroke-width: 1.5; fill: none; stroke-dasharray: 6 4; animation: dataFlow 2s linear infinite; }
+        .arch-link.solid { stroke-dasharray: none; animation: none; }
+        .arch-link-label { font-family: var(--font-mono); font-size: 6.5px; fill: #5c4a00; text-anchor: middle; letter-spacing: 0.5px; transition: all 0.3s; }
+        .arch-group:hover .arch-node-rect { stroke: rgba(255,224,0,0.6); fill: #0a0a14; filter: drop-shadow(0 0 8px rgba(230,184,0,0.4)); }
+        .arch-group:hover .arch-node-text { fill: #ffe000; }
+        .arch-group:hover .arch-node-sub { fill: #b89400; }
+        @keyframes dataFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -20; } }
 
-        /* === LIBRARIES === */
+        /* === TOOLCHAIN === */
         .lib-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; max-width: 860px; margin: 0 auto; }
         .lib-card { background: #05050a; border: 1px solid var(--border-gold); padding: 1.3rem 0.6rem; text-align: center; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500; letter-spacing: 1px; color: var(--text-secondary); transition: all 0.3s; cursor: none; text-transform: uppercase; position: relative; }
         .lib-card:hover { border-color: var(--border-bright); background: #0a0a14; color: var(--gold-bright); box-shadow: 0 0 25px rgba(230,184,0,0.2), inset 0 0 20px rgba(230,184,0,0.03); transform: translateY(-2px); }
@@ -532,21 +243,55 @@
         .lib-card:hover::before { opacity: 0.8; }
 
         /* === PROJECTS === */
-        .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.8rem; }
-        .project-card { background: #05050a; border: 1px solid var(--border-gold); text-decoration: none; color: inherit; display: block; transition: all 0.4s; position: relative; cursor: none; }
-        .project-card:hover { border-color: var(--border-bright); box-shadow: var(--glow-strong); transform: translateY(-3px); }
-        .project-thumb { width: 100%; height: 190px; overflow: hidden; border-bottom: 1px solid var(--border-gold); position: relative; }
-        .project-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(4,4,8,0.7) 100%); pointer-events: none; }
+        .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .project-card { background: #05050a; border: 1px solid var(--border-gold); text-decoration: none; color: inherit; display: block; transition: all 0.4s; position: relative; cursor: none; overflow: hidden; }
+        .project-card:hover { border-color: var(--border-bright); box-shadow: var(--glow-strong); transform: translateY(-4px); }
+        .project-thumb { width: 100%; height: 220px; overflow: hidden; border-bottom: 1px solid var(--border-gold); position: relative; }
         .project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-        .project-card:hover .project-thumb img { transform: scale(1.03); }
-        .project-body { padding: 1.5rem; }
-        .project-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.2rem; }
-        .project-role { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; color: var(--gold-pale); text-transform: uppercase; margin-bottom: 0.8rem; }
-        .project-stat { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 1px; border: 1px solid var(--border-gold); padding: 0.3rem 1rem; transition: all 0.3s; }
-        .project-stat .live-dot { width: 6px; height: 6px; background: var(--gold-dim); border-radius: 50%; transition: all 0.3s; animation: dotPulse 2s ease-in-out infinite; }
-        @keyframes dotPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
-        .project-card:hover .project-stat { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 15px rgba(230,184,0,0.15); }
-        .project-card:hover .project-stat .live-dot { background: var(--gold-bright); box-shadow: 0 0 10px var(--gold); animation-duration: 0.8s; }
+        .project-card:hover .project-thumb img { transform: scale(1.05); }
+        .project-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(4,4,8,0.2) 0%, rgba(4,4,8,0.85) 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 1.5rem; opacity: 0; transition: opacity 0.4s;
+        }
+        .project-card:hover .project-overlay { opacity: 1; }
+        .project-tech-stack {
+            font-family: var(--font-mono); font-size: 0.6rem; color: var(--gold-pale);
+            letter-spacing: 1px; line-height: 1.6;
+        }
+        .project-tech-stack span { display: block; }
+        .project-body { padding: 1.8rem; position: relative; z-index: 2; }
+        .project-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.3rem; color: #fff; }
+        .project-role { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 2px; color: var(--gold-pale); text-transform: uppercase; margin-bottom: 1rem; }
+        .project-stat { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 1px; border: 1px solid var(--border-gold); padding: 0.4rem 1.2rem; transition: all 0.3s; }
+        .project-stat .live-dot { width: 7px; height: 7px; background: var(--gold-dim); border-radius: 50%; transition: all 0.3s; animation: dotPulse 2s ease-in-out infinite; }
+        @keyframes dotPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+        .project-card:hover .project-stat { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 15px rgba(230,184,0,0.2); }
+        .project-card:hover .project-stat .live-dot { background: var(--gold-bright); box-shadow: 0 0 12px var(--gold); animation-duration: 0.8s; }
+
+        /* === AVAILABILITY === */
+        .availability-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--gold-pale);
+            padding: 0.5rem 1.2rem;
+            border: 1px solid var(--border-gold);
+            transition: all 0.3s;
+            cursor: none;
+        }
+        .availability-dot {
+            width: 8px; height: 8px;
+            background: var(--gold-bright);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold);
+            animation: availPulse 2s ease-in-out infinite;
+        }
+        @keyframes availPulse { 0%,100% { opacity: 0.6; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.2); } }
 
         /* === CONTACT === */
         .contact-wrapper { text-align: center; }
@@ -559,41 +304,14 @@
         .contact-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; }
         .contact-value { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--gold-bright); letter-spacing: 1px; }
 
-        /* === TERMINAL TICKER === */
-        .terminal-ticker {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            z-index: 5;
-            background: rgba(4,4,8,0.85);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border-gold);
-            padding: 0.4rem 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .ticker-track {
-            display: flex;
-            width: max-content;
-            animation: tickerScroll 30s linear infinite;
-        }
-        .ticker-text {
-            font-family: var(--font-mono);
-            font-size: 0.55rem;
-            letter-spacing: 2px;
-            color: var(--gold-pale);
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
+        .terminal-ticker { position: fixed; bottom: 0; left: 0; right: 0; z-index: 5; background: rgba(4,4,8,0.85); backdrop-filter: blur(10px); border-top: 1px solid var(--border-gold); padding: 0.4rem 0; overflow: hidden; pointer-events: none; }
+        .ticker-track { display: flex; width: max-content; animation: tickerScroll 30s linear infinite; }
+        .ticker-text { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 2px; color: var(--gold-pale); white-space: nowrap; flex-shrink: 0; }
         .ticker-text span { color: var(--text-dim); margin: 0 1.5rem; }
-        @keyframes tickerScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* === FOOTER === */
         footer { position: relative; z-index: 4; text-align: center; padding: 2rem 2rem 3rem; border-top: 1px solid var(--border-gold); font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; }
 
-        /* === RESPONSIVE === */
         @media (max-width: 1024px) {
             #home .container { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
             .hero-description, .hero-divider { margin: 0 auto; }
@@ -602,6 +320,7 @@
             .projects-grid { grid-template-columns: 1fr; }
             .lib-grid { grid-template-columns: repeat(3, 1fr); }
             .process-grid { grid-template-columns: repeat(2, 1fr); }
+            .metrics-grid { grid-template-columns: repeat(3, 1fr); }
             .holo-corner, .holo-ring { display: none; }
         }
         @media (max-width: 768px) {
@@ -616,6 +335,7 @@
             .section-title { font-size: 1.9rem; }
             .lib-grid { grid-template-columns: repeat(2, 1fr); }
             .skills-terminal .skill-row { padding: 0.9rem 1.2rem; font-size: 0.68rem; cursor: pointer; }
+            .metrics-grid { grid-template-columns: 1fr; }
             body { cursor: auto; }
             #cursor { display: none; }
             body.mobile { cursor: auto; }
@@ -624,515 +344,254 @@
     </style>
 </head>
 <body>
-    <!-- PRELOADER -->
     <div id="loader">
-        <div class="loader-geo">
-            <div class="loader-piece"></div>
-            <div class="loader-piece"></div>
-            <div class="loader-piece"></div>
-            <div class="loader-piece"></div>
-        </div>
-        <div class="loader-text">
-            <span>I</span><span>N</span><span>I</span><span>T</span><span>I</span><span>A</span><span>L</span><span>I</span><span>Z</span><span>I</span><span>N</span><span>G</span>
-        </div>
+        <div class="loader-geo"><div class="loader-piece"></div><div class="loader-piece"></div><div class="loader-piece"></div><div class="loader-piece"></div></div>
+        <div class="loader-text"><span>I</span><span>N</span><span>I</span><span>T</span><span>I</span><span>A</span><span>L</span><span>I</span><span>Z</span><span>I</span><span>N</span><span>G</span></div>
     </div>
-
-    <!-- CUSTOM CURSOR -->
-    <div id="cursor">
-        <div class="cursor-corner tl"></div>
-        <div class="cursor-corner tr"></div>
-        <div class="cursor-corner bl"></div>
-        <div class="cursor-corner br"></div>
-        <div class="cursor-dot"></div>
-    </div>
-
-    <!-- PARTICLES -->
+    <div id="cursor"><div class="cursor-corner tl"></div><div class="cursor-corner tr"></div><div class="cursor-corner bl"></div><div class="cursor-corner br"></div><div class="cursor-dot"></div></div>
     <div id="particlesContainer"></div>
-
-    <!-- HOLOGRAPHIC CANVAS -->
     <canvas id="holoCanvas"></canvas>
-
-    <!-- SCANLINES -->
     <div class="scanlines"></div>
+    <div class="holo-corner holo-corner-tl"></div><div class="holo-corner holo-corner-tr"></div><div class="holo-corner holo-corner-bl"></div><div class="holo-corner holo-corner-br"></div>
+    <div class="holo-ring"></div><div class="holo-ring"></div>
+    <div id="backToTop"></div>
 
-    <!-- CORNER HOLOGRAMS -->
-    <div class="holo-corner holo-corner-tl"></div>
-    <div class="holo-corner holo-corner-tr"></div>
-    <div class="holo-corner holo-corner-bl"></div>
-    <div class="holo-corner holo-corner-br"></div>
-
-    <!-- FLOATING RINGS -->
-    <div class="holo-ring"></div>
-    <div class="holo-ring"></div>
-
-    <!-- BACK TO TOP -->
-    <div id="backToTop" title="Back to top"></div>
-
-    <!-- NAV -->
     <nav>
-        <div class="nav-brand">YARIK1<span>System Engineer</span></div>
+        <div class="nav-brand">YARIK1<span id="navSubtitle">System Engineer</span><span class="typing-cursor"></span></div>
         <button class="mobile-toggle" id="menuBtn" aria-label="Menu">☰</button>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#process">Process</a></li>
+            <li><a href="#metrics">Metrics</a></li>
             <li><a href="#expertise">Expertise</a></li>
             <li><a href="#architecture">Architecture</a></li>
             <li><a href="#toolchain">Toolchain</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><button class="bare-metal-toggle" id="bareMetalToggle" title="Toggle Bare Metal Mode (ESC)">◈ BARE</button></li>
         </ul>
     </nav>
 
-    <!-- TERMINAL TICKER -->
-    <div class="terminal-ticker">
-        <div class="ticker-track">
-            <div class="ticker-text">> SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span></div>
-            <div class="ticker-text">> SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span></div>
-        </div>
-    </div>
+    <div class="terminal-ticker"><div class="ticker-track"><div class="ticker-text">> SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span></div><div class="ticker-text">> SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span></div></div></div>
 
-    <!-- HERO -->
-    <section id="home">
-        <div class="container">
-            <div class="hero-content">
-                <p class="hero-eyebrow">System Engineer</p>
-                <h1 class="hero-title">Yarik<em>1</em></h1>
-                <div class="hero-divider"></div>
-                <p class="hero-description">Architecting high-performance systems with clean abstraction. Scalable game frameworks, secure client-server architecture, maintainable codebases.</p>
-                <div class="hero-meta">
-                    <div class="hero-meta-item">Luau</div>
-                    <div class="hero-meta-item">Roblox</div>
-                    <div class="hero-meta-item">Systems</div>
-                </div>
-            </div>
-            <div class="avatar-scene">
-                <div class="avatar-card" id="avatarCard">
-                    <div class="avatar-holo"></div>
-                    <div class="avatar-border"></div>
-                    <div class="avatar-front">
-                        <img src="./assets/avatar.png" alt="Yarik1" onerror="this.src='https://placehold.co/400x480/080810/e6b800?text=YARIK1'">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="home"><div class="container"><div class="hero-content"><p class="hero-eyebrow">System Engineer</p><h1 class="hero-title">Yarik<em>1</em></h1><div class="hero-divider"></div><p class="hero-description">Architecting high-performance systems with clean abstraction. Scalable game frameworks, secure client-server architecture, maintainable codebases.</p><div class="hero-meta"><div class="hero-meta-item">Luau</div><div class="hero-meta-item">Roblox</div><div class="hero-meta-item">Systems</div></div></div><div class="avatar-scene"><div class="avatar-card" id="avatarCard"><div class="avatar-holo"></div><div class="avatar-border"></div><div class="avatar-front"><img src="./assets/avatar.png" alt="Yarik1" onerror="this.src='https://placehold.co/400x480/080810/e6b800?text=YARIK1'"></div></div></div></div></section>
 
-    <!-- HOW I WORK -->
-    <section id="process">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-number">01</p>
-                <h2 class="section-title">How I <em>Work</em></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="process-icon">◇</div>
-                    <div class="process-label">Design</div>
-                    <div class="process-desc">Architecture planning, data flow mapping, modular boundary definition</div>
-                </div>
-                <div class="process-step">
-                    <div class="process-icon">▣</div>
-                    <div class="process-label">Abstract</div>
-                    <div class="process-desc">Interface contracts, dependency injection, reusable component isolation</div>
-                </div>
-                <div class="process-step">
-                    <div class="process-icon">◈</div>
-                    <div class="process-label">Optimize</div>
-                    <div class="process-desc">Memory profiling, network throttling, cold-path elimination</div>
-                </div>
-                <div class="process-step">
-                    <div class="process-icon">◆</div>
-                    <div class="process-label">Ship</div>
-                    <div class="process-desc">Stress testing, telemetry integration, production deployment</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="process"><div class="container"><div class="section-header"><p class="section-number">01</p><h2 class="section-title">How I <em>Work</em></h2><div class="section-line"></div></div><div class="process-grid"><div class="process-step"><div class="process-icon">◇</div><div class="process-label">Design</div><div class="process-desc">Architecture planning, data flow mapping, modular boundary definition</div></div><div class="process-step"><div class="process-icon">▣</div><div class="process-label">Abstract</div><div class="process-desc">Interface contracts, dependency injection, reusable component isolation</div></div><div class="process-step"><div class="process-icon">◈</div><div class="process-label">Optimize</div><div class="process-desc">Memory profiling, network throttling, cold-path elimination</div></div><div class="process-step"><div class="process-icon">◆</div><div class="process-label">Ship</div><div class="process-desc">Stress testing, telemetry integration, production deployment</div></div></div></div></section>
 
-    <!-- EXPERTISE -->
-    <section id="expertise">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-number">02</p>
-                <h2 class="section-title">Technical <em>Spectrum</em></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="skills-terminal">
-                <div class="skill-row"><span class="skill-index">00</span><span class="skill-name">System Architecture</span><span class="skill-tag">CORE</span></div>
-                <div class="skill-row"><span class="skill-index">01</span><span class="skill-name">Performance Tuning</span><span class="skill-tag">RUNTIME</span></div>
-                <div class="skill-row"><span class="skill-index">02</span><span class="skill-name">Scalable Game Loops</span><span class="skill-tag">ENGINE</span></div>
-                <div class="skill-row"><span class="skill-index">03</span><span class="skill-name">Client-Server Sync</span><span class="skill-tag">NET</span></div>
-                <div class="skill-row"><span class="skill-index">04</span><span class="skill-name">Data Caching & Storage</span><span class="skill-tag">DATA</span></div>
-                <div class="skill-row"><span class="skill-index">05</span><span class="skill-name">Network Optimization</span><span class="skill-tag">NET</span></div>
-                <div class="skill-row"><span class="skill-index">06</span><span class="skill-name">Modular Design Patterns</span><span class="skill-tag">DESIGN</span></div>
-                <div class="skill-row"><span class="skill-index">07</span><span class="skill-name">Server Security</span><span class="skill-tag">AUTH</span></div>
-                <div class="skill-row"><span class="skill-index">08</span><span class="skill-name">Real-time Replication</span><span class="skill-tag">SYNC</span></div>
-                <div class="skill-row"><span class="skill-index">09</span><span class="skill-name">Memory Management</span><span class="skill-tag">RUNTIME</span></div>
-            </div>
-        </div>
-    </section>
+    <section id="metrics"><div class="container"><div class="section-header"><p class="section-number">02</p><h2 class="section-title">Performance <em>Metrics</em></h2><div class="section-line"></div></div><div class="metrics-grid"><div class="metric-card"><div class="metric-value" data-target="973">0</div><div class="metric-label">Peak Concurrent Users</div></div><div class="metric-card"><div class="metric-value" data-target="17">0</div><div class="metric-label">Libraries Mastered</div></div><div class="metric-card"><div class="metric-value" data-target="4">0</div><div class="metric-label">Production Systems</div></div></div></div></section>
 
-    <!-- ARCHITECTURE SCHEMA -->
-    <section id="architecture">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-number">03</p>
-                <h2 class="section-title">System <em>Architecture</em></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="arch-schema">
-                <div class="arch-svg-container">
-                    <svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Layer backgrounds -->
-                        <rect x="20" y="10" width="280" height="130" rx="4" fill="none" stroke="rgba(230,184,0,0.08)" stroke-width="1"/>
-                        <text x="30" y="28" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">NETWORKING LAYER</text>
-                        <rect x="20" y="155" width="280" height="110" rx="4" fill="none" stroke="rgba(230,184,0,0.08)" stroke-width="1"/>
-                        <text x="30" y="173" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">STATE LAYER</text>
-                        <rect x="20" y="280" width="280" height="110" rx="4" fill="none" stroke="rgba(230,184,0,0.08)" stroke-width="1"/>
-                        <text x="30" y="298" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">DATA & STORAGE LAYER</text>
+    <section id="expertise"><div class="container"><div class="section-header"><p class="section-number">03</p><h2 class="section-title">Technical <em>Spectrum</em></h2><div class="section-line"></div></div><div class="skills-terminal"><div class="skill-row"><span class="skill-index">00</span><span class="skill-name">System Architecture</span><span class="skill-tag">CORE</span></div><div class="skill-row"><span class="skill-index">01</span><span class="skill-name">Performance Tuning</span><span class="skill-tag">RUNTIME</span></div><div class="skill-row"><span class="skill-index">02</span><span class="skill-name">Scalable Game Loops</span><span class="skill-tag">ENGINE</span></div><div class="skill-row"><span class="skill-index">03</span><span class="skill-name">Client-Server Sync</span><span class="skill-tag">NET</span></div><div class="skill-row"><span class="skill-index">04</span><span class="skill-name">Data Caching & Storage</span><span class="skill-tag">DATA</span></div><div class="skill-row"><span class="skill-index">05</span><span class="skill-name">Network Optimization</span><span class="skill-tag">NET</span></div><div class="skill-row"><span class="skill-index">06</span><span class="skill-name">Modular Design Patterns</span><span class="skill-tag">DESIGN</span></div><div class="skill-row"><span class="skill-index">07</span><span class="skill-name">Server Security</span><span class="skill-tag">AUTH</span></div><div class="skill-row"><span class="skill-index">08</span><span class="skill-name">Real-time Replication</span><span class="skill-tag">SYNC</span></div><div class="skill-row"><span class="skill-index">09</span><span class="skill-name">Memory Management</span><span class="skill-tag">RUNTIME</span></div></div></div></section>
 
-                        <!-- Core System (center) -->
-                        <g class="arch-group">
-                            <rect x="380" y="145" width="180" height="50" rx="2" class="arch-node-rect" stroke="rgba(230,184,0,0.6)"/>
-                            <text x="470" y="162" class="arch-node-text" fill="#ffe000" font-size="9">CORE SYSTEM</text>
-                            <text x="470" y="178" class="arch-node-sub">Orchestration · Boot · Loop</text>
-                        </g>
+    <section id="architecture"><div class="container"><div class="section-header"><p class="section-number">04</p><h2 class="section-title">System <em>Architecture</em></h2><div class="section-line"></div></div><div class="arch-schema"><div class="arch-svg-container"><svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="10" width="280" height="150" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="28" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">NETWORKING LAYER</text><rect x="20" y="180" width="280" height="130" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="198" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">STATE LAYER</text><rect x="20" y="335" width="280" height="130" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="353" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">DATA & STORAGE LAYER</text>
+<g class="arch-group"><rect x="380" y="190" width="200" height="60" rx="3" class="arch-node-rect" stroke="rgba(230,184,0,0.6)"/><text x="480" y="212" class="arch-node-text" fill="#ffe000" font-size="11">CORE SYSTEM</text><text x="480" y="232" class="arch-node-sub">Orchestration · Boot · Loop</text></g>
+<g class="arch-group"><rect x="50" y="55" width="110" height="42" rx="3" class="arch-node-rect"/><text x="105" y="70" class="arch-node-text">BridgeNet2</text><text x="105" y="84" class="arch-node-sub">Remote Transport</text></g>
+<g class="arch-group"><rect x="180" y="55" width="110" height="42" rx="3" class="arch-node-rect"/><text x="235" y="70" class="arch-node-text">Replica</text><text x="235" y="84" class="arch-node-sub">State Streaming</text></g>
+<g class="arch-group"><rect x="50" y="215" width="110" height="42" rx="3" class="arch-node-rect"/><text x="105" y="230" class="arch-node-text">Signal</text><text x="105" y="244" class="arch-node-sub">Event Bus</text></g>
+<g class="arch-group"><rect x="180" y="215" width="110" height="42" rx="3" class="arch-node-rect"/><text x="235" y="230" class="arch-node-text">Rodux</text><text x="235" y="244" class="arch-node-sub">State Container</text></g>
+<g class="arch-group"><rect x="50" y="370" width="110" height="42" rx="3" class="arch-node-rect"/><text x="105" y="385" class="arch-node-text">ProfileStore</text><text x="105" y="399" class="arch-node-sub">Persistent Data</text></g>
+<g class="arch-group"><rect x="180" y="370" width="110" height="42" rx="3" class="arch-node-rect"/><text x="235" y="385" class="arch-node-text">QuickZone</text><text x="235" y="399" class="arch-node-sub">Spatial Caching</text></g>
+<g class="arch-group"><rect x="660" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="75" class="arch-node-text">Maid</text><text x="715" y="89" class="arch-node-sub">Cleanup Manager</text></g>
+<g class="arch-group"><rect x="660" y="125" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="140" class="arch-node-text">Janitor</text><text x="715" y="154" class="arch-node-sub">GC Helper</text></g>
+<g class="arch-group"><rect x="660" y="195" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="210" class="arch-node-text">Container</text><text x="715" y="224" class="arch-node-sub">DI / Service Locator</text></g>
+<g class="arch-group"><rect x="660" y="260" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="275" class="arch-node-text">Promise</text><text x="715" y="289" class="arch-node-sub">Async Flow</text></g>
+<g class="arch-group"><rect x="660" y="335" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="350" class="arch-node-text">Fusion</text><text x="715" y="364" class="arch-node-sub">Reactive UI</text></g>
+<g class="arch-group"><rect x="830" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="885" y="75" class="arch-node-text">Jolt</text><text x="885" y="89" class="arch-node-sub">Physics ECS</text></g>
+<g class="arch-group"><rect x="830" y="125" width="110" height="42" rx="3" class="arch-node-rect"/><text x="885" y="140" class="arch-node-text">Jecs</text><text x="885" y="154" class="arch-node-sub">Entity Framework</text></g>
+<path d="M380,205 C320,205 200,85 170,85" class="arch-link"/><text x="260" y="78" class="arch-link-label">remote comm</text>
+<path d="M380,218 C320,218 280,85 290,85" class="arch-link"/><text x="310" y="70" class="arch-link-label">state push</text>
+<path d="M380,228 C320,235 200,235 170,235" class="arch-link"/><text x="260" y="225" class="arch-link-label">events</text>
+<path d="M380,240 C320,250 280,240 290,240" class="arch-link"/><text x="310" y="232" class="arch-link-label">dispatch</text>
+<path d="M380,248 C320,395 200,395 170,395" class="arch-link"/><text x="260" y="385" class="arch-link-label">persist</text>
+<path d="M580,200 C620,160 620,80 660,80" class="arch-link"/><text x="600" y="70" class="arch-link-label">cleanup</text>
+<path d="M580,210 C630,180 620,145 660,145" class="arch-link"/><text x="615" y="135" class="arch-link-label">gc</text>
+<path d="M580,220 C630,230 620,215 660,215" class="arch-link"/><text x="615" y="210" class="arch-link-label">resolve</text>
+<path d="M580,230 C640,280 620,280 660,280" class="arch-link"/><text x="620" y="270" class="arch-link-label">async</text>
+<path d="M580,240 C650,355 620,355 660,355" class="arch-link"/><text x="620" y="345" class="arch-link-label">render</text>
+<path d="M580,195 C720,140 750,70 830,70" class="arch-link"/><text x="690" y="60" class="arch-link-label">physics</text>
+<path d="M580,190 C730,160 750,145 830,145" class="arch-link"/><text x="700" y="135" class="arch-link-label">entities</text>
+<line x1="160" y1="97" x2="180" y2="97" class="arch-link solid"/><text x="170" y="90" class="arch-link-label">→</text>
+<line x1="160" y1="257" x2="180" y2="257" class="arch-link solid"/><text x="170" y="250" class="arch-link-label">→</text></svg></div></div></div></section>
 
-                        <!-- Networking nodes -->
-                        <g class="arch-group">
-                            <rect x="50" y="50" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="100" y="64" class="arch-node-text">BridgeNet2</text>
-                            <text x="100" y="76" class="arch-node-sub">Remote Transport</text>
-                        </g>
-                        <g class="arch-group">
-                            <rect x="170" y="50" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="220" y="64" class="arch-node-text">Replica</text>
-                            <text x="220" y="76" class="arch-node-sub">State Streaming</text>
-                        </g>
+    <section id="toolchain"><div class="container"><div class="section-header"><p class="section-number">05</p><h2 class="section-title">Dev <em>Toolchain</em></h2><div class="section-line"></div></div><div class="lib-grid"><div class="lib-card">Container</div><div class="lib-card">SimpleWeight</div><div class="lib-card">BridgeNet2</div><div class="lib-card">ProfileStore</div><div class="lib-card">Replica</div><div class="lib-card">Signal</div><div class="lib-card">Maid</div><div class="lib-card">Promise</div><div class="lib-card">Janitor</div><div class="lib-card">Fusion</div><div class="lib-card">Jolt</div><div class="lib-card">Jecs</div><div class="lib-card">Rodux</div><div class="lib-card">ShapecastHB</div><div class="lib-card">SimplePath</div><div class="lib-card">QuickZone</div></div></div></section>
 
-                        <!-- State nodes -->
-                        <g class="arch-group">
-                            <rect x="50" y="190" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="100" y="204" class="arch-node-text">Signal</text>
-                            <text x="100" y="216" class="arch-node-sub">Event Bus</text>
-                        </g>
-                        <g class="arch-group">
-                            <rect x="170" y="190" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="220" y="204" class="arch-node-text">Rodux</text>
-                            <text x="220" y="216" class="arch-node-sub">State Container</text>
-                        </g>
+    <section id="projects"><div class="container"><div class="section-header"><p class="section-number">06</p><h2 class="section-title">Deployed <em>Systems</em></h2><div class="section-line"></div></div><div class="projects-grid">
+        <a href="https://www.roblox.com/games/119051443230992/Dead-Mars" target="_blank" class="project-card"><div class="project-thumb"><img src="https://tr.rbxcdn.com/180DAY-c44d4550d0380876af70504c0fb7456d/768/432/Image/Webp/noFilter" alt="Dead Mars" loading="lazy"><div class="project-overlay"><div class="project-tech-stack"><span>BridgeNet2 · Replica · Rodux</span><span>ProfileStore · Signal · Maid</span></div></div></div><div class="project-body"><h3 class="project-name">Dead Mars</h3><p class="project-role">Lead Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 570 CCU</span></div></a>
+        <a href="https://www.roblox.com/games/94939590381819/Wake-up-a-Brainrot" target="_blank" class="project-card"><div class="project-thumb"><img src="https://tr.rbxcdn.com/180DAY-873ef111a7b7f02c85453cfe7b155a06/768/432/Image/Webp/noFilter" alt="Wake up a Brainrot" loading="lazy"><div class="project-overlay"><div class="project-tech-stack"><span>Fusion · Replica · Signal</span><span>Maid · Promise · Container</span></div></div></div><div class="project-body"><h3 class="project-name">Wake up a Brainrot</h3><p class="project-role">Fullstack Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 319 CCU</span></div></a>
+        <a href="https://www.roblox.com/games/104724166902095/Smash-a-Lucky-Block" target="_blank" class="project-card"><div class="project-thumb"><img src="https://tr.rbxcdn.com/180DAY-bec7943ea9adb6721161002e87bff871/768/432/Image/Webp/noFilter" alt="Smash A Lucky Block" loading="lazy"><div class="project-overlay"><div class="project-tech-stack"><span>BridgeNet2 · Replica · Jolt</span><span>ProfileStore · Maid · Janitor</span></div></div></div><div class="project-body"><h3 class="project-name">Smash A Lucky Block</h3><p class="project-role">Fullstack + Netcode</p><span class="project-stat"><span class="live-dot"></span>PEAK 84 CCU</span></div></a>
+        <a href="https://www.roblox.com/games/117527250434588/Incremental-Template" target="_blank" class="project-card"><div class="project-thumb"><img src="https://t3.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Incremental Template" loading="lazy"><div class="project-overlay"><div class="project-tech-stack"><span>Container · Signal · Fusion</span><span>Maid · Promise · Rodux</span></div></div></div><div class="project-body"><h3 class="project-name">Incremental Template</h3><p class="project-role">Architecture Engineer</p><span class="project-stat"><span class="live-dot"></span>DEVELOPMENT</span></div></a>
+    </div></div></section>
 
-                        <!-- Data nodes -->
-                        <g class="arch-group">
-                            <rect x="50" y="315" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="100" y="329" class="arch-node-text">ProfileStore</text>
-                            <text x="100" y="341" class="arch-node-sub">Persistent Data</text>
-                        </g>
-                        <g class="arch-group">
-                            <rect x="170" y="315" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="220" y="329" class="arch-node-text">QuickZone</text>
-                            <text x="220" y="341" class="arch-node-sub">Spatial Caching</text>
-                        </g>
-
-                        <!-- Memory nodes (right side) -->
-                        <g class="arch-group">
-                            <rect x="650" y="60" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="700" y="74" class="arch-node-text">Maid</text>
-                            <text x="700" y="86" class="arch-node-sub">Cleanup Manager</text>
-                        </g>
-                        <g class="arch-group">
-                            <rect x="650" y="120" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="700" y="134" class="arch-node-text">Janitor</text>
-                            <text x="700" y="146" class="arch-node-sub">GC Helper</text>
-                        </g>
-                        <g class="arch-group">
-                            <rect x="650" y="190" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="700" y="204" class="arch-node-text">Container</text>
-                            <text x="700" y="216" class="arch-node-sub">DI / Service Locator</text>
-                        </g>
-                        <g class="arch-group">
-                            <rect x="650" y="260" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="700" y="274" class="arch-node-text">Promise</text>
-                            <text x="700" y="286" class="arch-node-sub">Async Flow</text>
-                        </g>
-                        <g class="arch-group">
-                            <rect x="650" y="325" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="700" y="339" class="arch-node-text">Fusion</text>
-                            <text x="700" y="351" class="arch-node-sub">Reactive UI</text>
-                        </g>
-
-                        <!-- ECS nodes (top right) -->
-                        <g class="arch-group">
-                            <rect x="820" y="60" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="870" y="74" class="arch-node-text">Jolt</text>
-                            <text x="870" y="86" class="arch-node-sub">Physics ECS</text>
-                        </g>
-                        <g class="arch-group">
-                            <rect x="820" y="120" width="100" height="36" rx="2" class="arch-node-rect"/>
-                            <text x="870" y="134" class="arch-node-text">Jecs</text>
-                            <text x="870" y="146" class="arch-node-sub">Entity Framework</text>
-                        </g>
-
-                        <!-- Connections from Core -->
-                        <!-- Core → BridgeNet2 -->
-                        <path d="M380,158 C320,158 200,80 160,80" class="arch-link"/>
-                        <text x="270" y="72" class="arch-link-label">remote comm</text>
-                        <!-- Core → Replica -->
-                        <path d="M380,170 C320,170 280,76 270,76" class="arch-link"/>
-                        <text x="290" y="60" class="arch-link-label">state push</text>
-                        <!-- Core → Signal -->
-                        <path d="M380,180 C320,200 200,210 160,210" class="arch-link"/>
-                        <text x="270" y="198" class="arch-link-label">events</text>
-                        <!-- Core → Rodux -->
-                        <path d="M380,188 C320,220 280,216 270,216" class="arch-link"/>
-                        <text x="300" y="210" class="arch-link-label">dispatch</text>
-                        <!-- Core → ProfileStore -->
-                        <path d="M380,195 C320,340 200,340 160,340" class="arch-link"/>
-                        <text x="270" y="328" class="arch-link-label">persist</text>
-                        <!-- Core → Maid -->
-                        <path d="M560,155 C600,130 600,70 650,70" class="arch-link"/>
-                        <text x="590" y="60" class="arch-link-label">cleanup</text>
-                        <!-- Core → Janitor -->
-                        <path d="M560,160 C610,140 610,130 650,130" class="arch-link"/>
-                        <text x="600" y="118" class="arch-link-label">gc</text>
-                        <!-- Core → Container -->
-                        <path d="M560,170 C620,180 620,200 650,200" class="arch-link"/>
-                        <text x="605" y="188" class="arch-link-label">resolve</text>
-                        <!-- Core → Promise -->
-                        <path d="M560,180 C630,250 620,270 650,270" class="arch-link"/>
-                        <text x="610" y="258" class="arch-link-label">async</text>
-                        <!-- Core → Fusion -->
-                        <path d="M560,190 C640,330 620,340 650,340" class="arch-link"/>
-                        <text x="610" y="328" class="arch-link-label">render</text>
-                        <!-- Core → Jolt -->
-                        <path d="M560,150 C700,100 750,60 820,60" class="arch-link"/>
-                        <text x="690" y="50" class="arch-link-label">physics</text>
-                        <!-- Core → Jecs -->
-                        <path d="M560,148 C720,120 750,130 820,130" class="arch-link"/>
-                        <text x="700" y="118" class="arch-link-label">entities</text>
-
-                        <!-- Inter-node connections -->
-                        <line x1="150" y1="86" x2="170" y2="86" class="arch-link"/>
-                        <text x="160" y="80" class="arch-link-label">→</text>
-                        <line x1="150" y1="226" x2="170" y2="226" class="arch-link"/>
-                        <text x="160" y="220" class="arch-link-label">→</text>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TOOLCHAIN -->
-    <section id="toolchain">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-number">04</p>
-                <h2 class="section-title">Dev <em>Toolchain</em></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="lib-grid">
-                <div class="lib-card">Container</div><div class="lib-card">SimpleWeight</div>
-                <div class="lib-card">BridgeNet2</div><div class="lib-card">ProfileStore</div>
-                <div class="lib-card">Replica</div><div class="lib-card">Signal</div>
-                <div class="lib-card">Maid</div><div class="lib-card">Promise</div>
-                <div class="lib-card">Janitor</div><div class="lib-card">Fusion</div>
-                <div class="lib-card">Jolt</div><div class="lib-card">Jecs</div>
-                <div class="lib-card">Rodux</div><div class="lib-card">ShapecastHB</div>
-                <div class="lib-card">SimplePath</div><div class="lib-card">QuickZone</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-number">05</p>
-                <h2 class="section-title">Deployed <em>Systems</em></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="projects-grid">
-                <a href="https://www.roblox.com/games/119051443230992/Dead-Mars" target="_blank" class="project-card">
-                    <div class="project-thumb"><img src="https://tr.rbxcdn.com/180DAY-c44d4550d0380876af70504c0fb7456d/768/432/Image/Webp/noFilter" alt="Dead Mars" loading="lazy"></div>
-                    <div class="project-body"><h3 class="project-name">Dead Mars</h3><p class="project-role">Lead Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 570 CCU</span></div>
-                </a>
-                <a href="https://www.roblox.com/games/94939590381819/Wake-up-a-Brainrot" target="_blank" class="project-card">
-                    <div class="project-thumb"><img src="https://tr.rbxcdn.com/180DAY-873ef111a7b7f02c85453cfe7b155a06/768/432/Image/Webp/noFilter" alt="Wake up a Brainrot" loading="lazy"></div>
-                    <div class="project-body"><h3 class="project-name">Wake up a Brainrot</h3><p class="project-role">Fullstack Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 319 CCU</span></div>
-                </a>
-                <a href="https://www.roblox.com/games/104724166902095/Smash-a-Lucky-Block" target="_blank" class="project-card">
-                    <div class="project-thumb"><img src="https://tr.rbxcdn.com/180DAY-bec7943ea9adb6721161002e87bff871/768/432/Image/Webp/noFilter" alt="Smash A Lucky Block" loading="lazy"></div>
-                    <div class="project-body"><h3 class="project-name">Smash A Lucky Block</h3><p class="project-role">Fullstack + Netcode</p><span class="project-stat"><span class="live-dot"></span>PEAK 84 CCU</span></div>
-                </a>
-                <a href="https://www.roblox.com/games/117527250434588/Incremental-Template" target="_blank" class="project-card">
-                    <div class="project-thumb"><img src="https://t3.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Incremental Template" loading="lazy"></div>
-                    <div class="project-body"><h3 class="project-name">Incremental Template</h3><p class="project-role">Architecture Engineer</p><span class="project-stat"><span class="live-dot"></span>DEVELOPMENT</span></div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-number">06</p>
-                <h2 class="section-title">Establish <em>Link</em></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="contact-wrapper">
-                <a href="https://discord.com/users/glogangs" target="_blank" class="contact-card">
-                    <svg class="contact-icon" viewBox="0 0 24 24"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/></svg>
-                    <div class="contact-info"><div class="contact-label">Discord</div><div class="contact-value">glogangs</div></div>
-                </a>
-                <br>
-                <button class="export-btn" id="exportDossier" title="Export as PDF">⬡ Export Dossier</button>
-            </div>
-        </div>
-    </section>
-
+    <section id="contact"><div class="container"><div class="section-header"><p class="section-number">07</p><h2 class="section-title">Establish <em>Link</em></h2><div class="section-line"></div></div><div class="contact-wrapper">
+        <div class="availability-indicator"><span class="availability-dot"></span> Open for commissions</div>
+        <br>
+        <a href="https://discord.com/users/glogangs" target="_blank" class="contact-card"><svg class="contact-icon" viewBox="0 0 24 24"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/></svg><div class="contact-info"><div class="contact-label">Discord</div><div class="contact-value">glogangs</div></div></a>
+        <br>
+        <button class="export-btn" id="exportDossier">⬡ Export Dossier</button>
+    </div></div></section>
     <footer>YARIK1 / System Engineering / 2026</footer>
 
     <script>
         (function() {
-            // ===== DETECT MOBILE =====
             const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent) || window.innerWidth <= 768;
             if (isMobile) document.body.classList.add('mobile');
 
-            // ===== DYNAMIC TITLE =====
-            const titles = ['Yarik1 — System Engineer', 'Yarik1 — Online', 'Yarik1 — Available'];
-            let titleIndex = 0;
+            // === DYNAMIC TITLE + NAV SUBTITLE TYPING ===
+            const titles = ['Yarik1 — System Engineer', 'Yarik1 — Online', 'Yarik1 — Available', 'Yarik1 — Secure'];
+            const subtitleTexts = ['System Engineer', 'Online', 'Available', 'Secure'];
+            let titleIdx = 0, subtitleIdx = 0;
             let isTabActive = true;
+            const navSubtitle = document.getElementById('navSubtitle');
+
             document.addEventListener('visibilitychange', () => {
                 isTabActive = !document.hidden;
-                if (!isTabActive) {
-                    document.title = 'Yarik1 — System Engineer';
-                }
+                if (!isTabActive) document.title = 'Yarik1 — System Engineer';
             });
-            setInterval(() => {
-                if (isTabActive) {
-                    titleIndex = (titleIndex + 1) % titles.length;
-                    document.title = titles[titleIndex];
-                }
-            }, 3000);
 
-            // ===== LOADER =====
+            function typeSubtitle(text, callback) {
+                let i = 0;
+                navSubtitle.textContent = '';
+                const interval = setInterval(() => {
+                    navSubtitle.textContent += text[i];
+                    i++;
+                    if (i >= text.length) {
+                        clearInterval(interval);
+                        if (callback) setTimeout(callback, 2000);
+                    }
+                }, 80);
+            }
+
+            function cycleTitles() {
+                if (isTabActive) {
+                    titleIdx = (titleIdx + 1) % titles.length;
+                    document.title = titles[titleIdx];
+                }
+                subtitleIdx = (subtitleIdx + 1) % subtitleTexts.length;
+                typeSubtitle(subtitleTexts[subtitleIdx]);
+            }
+
+            typeSubtitle('System Engineer');
+            setInterval(cycleTitles, 5000);
+
+            // === LOADER ===
             window.addEventListener('load', () => {
                 setTimeout(() => document.getElementById('loader')?.classList.add('hidden'), 1800);
             });
 
-            // ===== CUSTOM CURSOR =====
+            // === CURSOR ===
             const cursor = document.getElementById('cursor');
             if (!isMobile && cursor) {
                 cursor.classList.add('visible');
-                document.addEventListener('mousemove', (e) => {
-                    cursor.style.left = e.clientX + 'px';
-                    cursor.style.top = e.clientY + 'px';
-                });
-                const hoverTargets = document.querySelectorAll('a, .nav-links a, .skill-row, .lib-card, .arch-group, .project-card, .contact-card, .hero-meta-item, .process-step, .export-btn, #backToTop');
-                hoverTargets.forEach(el => {
-                    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-                    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-                });
+                document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+                const hts = document.querySelectorAll('a, .nav-links a, .skill-row, .lib-card, .arch-group, .project-card, .contact-card, .hero-meta-item, .process-step, .export-btn, #backToTop, .bare-metal-toggle, .availability-indicator');
+                hts.forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
             }
 
-            // ===== CLICK PARTICLES =====
-            const particlesContainer = document.getElementById('particlesContainer');
+            // === PARTICLES ===
+            const pc = document.getElementById('particlesContainer');
             document.addEventListener('click', (e) => {
-                if (isMobile) return;
+                if (isMobile || document.body.classList.contains('bare-metal')) return;
                 for (let i = 0; i < 8; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'click-particle';
-                    const angle = (Math.PI * 2 * i) / 8;
-                    const dist = 20 + Math.random() * 30;
-                    particle.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;--dx:${Math.cos(angle)*dist}px;--dy:${Math.sin(angle)*dist}px;`;
-                    particlesContainer.appendChild(particle);
-                    particle.addEventListener('animationend', () => particle.remove());
+                    const p = document.createElement('div'); p.className = 'click-particle';
+                    const a = (Math.PI * 2 * i) / 8, d = 20 + Math.random() * 30;
+                    p.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;`;
+                    pc.appendChild(p); p.addEventListener('animationend', () => p.remove());
                 }
             });
 
-            // ===== BACK TO TOP =====
-            const backBtn = document.getElementById('backToTop');
-            window.addEventListener('scroll', () => {
-                backBtn.classList.toggle('visible', window.scrollY > 500);
-            });
-            backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            // === BACK TO TOP ===
+            const bb = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => bb.classList.toggle('visible', window.scrollY > 500));
+            bb.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            // ===== EXPORT PDF =====
-            document.getElementById('exportDossier')?.addEventListener('click', () => {
-                window.print();
+            // === EXPORT ===
+            document.getElementById('exportDossier')?.addEventListener('click', () => window.print());
+
+            // === BARE METAL TOGGLE ===
+            const bareToggle = document.getElementById('bareMetalToggle');
+            let bareMetal = localStorage.getItem('bareMetal') === 'true';
+            if (bareMetal) document.body.classList.add('bare-metal');
+            bareToggle?.addEventListener('click', () => {
+                bareMetal = !bareMetal;
+                document.body.classList.toggle('bare-metal', bareMetal);
+                localStorage.setItem('bareMetal', bareMetal);
             });
 
-            // ===== HOLOGRAPHIC CANVAS =====
+            // === KEYBOARD SHORTCUTS ===
+            document.addEventListener('keydown', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                const key = e.key.toLowerCase();
+                const sectionMap = {
+                    '1': 'home', '2': 'process', '3': 'metrics', '4': 'expertise',
+                    '5': 'architecture', '6': 'toolchain', '7': 'projects', '8': 'contact'
+                };
+                if (sectionMap[key]) {
+                    const s = document.getElementById(sectionMap[key]);
+                    if (s) window.scrollTo({ top: s.offsetTop - 60, behavior: 'smooth' });
+                }
+                if (key === '0') window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (key === 'escape') {
+                    bareMetal = !bareMetal;
+                    document.body.classList.toggle('bare-metal', bareMetal);
+                    localStorage.setItem('bareMetal', bareMetal);
+                }
+                if (key === 'p' && e.ctrlKey) { e.preventDefault(); window.print(); }
+            });
+
+            // === METRICS COUNTER ===
+            const metricValues = document.querySelectorAll('.metric-value');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = parseInt(el.dataset.target);
+                        let current = 0;
+                        const duration = 1500;
+                        const step = Math.ceil(target / (duration / 16));
+                        const interval = setInterval(() => {
+                            current = Math.min(current + step, target);
+                            el.textContent = current;
+                            if (current >= target) clearInterval(interval);
+                        }, 16);
+                        observer.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            metricValues.forEach(el => observer.observe(el));
+
+            // === HOLO CANVAS ===
             const canvas = document.getElementById('holoCanvas');
             const ctx = canvas.getContext('2d');
             let w, h, time = 0;
-            function resizeCanvas() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-            function drawHoloGrid() {
+            function rc() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+            function draw() {
+                if (document.body.classList.contains('bare-metal')) { requestAnimationFrame(draw); return; }
                 ctx.clearRect(0, 0, w, h);
-                const gs = 55, ox = (time * 0.06) % gs, oy = (time * 0.03) % gs;
-                const cx = w/2, cy = h/2, md = Math.sqrt(cx*cx + cy*cy);
-                for (let x = -gs + ox; x < w + gs; x += gs) {
-                    const a = Math.max(0, 0.1 * (1 - Math.abs(x-cx)/cx*1.3));
-                    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h);
-                    ctx.strokeStyle = `rgba(230,184,0,${a})`; ctx.lineWidth = 0.5; ctx.stroke();
-                }
-                for (let y = -gs + oy; y < h + gs; y += gs) {
-                    const a = Math.max(0, 0.1 * (1 - Math.abs(y-cy)/cy*1.3));
-                    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y);
-                    ctx.strokeStyle = `rgba(230,184,0,${a})`; ctx.lineWidth = 0.5; ctx.stroke();
-                }
-                for (let x = -gs + ox; x < w + gs; x += gs) {
-                    for (let y = -gs + oy; y < h + gs; y += gs) {
-                        const d = Math.sqrt((x-cx)**2 + (y-cy)**2) / md;
-                        const a = Math.max(0, 0.4 * (1 - d*1.4));
-                        const p = 0.6 + 0.4*Math.sin(time*0.03 + x*0.01 + y*0.01);
-                        if (a > 0.02) {
-                            ctx.beginPath(); ctx.arc(x,y,1.6,0,Math.PI*2);
-                            ctx.fillStyle = `rgba(255,208,0,${a*p})`; ctx.fill();
-                        }
-                    }
-                }
-                for (let i = 0; i < 3; i++) {
-                    const rx = w*(0.2+i*0.3) + Math.sin(time*0.004+i)*50;
-                    const ry = h*(0.3+i*0.2) + Math.cos(time*0.005+i)*40;
-                    const rr = 70 + i*35 + Math.sin(time*0.008+i)*18;
-                    ctx.beginPath(); ctx.arc(rx, ry, rr, 0, Math.PI*2);
-                    ctx.strokeStyle = `rgba(230,184,0,${0.03+i*0.02})`; ctx.lineWidth = 0.7; ctx.stroke();
-                }
-                time++; requestAnimationFrame(drawHoloGrid);
+                const gs = 55, ox = (time * 0.06) % gs, oy = (time * 0.03) % gs, cx = w/2, cy = h/2, md = Math.sqrt(cx*cx+cy*cy);
+                for (let x = -gs+ox; x < w+gs; x+=gs) { const a=Math.max(0,0.1*(1-Math.abs(x-cx)/cx*1.3)); ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.strokeStyle=`rgba(230,184,0,${a})`; ctx.lineWidth=0.5; ctx.stroke(); }
+                for (let y = -gs+oy; y < h+gs; y+=gs) { const a=Math.max(0,0.1*(1-Math.abs(y-cy)/cy*1.3)); ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.strokeStyle=`rgba(230,184,0,${a})`; ctx.lineWidth=0.5; ctx.stroke(); }
+                for (let x=-gs+ox;x<w+gs;x+=gs){for(let y=-gs+oy;y<h+gs;y+=gs){const d=Math.sqrt((x-cx)**2+(y-cy)**2)/md;const a=Math.max(0,0.4*(1-d*1.4));const p=0.6+0.4*Math.sin(time*0.03+x*0.01+y*0.01);if(a>0.02){ctx.beginPath();ctx.arc(x,y,1.6,0,Math.PI*2);ctx.fillStyle=`rgba(255,208,0,${a*p})`;ctx.fill();}}}
+                for(let i=0;i<3;i++){const rx=w*(0.2+i*0.3)+Math.sin(time*0.004+i)*50;const ry=h*(0.3+i*0.2)+Math.cos(time*0.005+i)*40;const rr=70+i*35+Math.sin(time*0.008+i)*18;ctx.beginPath();ctx.arc(rx,ry,rr,0,Math.PI*2);ctx.strokeStyle=`rgba(230,184,0,${0.03+i*0.02})`;ctx.lineWidth=0.7;ctx.stroke();}
+                time++; requestAnimationFrame(draw);
             }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas(); drawHoloGrid();
+            window.addEventListener('resize', rc); rc(); draw();
 
-            // ===== PARALLAX =====
-            const pSections = document.querySelectorAll('section');
-            window.addEventListener('scroll', () => {
-                pSections.forEach(sec => {
-                    const r = sec.getBoundingClientRect();
-                    sec.style.transform = `translateY(${(r.top + r.height/2 - window.innerHeight/2) * 0.02}px)`;
-                });
-            }, { passive: true });
+            // === PARALLAX ===
+            const pS = document.querySelectorAll('section');
+            window.addEventListener('scroll', () => { pS.forEach(s => { const r=s.getBoundingClientRect(); s.style.transform=`translateY(${(r.top+r.height/2-window.innerHeight/2)*0.02}px)`; }); }, {passive:true});
 
-            // ===== 3D AVATAR =====
-            const av = document.getElementById('avatarCard');
-            let tX=0, tY=0, cX=0, cY=0;
-            function lerp(a,b,t){return a+(b-a)*t;}
-            function animAv() {
-                cX=lerp(cX,tX,0.06); cY=lerp(cY,tY,0.06);
-                if(av) av.style.transform=`rotateX(${cX}deg) rotateY(${cY}deg)`;
-                requestAnimationFrame(animAv);
-            }
-            if(av){animAv(); av.addEventListener('mousemove',e=>{const r=av.getBoundingClientRect(); tX=((e.clientY-r.top-r.height/2)/(r.height/2))*-12; tY=((e.clientX-r.left-r.width/2)/(r.width/2))*12;}); av.addEventListener('mouseleave',()=>{tX=0;tY=0;});}
+            // === 3D AVATAR ===
+            const av=document.getElementById('avatarCard'); let tX=0,tY=0,cX=0,cY=0;
+            function lr(a,b,t){return a+(b-a)*t;}
+            function animAv(){cX=lr(cX,tX,0.06);cY=lr(cY,tY,0.06);if(av)av.style.transform=`rotateX(${cX}deg) rotateY(${cY}deg)`;requestAnimationFrame(animAv);}
+            if(av){animAv();av.addEventListener('mousemove',e=>{const r=av.getBoundingClientRect();tX=((e.clientY-r.top-r.height/2)/(r.height/2))*-12;tY=((e.clientX-r.left-r.width/2)/(r.width/2))*12;});av.addEventListener('mouseleave',()=>{tX=0;tY=0;});}
 
-            // ===== MOBILE MENU =====
-            const mb=document.getElementById('menuBtn'), nl=document.getElementById('navLinks');
-            mb?.addEventListener('click',()=>{const a=nl.classList.toggle('active'); mb.textContent=a?'✕':'☰';});
-            const secs=document.querySelectorAll('section[id]'), nas=document.querySelectorAll('.nav-links a');
-            window.addEventListener('scroll',()=>{let c=''; secs.forEach(s=>{if(window.scrollY>=s.offsetTop-150)c=s.getAttribute('id');}); nas.forEach(a=>{a.classList.remove('active'); if(a.getAttribute('href')==='#'+c)a.classList.add('active');});},{passive:true});
-            document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault(); const t=document.querySelector(this.getAttribute('href')); if(t){window.scrollTo({top:t.offsetTop-60,behavior:'smooth'}); nl.classList.remove('active'); if(mb)mb.textContent='☰';}});});
-            document.addEventListener('click',e=>{if(!e.target.closest('nav')&&nl.classList.contains('active')){nl.classList.remove('active'); if(mb)mb.textContent='☰';}});
+            // === MOBILE MENU ===
+            const mb=document.getElementById('menuBtn'),nl=document.getElementById('navLinks');
+            mb?.addEventListener('click',()=>{const a=nl.classList.toggle('active');mb.textContent=a?'✕':'☰';});
+            const secs=document.querySelectorAll('section[id]'),nas=document.querySelectorAll('.nav-links a');
+            window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-150)c=s.getAttribute('id');});nas.forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+c)a.classList.add('active');});},{passive:true});
+            document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){window.scrollTo({top:t.offsetTop-60,behavior:'smooth'});nl.classList.remove('active');if(mb)mb.textContent='☰';}});});
+            document.addEventListener('click',e=>{if(!e.target.closest('nav')&&nl.classList.contains('active')){nl.classList.remove('active');if(mb)mb.textContent='☰';}});
         })();
     </script>
 </body>
