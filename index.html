@@ -56,7 +56,7 @@
             width: 8px; height: 8px;
             border-color: var(--gold-bright);
             border-style: solid;
-            transition: all 0.2s;
+            transition: border-color 0.2s;
         }
         .cursor-corner.tl { top: 0; left: 0; border-width: 1.5px 0 0 1.5px; }
         .cursor-corner.tr { top: 0; right: 0; border-width: 1.5px 1.5px 0 0; }
@@ -69,6 +69,7 @@
             background: var(--gold-bright);
             transform: translate(-50%, -50%);
             box-shadow: 0 0 6px var(--gold), 0 0 12px var(--gold);
+            transition: background 0.2s, box-shadow 0.2s;
         }
         #cursor.hover .cursor-corner { border-color: #fff; }
         #cursor.hover .cursor-dot { background: #fff; box-shadow: 0 0 8px #fff, 0 0 16px #fff; }
@@ -140,27 +141,6 @@
         .holo-ring:nth-child(1) { width: 140px; height: 140px; top: 12%; left: -5%; animation-delay: 0s; }
         .holo-ring:nth-child(2) { width: 100px; height: 100px; top: 75%; right: -3%; animation-delay: 2s; }
         @keyframes ringFloat { 0%,100% { transform: translate(0, 0) scale(1); opacity: 0.25; } 25% { transform: translate(15px, -20px) scale(1.05); opacity: 0.5; } 50% { transform: translate(-10px, -10px) scale(0.95); opacity: 0.35; } 75% { transform: translate(10px, 15px) scale(1.02); opacity: 0.45; } }
-
-        /* === GLITCH OVERLAY === */
-        #glitchOverlay {
-            position: fixed;
-            inset: 0;
-            z-index: 999;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.1s;
-        }
-        #glitchOverlay.active {
-            opacity: 1;
-            animation: glitchFlash 0.3s ease-out forwards;
-        }
-        @keyframes glitchFlash {
-            0% { background: rgba(230,184,0,0.15); }
-            20% { background: rgba(230,184,0,0.05); transform: translateX(-4px); }
-            40% { background: transparent; transform: translateX(4px); }
-            60% { background: rgba(230,184,0,0.08); transform: translateX(-2px); }
-            100% { background: transparent; transform: translateX(0); opacity: 0; }
-        }
 
         /* === LOADER === */
         #loader {
@@ -248,18 +228,8 @@
             font-weight: 800;
             line-height: 0.95;
             letter-spacing: -2px;
-            position: relative;
         }
         .hero-title em { font-style: normal; color: var(--gold-bright); text-shadow: 0 0 50px rgba(230,184,0,0.4); }
-        .hero-title .glitch-clone {
-            position: absolute;
-            top: 0; left: 0;
-            color: #ff4444;
-            opacity: 0;
-            pointer-events: none;
-            clip-path: inset(0);
-        }
-        .hero-title .glitch-clone.cyan { color: #00ffff; left: -3px; }
         .hero-divider { width: 80px; height: 2px; background: var(--gold); box-shadow: 0 0 15px rgba(230,184,0,0.4); }
         .hero-description { font-size: 1rem; font-weight: 300; color: var(--text-secondary); max-width: 480px; line-height: 1.7; }
         .hero-meta { display: flex; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
@@ -422,13 +392,18 @@
             overflow: hidden;
             pointer-events: none;
         }
+        .ticker-track {
+            display: flex;
+            width: max-content;
+            animation: tickerScroll 30s linear infinite;
+        }
         .ticker-text {
             font-family: var(--font-mono);
             font-size: 0.55rem;
             letter-spacing: 2px;
             color: var(--gold-pale);
             white-space: nowrap;
-            animation: tickerScroll 25s linear infinite;
+            flex-shrink: 0;
         }
         .ticker-text span { color: var(--text-dim); margin: 0 1.5rem; }
         @keyframes tickerScroll {
@@ -486,9 +461,6 @@
         <div class="cursor-dot"></div>
     </div>
 
-    <!-- GLITCH OVERLAY -->
-    <div id="glitchOverlay"></div>
-
     <!-- PARTICLES -->
     <div id="particlesContainer"></div>
 
@@ -524,9 +496,13 @@
 
     <!-- TERMINAL TICKER -->
     <div class="terminal-ticker">
-        <div class="ticker-text">
-            > SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span>
-            > SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span>
+        <div class="ticker-track">
+            <div class="ticker-text">
+                > SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span>
+            </div>
+            <div class="ticker-text">
+                > SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span>
+            </div>
         </div>
     </div>
 
@@ -535,7 +511,7 @@
         <div class="container">
             <div class="hero-content">
                 <p class="hero-eyebrow">System Engineer</p>
-                <h1 class="hero-title" id="heroTitle">Yarik<em>1</em></h1>
+                <h1 class="hero-title">Yarik<em>1</em></h1>
                 <div class="hero-divider"></div>
                 <p class="hero-description">Architecting high-performance systems with clean abstraction. Scalable game frameworks, secure client-server architecture, maintainable codebases.</p>
                 <div class="hero-meta">
@@ -615,7 +591,6 @@
                         <line x1="450" y1="150" x2="200" y2="250"/>
                         <line x1="700" y1="50" x2="450" y2="150"/>
                         <line x1="450" y1="150" x2="700" y2="250"/>
-                        <line x1="450" y1="150" x2="450" y2="150" stroke-width="0"/>
                     </svg>
                 </div>
                 <div class="arch-nodes">
@@ -691,84 +666,24 @@
             window.addEventListener('load', () => {
                 setTimeout(() => {
                     document.getElementById('loader')?.classList.add('hidden');
-                    triggerNameGlitch();
                 }, 400);
             });
 
-            // ===== AUDIO ENGINE =====
-            let audioCtx = null;
-            function getAudioCtx() {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                return audioCtx;
-            }
-
-            function playSound(freq, duration, type = 'square', vol = 0.015) {
-                if (isMobile) return;
-                try {
-                    const ctx = getAudioCtx();
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = type;
-                    osc.frequency.setValueAtTime(freq, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(freq * 0.5, ctx.currentTime + duration);
-                    gain.gain.setValueAtTime(vol, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(ctx.currentTime);
-                    osc.stop(ctx.currentTime + duration);
-                } catch(e) {}
-            }
-
-            function sfxHover() { playSound(800, 0.06, 'square', 0.01); }
-            function sfxClick() { playSound(200, 0.1, 'triangle', 0.02); }
-            function sfxGlitch() { playSound(60, 0.15, 'sawtooth', 0.025); }
-
-            // ===== NAME GLITCH ON LOAD =====
-            function triggerNameGlitch() {
-                const title = document.getElementById('heroTitle');
-                if (!title) return;
-                const orig = title.innerHTML;
-                const glitchHTML = 'Yarik<em style="color:#ff4444;position:absolute;left:3px;top:0;clip-path:inset(0);opacity:0.7;">1</em><em style="color:#00ffff;position:absolute;left:-3px;top:0;clip-path:inset(0);opacity:0.7;">1</em>';
-                
-                title.innerHTML = orig + glitchHTML;
-                sfxGlitch();
-                document.getElementById('glitchOverlay')?.classList.add('active');
-                
-                setTimeout(() => {
-                    title.innerHTML = orig;
-                    document.getElementById('glitchOverlay')?.classList.remove('active');
-                }, 350);
-            }
-
-            // ===== CUSTOM CURSOR =====
+            // ===== CUSTOM CURSOR (NO LERP - DIRECT) =====
             const cursor = document.getElementById('cursor');
-            let cursorX = -100, cursorY = -100;
-            let targetCX = -100, targetCY = -100;
 
             if (!isMobile && cursor) {
                 cursor.classList.add('visible');
                 
                 document.addEventListener('mousemove', (e) => {
-                    targetCX = e.clientX;
-                    targetCY = e.clientY;
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
                 });
 
-                function updateCursor() {
-                    cursorX += (targetCX - cursorX) * 0.15;
-                    cursorY += (targetCY - cursorY) * 0.15;
-                    cursor.style.left = cursorX + 'px';
-                    cursor.style.top = cursorY + 'px';
-                    requestAnimationFrame(updateCursor);
-                }
-                updateCursor();
-
-                // Hover effect on interactive elements
+                // Hover effect
                 const hoverTargets = document.querySelectorAll('a, .nav-links a, .skill-row, .lib-card, .arch-node, .project-card, .contact-card, .hero-meta-item');
                 hoverTargets.forEach(el => {
-                    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); sfxHover(); });
+                    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
                     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
                 });
             }
@@ -777,7 +692,6 @@
             const particlesContainer = document.getElementById('particlesContainer');
             document.addEventListener('click', (e) => {
                 if (isMobile) return;
-                sfxClick();
                 const count = 8;
                 for (let i = 0; i < count; i++) {
                     const particle = document.createElement('div');
@@ -853,7 +767,7 @@
             const parallaxSections = document.querySelectorAll('section');
             window.addEventListener('scroll', () => {
                 const scrollY = window.scrollY;
-                parallaxSections.forEach((sec, i) => {
+                parallaxSections.forEach((sec) => {
                     const rect = sec.getBoundingClientRect();
                     const center = rect.top + rect.height / 2;
                     const viewCenter = window.innerHeight / 2;
@@ -921,11 +835,6 @@
                     if (menuBtn) menuBtn.textContent = '☰';
                 }
             });
-
-            // ===== UNLOCK AUDIO ON FIRST INTERACTION =====
-            document.addEventListener('click', () => {
-                try { getAudioCtx().resume(); } catch(e) {}
-            }, { once: true });
         })();
     </script>
 </body>
