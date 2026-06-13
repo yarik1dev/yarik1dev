@@ -3,17 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Yarik1 — System Engineer | High-Performance Architecture</title>
-    <meta name="description" content="Yarik1 — Middle System Engineer specializing in scalable game frameworks, secure client-server architecture, and high-performance Luau systems on Roblox.">
-    <meta name="keywords" content="system engineer, roblox, luau, game architecture, performance, networking, backend">
+    <title>Yarik1 — System Engineer</title>
+    <meta name="description" content="Yarik1 — Middle System Engineer specializing in scalable game frameworks, secure client-server architecture, and high-performance Luau systems.">
     <meta property="og:title" content="Yarik1 — System Engineer">
-    <meta property="og:description" content="Architecting high-performance systems with clean abstraction. Scalable frameworks, secure architecture, maintainable codebases.">
+    <meta property="og:description" content="High-performance systems. Clean abstraction. Production-grade architecture.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yarik1.dev">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Yarik1 — System Engineer">
-    <meta name="twitter:description" content="High-performance systems. Clean abstraction. Production-grade architecture.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3Cfilter id='g'%3E%3CfeGaussianBlur stdDeviation='1.5'/%3E%3CfeMerge%3E%3CfeMergeNode in='blur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect x='6' y='6' width='52' height='52' rx='8' fill='none' stroke='%23e6b800' stroke-width='2' transform='rotate(45,32,32)' filter='url(%23g)'/%3E%3Cpath d='M20 44 L32 18 L44 44Z' fill='%23e6b800' opacity='0.9'/%3E%3Ccircle cx='32' cy='34' r='6' fill='%23040408'/%3E%3Ctext x='32' y='36' text-anchor='middle' font-family='monospace' font-size='6' fill='%23e6b800'%3E1%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3Cfilter id='g'%3E%3CfeGaussianBlur stdDeviation='1.5'/%3E%3CfeMerge%3E%3CfeMergeNode in='blur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect x='6' y='6' width='52' height='52' rx='8' fill='none' stroke='%23e6b800' stroke-width='2' transform='rotate(45,32,32)' filter='url(%23g)'/%3E%3Cpath d='M20 44 L32 18 L44 44Z' fill='%23e6b800' opacity='0.9'/%3E%3Ccircle cx='32' cy='34' r='6' fill='%23040408'/%3E%3Ctext x='32' y='36' text-anchor='middle' font-family='monospace' font-size='6' fill='%23e6b800'%3E%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -26,11 +22,6 @@
             --glow: 0 0 20px rgba(230,184,0,0.15); --glow-strong: 0 0 50px rgba(255,208,0,0.35);
             --font: 'Space Grotesk', sans-serif; --mono: 'JetBrains Mono', monospace;
         }
-        body.light { --bg: #f5f5f0; --panel: #fff; --text: #1a1a20; --text2: #4a4a55; --text3: #7a7a88; --border: rgba(180,150,0,0.25); --border-bright: rgba(160,130,0,0.6); }
-        body.light .scanlines, body.light #holoCanvas, body.light .holo-corner, body.light .holo-ring { opacity: 0.15 !important; }
-        body.light .hero-title { color: #1a1a20; background: none; -webkit-text-fill-color: #1a1a20; animation: none; }
-        body.light .hero-title em { color: #b89400; text-shadow: none; }
-
         *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
         body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased;cursor:none}
         body.mobile{cursor:auto}
@@ -95,18 +86,13 @@
         .export-btn:hover{border-color:var(--gold-bright);color:var(--gold-bright);box-shadow:0 0 20px rgba(230,184,0,0.2)}
         .bare-metal-toggle{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--mono);font-size:0.55rem;color:var(--text3);background:none;border:1px solid transparent;padding:0.3rem 0.6rem;cursor:none;transition:all 0.3s;letter-spacing:1px}
         .bare-metal-toggle:hover{border-color:var(--border);color:var(--gold-pale)}
-        .theme-toggle{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--mono);font-size:0.55rem;color:var(--text3);background:none;border:1px solid transparent;padding:0.3rem 0.6rem;cursor:none;transition:all 0.3s;letter-spacing:1px}
-        .theme-toggle:hover{border-color:var(--border);color:var(--gold-pale)}
 
-        /* === TOAST === */
         #toast{position:fixed;bottom:4rem;left:50%;transform:translateX(-50%);z-index:10000;font-family:var(--mono);font-size:0.6rem;letter-spacing:2px;color:var(--gold-bright);background:rgba(4,4,8,0.95);border:1px solid var(--border);padding:0.6rem 1.8rem;opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;transform:translateX(-50%) translateY(10px)}
         #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
         nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(4,4,8,0.9);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border-bottom:1px solid var(--border);padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between}
         .nav-brand{font-family:var(--mono);font-size:1rem;font-weight:600;color:var(--gold-bright);letter-spacing:2px;text-shadow:0 0 15px rgba(230,184,0,0.4);display:flex;align-items:center;gap:0.6rem;cursor:pointer}
         .nav-brand span{font-weight:400;color:var(--text3);font-size:0.6rem;letter-spacing:2px;text-shadow:none}
-        .nav-brand .typing-cursor{display:inline-block;width:1px;height:1em;background:var(--gold-bright);animation:cursorBlink 1s step-end infinite;vertical-align:middle;margin-left:2px}
-        @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
         .nav-links{display:flex;list-style:none;gap:0;align-items:center}
         .nav-links a{font-family:var(--mono);font-size:0.6rem;font-weight:500;color:var(--text2);text-decoration:none;text-transform:uppercase;letter-spacing:2px;padding:0.5rem 1.2rem;transition:all 0.3s;border:1px solid transparent;cursor:none}
         .nav-links a:hover{color:var(--gold-bright);border-color:rgba(230,184,0,0.3);background:rgba(230,184,0,0.04);box-shadow:0 0 15px rgba(230,184,0,0.1)}
@@ -115,7 +101,7 @@
         .mobile-toggle:hover{border-color:var(--gold-bright);box-shadow:0 0 15px rgba(230,184,0,0.25)}
 
         section{position:relative;z-index:4;min-height:100vh;display:flex;align-items:center;padding:100px 3rem;transition:transform 0.1s linear;will-change:transform}
-        #process,#testimonials{min-height:auto;padding:100px 3rem 80px}
+        #process{min-height:auto;padding:100px 3rem 80px}
         .container{max-width:1200px;width:100%;margin:0 auto}
 
         .fade-up{opacity:0;transform:translateY(25px);transition:opacity 0.7s ease,transform 0.7s ease}
@@ -129,9 +115,10 @@
         @keyframes goldShimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
         .hero-divider{width:80px;height:2px;background:var(--gold);box-shadow:0 0 15px rgba(230,184,0,0.4)}
         .hero-description{font-size:1rem;font-weight:300;color:var(--text2);max-width:480px;line-height:1.7}
-        .hero-meta{display:flex;gap:1.5rem;font-family:var(--mono);font-size:0.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px}
-        .hero-meta-item{padding:0.4rem 1rem;border:1px solid rgba(230,184,0,0.2);transition:all 0.3s;cursor:none}
+        .hero-meta{display:flex;gap:1.5rem;font-family:var(--mono);font-size:0.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;flex-wrap:wrap}
+        .hero-meta-item{padding:0.4rem 1rem;border:1px solid rgba(230,184,0,0.2);transition:all 0.3s;cursor:none;display:flex;align-items:center;gap:0.5rem}
         .hero-meta-item:hover{border-color:var(--gold-bright);color:var(--gold-pale);box-shadow:0 0 12px rgba(230,184,0,0.2)}
+        .hero-meta-item .meta-icon{font-family:var(--mono);font-size:0.8rem}
 
         .avatar-scene{display:flex;justify-content:center;align-items:center;perspective:900px}
         .avatar-card{width:320px;height:380px;position:relative;transform-style:preserve-3d;transition:transform 0.1s ease-out;will-change:transform;cursor:none}
@@ -155,15 +142,9 @@
         .process-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:2px;color:var(--gold-pale);text-transform:uppercase;margin-bottom:0.4rem}
         .process-desc{font-size:0.75rem;color:var(--text3);line-height:1.4}
 
-        .trusted-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;max-width:900px;margin:0 auto}
-        .trusted-card{background:var(--panel);border:1px solid var(--border);padding:2rem 1rem;text-align:center;transition:all 0.3s;cursor:none}
-        .trusted-card:hover{border-color:var(--border-bright);box-shadow:0 0 20px rgba(230,184,0,0.2);transform:translateY(-2px)}
-        .trusted-icon{font-family:var(--mono);font-size:1.8rem;color:var(--gold-bright);margin-bottom:0.5rem;text-shadow:0 0 10px rgba(230,184,0,0.3)}
-        .trusted-name{font-family:var(--mono);font-size:0.65rem;letter-spacing:2px;color:var(--text2);text-transform:uppercase}
-
-        /* === SKILLS INTERCONNECTED === */
-        .skills-interconnected{max-width:900px;margin:0 auto;position:relative}
-        .skills-svg{width:100%;height:auto;min-height:450px}
+        /* === SKILLS SVG === */
+        .skills-svg-container{width:100%;max-width:950px;margin:0 auto;overflow:visible}
+        .skills-svg-container svg{width:100%;height:auto;min-height:480px}
         .skill-node-rect{fill:var(--panel);stroke:rgba(230,184,0,0.3);stroke-width:1.2;transition:all 0.3s}
         .skill-node-text{font-family:var(--mono);font-size:9px;fill:var(--text2);text-anchor:middle;dominant-baseline:central;letter-spacing:1px;transition:all 0.3s}
         .skill-node-sub{font-family:var(--mono);font-size:6.5px;fill:var(--text3);text-anchor:middle;dominant-baseline:central;letter-spacing:0.5px;transition:all 0.3s}
@@ -175,8 +156,8 @@
         .skill-group:hover .skill-node-sub{fill:#b89400}
         @keyframes skillFlow{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-20}}
 
-        .arch-schema{max-width:1000px;margin:0 auto}
-        .arch-svg-container{width:100%;overflow:visible}
+        /* === ARCH SVG === */
+        .arch-svg-container{width:100%;max-width:1000px;margin:0 auto;overflow:visible}
         .arch-svg-container svg{width:100%;height:auto;min-height:500px}
         .arch-node-rect{fill:var(--panel);stroke:rgba(230,184,0,0.3);stroke-width:1.2;transition:all 0.3s}
         .arch-node-text{font-family:var(--mono);font-size:10px;fill:var(--text2);text-anchor:middle;dominant-baseline:central;letter-spacing:1px;transition:all 0.3s}
@@ -195,7 +176,6 @@
         .lib-card::before{content:'';position:absolute;top:-1px;left:20%;right:20%;height:1px;background:var(--gold);opacity:0;transition:opacity 0.3s}
         .lib-card:hover::before{opacity:0.8}
 
-        /* === PROJECTS === */
         .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
         .project-card{background:var(--panel);border:1px solid var(--border);text-decoration:none;color:inherit;display:block;transition:all 0.4s;position:relative;cursor:none;overflow:hidden}
         .project-card:hover{border-color:var(--border-bright);box-shadow:var(--glow-strong);transform:translateY(-4px)}
@@ -206,8 +186,6 @@
         .project-thumb img.loaded{opacity:1}
         .project-card:hover .project-thumb img{transform:scale(1.05)}
         .project-body{padding:1.8rem;position:relative;z-index:2}
-        .project-tags{display:flex;gap:0.5rem;margin-bottom:0.4rem}
-        .project-tag{font-family:var(--mono);font-size:0.5rem;padding:0.15rem 0.5rem;border:1px solid rgba(230,184,0,0.3);color:var(--gold-pale);letter-spacing:1px;text-transform:uppercase}
         .project-name{font-size:1.4rem;font-weight:700;margin-bottom:0.3rem;color:var(--text)}
         .project-role{font-family:var(--mono);font-size:0.65rem;letter-spacing:2px;color:var(--gold-pale);text-transform:uppercase;margin-bottom:1rem}
         .project-stat{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.7rem;color:var(--text3);letter-spacing:1px;border:1px solid var(--border);padding:0.4rem 1.2rem;transition:all 0.3s}
@@ -240,29 +218,14 @@
 
         footer{position:relative;z-index:4;text-align:center;padding:2rem 2rem 3rem;border-top:1px solid var(--border);font-family:var(--mono);font-size:0.55rem;letter-spacing:3px;color:var(--text3);text-transform:uppercase}
 
-        /* === PRINT === */
         @media print{
             body{background:#fff!important;color:#000!important;cursor:auto!important}
-            #cursor,.scroll-progress,.holo-corner,.holo-ring,#holoCanvas,.scanlines,#particlesContainer,#backToTop,.terminal-ticker,#easterEgg,#loader,.section-divider,.export-btn,.copy-btn,.bare-metal-toggle,.theme-toggle,.mobile-toggle,.nav-links a:not(.active){display:none!important}
+            #cursor,.scroll-progress,.holo-corner,.holo-ring,#holoCanvas,.scanlines,#particlesContainer,#backToTop,.terminal-ticker,#easterEgg,#loader,.section-divider,.export-btn,.copy-btn,.bare-metal-toggle,.mobile-toggle,.nav-links a:not(.active){display:none!important}
             nav{position:static;border-bottom:2px solid #000;background:#fff!important;padding:1rem}
             .nav-brand{color:#000!important;text-shadow:none!important}
-            .nav-brand span{color:#555!important}
             section{min-height:auto!important;padding:40px 2rem!important;page-break-inside:avoid}
             .hero-title{font-size:3rem!important;color:#000!important;background:none!important;-webkit-text-fill-color:#000!important;animation:none!important}
-            .hero-title em{color:#b89400!important}
-            .section-title{font-size:1.8rem!important;color:#000!important}
-            .section-title em{color:#b89400!important}
-            .hero-description,.process-desc,.project-role,.contact-label{color:#444!important}
-            .project-card,.trusted-card,.process-step,.lib-card,.skill-item{background:#fff!important;border:1px solid #ccc!important;box-shadow:none!important}
-            .project-thumb{height:150px!important}
-            .project-stat{color:#000!important;border-color:#000!important}
-            .project-stat .live-dot{background:#b89400!important}
             .fade-up{opacity:1!important;transform:none!important}
-            .arch-svg-container svg,.skills-svg{min-height:300px!important}
-            .arch-node-rect,.skill-node-rect{fill:#fff!important;stroke:#000!important}
-            .arch-node-text,.skill-node-text{fill:#000!important}
-            .arch-node-sub,.skill-node-sub{fill:#555!important}
-            footer{border-top:2px solid #000;color:#000!important}
         }
 
         @media(max-width:1024px){
@@ -270,7 +233,7 @@
             .hero-description,.hero-divider{margin:0 auto}.hero-meta{justify-content:center}
             .avatar-card{width:260px;height:310px}.projects-grid{grid-template-columns:1fr}
             .lib-grid{grid-template-columns:repeat(3,1fr)}.process-grid{grid-template-columns:repeat(2,1fr)}
-            .trusted-grid{grid-template-columns:repeat(3,1fr)}.holo-corner,.holo-ring{display:none}
+            .holo-corner,.holo-ring{display:none}
         }
         @media(max-width:768px){
             nav{padding:0 1.5rem}.nav-brand span{display:none}
@@ -278,8 +241,7 @@
             .nav-links.active{display:flex}.nav-links a{border:none;padding:0.8rem 1rem;cursor:pointer}
             .mobile-toggle{display:flex;cursor:pointer}section{padding:80px 1.5rem}
             .hero-title{font-size:3.2rem}.section-title{font-size:1.9rem}
-            .lib-grid{grid-template-columns:repeat(2,1fr)}.trusted-grid{grid-template-columns:repeat(2,1fr)}
-            .skills-terminal .skill-row{padding:0.9rem 1.2rem;font-size:0.68rem;cursor:pointer}
+            .lib-grid{grid-template-columns:repeat(2,1fr)}
             body{cursor:auto}#cursor{display:none}body.mobile{cursor:auto}.terminal-ticker{display:none}
         }
     </style>
@@ -298,18 +260,16 @@
     <div id="backToTop"></div>
 
     <nav>
-        <div class="nav-brand" id="navBrand">YARIK1<span id="navSubtitle">System Engineer</span><span class="typing-cursor"></span></div>
+        <div class="nav-brand" id="navBrand">YARIK1</div>
         <button class="mobile-toggle" id="menuBtn" aria-label="Menu">☰</button>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#expertise">Expertise</a></li>
             <li><a href="#architecture">Architecture</a></li>
-            <li><a href="#testimonials">Trusted</a></li>
             <li><a href="#toolchain">Toolchain</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><button class="theme-toggle" id="themeToggle">◐</button></li>
             <li><button class="bare-metal-toggle" id="bareMetalToggle">◈</button></li>
         </ul>
     </nav>
@@ -319,57 +279,102 @@
         <div class="ticker-text">> SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span></div>
     </div></div>
 
-    <section id="home"><div class="container"><div class="hero-content"><p class="hero-eyebrow fade-up">System Engineer</p><h1 class="hero-title fade-up">Yarik<em>1</em></h1><div class="hero-divider fade-up"></div><p class="hero-description fade-up">Architecting high-performance systems with clean abstraction. Scalable game frameworks, secure client-server architecture, maintainable codebases.</p><div class="hero-meta fade-up"><div class="hero-meta-item">Luau</div><div class="hero-meta-item">Roblox</div><div class="hero-meta-item">Systems</div></div></div><div class="avatar-scene fade-up"><div class="avatar-card" id="avatarCard"><div class="avatar-holo"></div><div class="avatar-border"></div><div class="avatar-front"><img src="./assets/avatar.png" alt="Yarik1" onerror="this.src='https://placehold.co/400x480/080810/e6b800?text=YARIK1'"></div></div></div></div></section>
+    <section id="home"><div class="container"><div class="hero-content"><p class="hero-eyebrow fade-up">System Engineer</p><h1 class="hero-title fade-up">Yarik<em>1</em></h1><div class="hero-divider fade-up"></div><p class="hero-description fade-up">Architecting high-performance systems with clean abstraction. Scalable game frameworks, secure client-server architecture, maintainable codebases.</p><div class="hero-meta fade-up">
+        <div class="hero-meta-item"><span class="meta-icon">⬢</span> Luau</div>
+        <div class="hero-meta-item"><span class="meta-icon">⬡</span> Roblox</div>
+        <div class="hero-meta-item"><span class="meta-icon">◆</span> Systems</div>
+        <div class="hero-meta-item"><span class="meta-icon">⬢</span> GitHub</div>
+        <div class="hero-meta-item"><span class="meta-icon">◈</span> VS Code</div>
+        <div class="hero-meta-item"><span class="meta-icon">◆</span> C#</div>
+    </div></div><div class="avatar-scene fade-up"><div class="avatar-card" id="avatarCard"><div class="avatar-holo"></div><div class="avatar-border"></div><div class="avatar-front"><img src="./assets/avatar.png" alt="Yarik1" onerror="this.src='https://placehold.co/400x480/080810/e6b800?text=YARIK1'"></div></div></div></div></section>
     <div class="section-divider"></div>
 
     <section id="process"><div class="container"><div class="section-header fade-up"><p class="section-number">01</p><h2 class="section-title">How I <em>Work</em></h2><div class="section-line"></div></div><div class="process-grid"><div class="process-step fade-up"><div class="process-icon">◇</div><div class="process-label">Design</div><div class="process-desc">Architecture planning, data flow mapping, modular boundary definition</div></div><div class="process-step fade-up"><div class="process-icon">▣</div><div class="process-label">Abstract</div><div class="process-desc">Interface contracts, dependency injection, reusable component isolation</div></div><div class="process-step fade-up"><div class="process-icon">◈</div><div class="process-label">Optimize</div><div class="process-desc">Memory profiling, network throttling, cold-path elimination</div></div><div class="process-step fade-up"><div class="process-icon">◆</div><div class="process-label">Ship</div><div class="process-desc">Stress testing, telemetry integration, production deployment</div></div></div></div></section>
     <div class="section-divider"></div>
 
-    <section id="expertise"><div class="container"><div class="section-header fade-up"><p class="section-number">02</p><h2 class="section-title">Technical <em>Spectrum</em></h2><div class="section-line"></div></div><div class="skills-interconnected fade-up"><div class="skills-svg"><svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
-        <rect x="15" y="10" width="200" height="140" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="25" y="28" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">CORE SYSTEMS</text>
-        <rect x="15" y="170" width="200" height="120" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="25" y="188" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">NETWORK LAYER</text>
-        <rect x="15" y="310" width="200" height="120" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="25" y="328" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">DATA & STORAGE</text>
-        <rect x="250" y="10" width="200" height="140" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="260" y="28" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">DESIGN PATTERNS</text>
-        <rect x="250" y="170" width="200" height="120" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="260" y="188" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">RUNTIME & PERF</text>
-        <rect x="500" y="10" width="180" height="200" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="510" y="28" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">SYNC & REPLICATION</text>
-        <rect x="500" y="230" width="180" height="200" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="510" y="248" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">SECURITY & AUTH</text>
-        <g class="skill-group"><rect x="40" y="55" width="140" height="36" rx="3" class="skill-node-rect" stroke="rgba(230,184,0,0.5)"/><text x="110" y="69" class="skill-node-text" fill="#ffe000" font-size="10">System Architecture</text><text x="110" y="82" class="skill-node-sub">Core Orchestration</text></g>
-        <g class="skill-group"><rect x="40" y="200" width="140" height="36" rx="3" class="skill-node-rect"/><text x="110" y="214" class="skill-node-text">Network Optimization</text><text x="110" y="227" class="skill-node-sub">Throttling & Buffering</text></g>
-        <g class="skill-group"><rect x="40" y="340" width="140" height="36" rx="3" class="skill-node-rect"/><text x="110" y="354" class="skill-node-text">Data Caching</text><text x="110" y="367" class="skill-node-sub">ProfileStore · QuickZone</text></g>
-        <g class="skill-group"><rect x="275" y="55" width="140" height="36" rx="3" class="skill-node-rect"/><text x="345" y="69" class="skill-node-text">Modular Design</text><text x="345" y="82" class="skill-node-sub">DI · Container · Maid</text></g>
-        <g class="skill-group"><rect x="275" y="200" width="140" height="36" rx="3" class="skill-node-rect"/><text x="345" y="214" class="skill-node-text">Performance Tuning</text><text x="345" y="227" class="skill-node-sub">Memory & CPU Profiling</text></g>
-        <g class="skill-group"><rect x="525" y="55" width="130" height="36" rx="3" class="skill-node-rect"/><text x="590" y="69" class="skill-node-text">Client-Server Sync</text><text x="590" y="82" class="skill-node-sub">Replica · Signal</text></g>
-        <g class="skill-group"><rect x="525" y="110" width="130" height="36" rx="3" class="skill-node-rect"/><text x="590" y="124" class="skill-node-text">Real-time Replication</text><text x="590" y="137" class="skill-node-sub">BridgeNet2 · Jecs</text></g>
-        <g class="skill-group"><rect x="525" y="270" width="130" height="36" rx="3" class="skill-node-rect"/><text x="590" y="284" class="skill-node-text">Server Security</text><text x="590" y="297" class="skill-node-sub">Auth · Validation</text></g>
-        <g class="skill-group"><rect x="525" y="325" width="130" height="36" rx="3" class="skill-node-rect"/><text x="590" y="339" class="skill-node-text">Memory Management</text><text x="590" y="352" class="skill-node-sub">Janitor · GC Control</text></g>
-        <path d="M180,73 C240,73 240,73 275,73" class="skill-link solid"/><text x="230" y="65" class="skill-link-label">depends</text>
-        <path d="M180,218 C240,218 240,218 275,218" class="skill-link solid"/><text x="230" y="210" class="skill-link-label">optimizes</text>
-        <path d="M180,358 C240,358 240,290 275,290" class="skill-link"/><text x="230" y="320" class="skill-link-label">feeds</text>
-        <path d="M415,73 C480,73 480,73 525,73" class="skill-link solid"/><text x="470" y="65" class="skill-link-label">structures</text>
-        <path d="M415,218 C480,218 480,140 525,140" class="skill-link"/><text x="470" y="175" class="skill-link-label">profiles</text>
-        <path d="M590,91 C590,110 590,110 590,110" class="skill-link solid"/><text x="620" y="105" class="skill-link-label">→</text>
-        <path d="M590,306 C590,325 590,325 590,325" class="skill-link solid"/><text x="620" y="320" class="skill-link-label">→</text>
-    </svg></div></div></div></section>
+    <section id="expertise"><div class="container"><div class="section-header fade-up"><p class="section-number">02</p><h2 class="section-title">Technical <em>Spectrum</em></h2><div class="section-line"></div></div><div class="skills-svg-container fade-up"><svg viewBox="0 0 950 520" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="15" width="210" height="155" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="34" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">CORE SYSTEMS</text>
+        <rect x="20" y="190" width="210" height="135" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="209" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">NETWORK LAYER</text>
+        <rect x="20" y="345" width="210" height="135" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="364" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">DATA & STORAGE</text>
+        <rect x="260" y="15" width="210" height="155" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="270" y="34" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">DESIGN PATTERNS</text>
+        <rect x="260" y="190" width="210" height="135" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="270" y="209" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">RUNTIME & PERF</text>
+        <rect x="500" y="15" width="200" height="215" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="510" y="34" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">SYNC & REPLICATION</text>
+        <rect x="500" y="250" width="200" height="230" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="510" y="269" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">SECURITY & AUTH</text>
+        <rect x="730" y="15" width="190" height="465" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="740" y="34" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">MEMORY & LIFECYCLE</text>
+        <g class="skill-group"><rect x="45" y="65" width="160" height="40" rx="3" class="skill-node-rect" stroke="rgba(230,184,0,0.5)"/><text x="125" y="80" class="skill-node-text" fill="#ffe000" font-size="10">System Architecture</text><text x="125" y="94" class="skill-node-sub">Core Orchestration</text></g>
+        <g class="skill-group"><rect x="45" y="220" width="160" height="40" rx="3" class="skill-node-rect"/><text x="125" y="235" class="skill-node-text">Network Optimization</text><text x="125" y="249" class="skill-node-sub">BridgeNet2 · Throttling</text></g>
+        <g class="skill-group"><rect x="45" y="375" width="160" height="40" rx="3" class="skill-node-rect"/><text x="125" y="390" class="skill-node-text">Data Caching</text><text x="125" y="404" class="skill-node-sub">ProfileStore · QuickZone</text></g>
+        <g class="skill-group"><rect x="285" y="65" width="160" height="40" rx="3" class="skill-node-rect"/><text x="365" y="80" class="skill-node-text">Modular Design</text><text x="365" y="94" class="skill-node-sub">DI · Container · Maid</text></g>
+        <g class="skill-group"><rect x="285" y="220" width="160" height="40" rx="3" class="skill-node-rect"/><text x="365" y="235" class="skill-node-text">Performance Tuning</text><text x="365" y="249" class="skill-node-sub">Memory & CPU Profiling</text></g>
+        <g class="skill-group"><rect x="520" y="65" width="160" height="40" rx="3" class="skill-node-rect"/><text x="600" y="80" class="skill-node-text">Client-Server Sync</text><text x="600" y="94" class="skill-node-sub">Replica · Signal</text></g>
+        <g class="skill-group"><rect x="520" y="125" width="160" height="40" rx="3" class="skill-node-rect"/><text x="600" y="140" class="skill-node-text">Real-time Replication</text><text x="600" y="154" class="skill-node-sub">BridgeNet2 · Jecs</text></g>
+        <g class="skill-group"><rect x="520" y="285" width="160" height="40" rx="3" class="skill-node-rect"/><text x="600" y="300" class="skill-node-text">Server Security</text><text x="600" y="314" class="skill-node-sub">Auth · Validation</text></g>
+        <g class="skill-group"><rect x="520" y="345" width="160" height="40" rx="3" class="skill-node-rect"/><text x="600" y="360" class="skill-node-text">Memory Management</text><text x="600" y="374" class="skill-node-sub">Janitor · GC Control</text></g>
+        <g class="skill-group"><rect x="750" y="65" width="150" height="40" rx="3" class="skill-node-rect"/><text x="825" y="80" class="skill-node-text">Scalable Game Loops</text><text x="825" y="94" class="skill-node-sub">Heartbeat · Step</text></g>
+        <g class="skill-group"><rect x="750" y="260" width="150" height="40" rx="3" class="skill-node-rect"/><text x="825" y="275" class="skill-node-text">Maid / Janitor</text><text x="825" y="289" class="skill-node-sub">Cleanup & GC</text></g>
+        <path d="M205,85 C250,85 250,85 285,85" class="skill-link solid"/><text x="245" y="78" class="skill-link-label">depends</text>
+        <path d="M205,240 C250,240 250,240 285,240" class="skill-link solid"/><text x="245" y="232" class="skill-link-label">optimizes</text>
+        <path d="M205,395 C250,395 250,310 285,310" class="skill-link"/><text x="245" y="348" class="skill-link-label">feeds</text>
+        <path d="M445,85 C490,85 490,85 520,85" class="skill-link solid"/><text x="482" y="77" class="skill-link-label">structures</text>
+        <path d="M445,240 C490,240 490,155 520,155" class="skill-link"/><text x="482" y="195" class="skill-link-label">profiles</text>
+        <path d="M680,85 C720,85 720,85 750,85" class="skill-link solid"/><text x="715" y="77" class="skill-link-label">drives</text>
+        <path d="M680,145 C720,145 720,280 750,280" class="skill-link"/><text x="715" y="210" class="skill-link-label">cleans</text>
+    </svg></div></div></section>
     <div class="section-divider"></div>
 
-    <section id="architecture"><div class="container"><div class="section-header fade-up"><p class="section-number">03</p><h2 class="section-title">System <em>Architecture</em></h2><div class="section-line"></div></div><div class="arch-schema fade-up"><div class="arch-svg-container"><svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="10" width="280" height="150" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="28" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">NETWORKING LAYER</text><rect x="20" y="180" width="280" height="130" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="198" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">STATE LAYER</text><rect x="20" y="335" width="280" height="130" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="353" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">DATA & STORAGE</text><g class="arch-group"><rect x="380" y="190" width="200" height="60" rx="3" class="arch-node-rect" stroke="rgba(230,184,0,0.6)"/><text x="480" y="212" class="arch-node-text" fill="#ffe000" font-size="11">CORE SYSTEM</text><text x="480" y="232" class="arch-node-sub">Orchestration · Boot · Loop</text></g><g class="arch-group"><rect x="50" y="55" width="110" height="42" rx="3" class="arch-node-rect"/><text x="105" y="70" class="arch-node-text">BridgeNet2</text><text x="105" y="84" class="arch-node-sub">Remote Transport</text></g><g class="arch-group"><rect x="180" y="55" width="110" height="42" rx="3" class="arch-node-rect"/><text x="235" y="70" class="arch-node-text">Replica</text><text x="235" y="84" class="arch-node-sub">State Streaming</text></g><g class="arch-group"><rect x="50" y="215" width="110" height="42" rx="3" class="arch-node-rect"/><text x="105" y="230" class="arch-node-text">Signal</text><text x="105" y="244" class="arch-node-sub">Event Bus</text></g><g class="arch-group"><rect x="180" y="215" width="110" height="42" rx="3" class="arch-node-rect"/><text x="235" y="230" class="arch-node-text">Rodux</text><text x="235" y="244" class="arch-node-sub">State Container</text></g><g class="arch-group"><rect x="50" y="370" width="110" height="42" rx="3" class="arch-node-rect"/><text x="105" y="385" class="arch-node-text">ProfileStore</text><text x="105" y="399" class="arch-node-sub">Persistent Data</text></g><g class="arch-group"><rect x="180" y="370" width="110" height="42" rx="3" class="arch-node-rect"/><text x="235" y="385" class="arch-node-text">QuickZone</text><text x="235" y="399" class="arch-node-sub">Spatial Caching</text></g><g class="arch-group"><rect x="660" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="75" class="arch-node-text">Maid</text><text x="715" y="89" class="arch-node-sub">Cleanup Manager</text></g><g class="arch-group"><rect x="660" y="125" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="140" class="arch-node-text">Janitor</text><text x="715" y="154" class="arch-node-sub">GC Helper</text></g><g class="arch-group"><rect x="660" y="195" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="210" class="arch-node-text">Container</text><text x="715" y="224" class="arch-node-sub">DI / Service Locator</text></g><g class="arch-group"><rect x="660" y="260" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="275" class="arch-node-text">Promise</text><text x="715" y="289" class="arch-node-sub">Async Flow</text></g><g class="arch-group"><rect x="660" y="335" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="350" class="arch-node-text">Fusion</text><text x="715" y="364" class="arch-node-sub">Reactive UI</text></g><g class="arch-group"><rect x="830" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="885" y="75" class="arch-node-text">Jolt</text><text x="885" y="89" class="arch-node-sub">Physics ECS</text></g><g class="arch-group"><rect x="830" y="125" width="110" height="42" rx="3" class="arch-node-rect"/><text x="885" y="140" class="arch-node-text">Jecs</text><text x="885" y="154" class="arch-node-sub">Entity Framework</text></g><path d="M380,205 C320,205 200,85 170,85" class="arch-link"/><text x="260" y="78" class="arch-link-label">remote comm</text><path d="M380,218 C320,218 280,85 290,85" class="arch-link"/><text x="310" y="70" class="arch-link-label">state push</text><path d="M380,228 C320,235 200,235 170,235" class="arch-link"/><text x="260" y="225" class="arch-link-label">events</text><path d="M380,240 C320,250 280,240 290,240" class="arch-link"/><text x="310" y="232" class="arch-link-label">dispatch</text><path d="M380,248 C320,395 200,395 170,395" class="arch-link"/><text x="260" y="385" class="arch-link-label">persist</text><path d="M580,200 C620,160 620,80 660,80" class="arch-link"/><text x="600" y="70" class="arch-link-label">cleanup</text><path d="M580,210 C630,180 620,145 660,145" class="arch-link"/><text x="615" y="135" class="arch-link-label">gc</text><path d="M580,220 C630,230 620,215 660,215" class="arch-link"/><text x="615" y="210" class="arch-link-label">resolve</text><path d="M580,230 C640,280 620,280 660,280" class="arch-link"/><text x="620" y="270" class="arch-link-label">async</text><path d="M580,240 C650,355 620,355 660,355" class="arch-link"/><text x="620" y="345" class="arch-link-label">render</text><path d="M580,195 C720,140 750,70 830,70" class="arch-link"/><text x="690" y="60" class="arch-link-label">physics</text><path d="M580,190 C730,160 750,145 830,145" class="arch-link"/><text x="700" y="135" class="arch-link-label">entities</text><line x1="160" y1="97" x2="180" y2="97" class="arch-link solid"/><text x="170" y="90" class="arch-link-label">→</text><line x1="160" y1="257" x2="180" y2="257" class="arch-link solid"/><text x="170" y="250" class="arch-link-label">→</text></svg></div></div></div></section>
+    <section id="architecture"><div class="container"><div class="section-header fade-up"><p class="section-number">03</p><h2 class="section-title">System <em>Architecture</em></h2><div class="section-line"></div></div><div class="arch-svg-container fade-up"><svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="20" width="250" height="150" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="40" y="40" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">NETWORKING LAYER</text>
+        <rect x="30" y="190" width="250" height="130" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="40" y="210" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">STATE LAYER</text>
+        <rect x="30" y="340" width="250" height="130" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="40" y="360" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">DATA & STORAGE</text>
+        <g class="arch-group"><rect x="390" y="190" width="200" height="60" rx="3" class="arch-node-rect" stroke="rgba(230,184,0,0.6)"/><text x="490" y="212" class="arch-node-text" fill="#ffe000" font-size="11">CORE SYSTEM</text><text x="490" y="232" class="arch-node-sub">Orchestration · Boot · Loop</text></g>
+        <g class="arch-group"><rect x="60" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="115" y="75" class="arch-node-text">BridgeNet2</text><text x="115" y="89" class="arch-node-sub">Remote Transport</text></g>
+        <g class="arch-group"><rect x="190" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="245" y="75" class="arch-node-text">Replica</text><text x="245" y="89" class="arch-node-sub">State Streaming</text></g>
+        <g class="arch-group"><rect x="60" y="230" width="110" height="42" rx="3" class="arch-node-rect"/><text x="115" y="245" class="arch-node-text">Signal</text><text x="115" y="259" class="arch-node-sub">Event Bus</text></g>
+        <g class="arch-group"><rect x="190" y="230" width="110" height="42" rx="3" class="arch-node-rect"/><text x="245" y="245" class="arch-node-text">Rodux</text><text x="245" y="259" class="arch-node-sub">State Container</text></g>
+        <g class="arch-group"><rect x="60" y="380" width="110" height="42" rx="3" class="arch-node-rect"/><text x="115" y="395" class="arch-node-text">ProfileStore</text><text x="115" y="409" class="arch-node-sub">Persistent Data</text></g>
+        <g class="arch-group"><rect x="190" y="380" width="110" height="42" rx="3" class="arch-node-rect"/><text x="245" y="395" class="arch-node-text">QuickZone</text><text x="245" y="409" class="arch-node-sub">Spatial Caching</text></g>
+        <g class="arch-group"><rect x="660" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="75" class="arch-node-text">Maid</text><text x="715" y="89" class="arch-node-sub">Cleanup Manager</text></g>
+        <g class="arch-group"><rect x="660" y="125" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="140" class="arch-node-text">Janitor</text><text x="715" y="154" class="arch-node-sub">GC Helper</text></g>
+        <g class="arch-group"><rect x="660" y="195" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="210" class="arch-node-text">Container</text><text x="715" y="224" class="arch-node-sub">DI / Service Locator</text></g>
+        <g class="arch-group"><rect x="660" y="260" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="275" class="arch-node-text">Promise</text><text x="715" y="289" class="arch-node-sub">Async Flow</text></g>
+        <g class="arch-group"><rect x="660" y="330" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="345" class="arch-node-text">Fusion</text><text x="715" y="359" class="arch-node-sub">Reactive UI</text></g>
+        <g class="arch-group"><rect x="660" y="400" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="415" class="arch-node-text">SimpleWeight</text><text x="715" y="429" class="arch-node-sub">Load Balancer</text></g>
+        <g class="arch-group"><rect x="820" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="875" y="75" class="arch-node-text">Jolt</text><text x="875" y="89" class="arch-node-sub">Physics ECS</text></g>
+        <g class="arch-group"><rect x="820" y="125" width="110" height="42" rx="3" class="arch-node-rect"/><text x="875" y="140" class="arch-node-text">Jecs</text><text x="875" y="154" class="arch-node-sub">Entity Framework</text></g>
+        <g class="arch-group"><rect x="820" y="195" width="110" height="42" rx="3" class="arch-node-rect"/><text x="875" y="210" class="arch-node-text">ShapecastHB</text><text x="875" y="224" class="arch-node-sub">Hitbox Detection</text></g>
+        <g class="arch-group"><rect x="820" y="260" width="110" height="42" rx="3" class="arch-node-rect"/><text x="875" y="275" class="arch-node-text">SimplePath</text><text x="875" y="289" class="arch-node-sub">Pathfinding</text></g>
+        <path d="M390,205 C330,205 220,90 200,90" class="arch-link"/><text x="280" y="82" class="arch-link-label">remote comm</text>
+        <path d="M390,218 C330,218 300,90 300,90" class="arch-link"/><text x="330" y="80" class="arch-link-label">state push</text>
+        <path d="M390,228 C330,250 220,250 200,250" class="arch-link"/><text x="280" y="242" class="arch-link-label">events</text>
+        <path d="M390,240 C330,265 300,255 300,255" class="arch-link"/><text x="330" y="250" class="arch-link-label">dispatch</text>
+        <path d="M390,248 C330,400 220,400 200,400" class="arch-link"/><text x="280" y="392" class="arch-link-label">persist</text>
+        <path d="M590,200 C620,160 620,80 660,80" class="arch-link"/><text x="605" y="72" class="arch-link-label">cleanup</text>
+        <path d="M590,210 C630,180 620,145 660,145" class="arch-link"/><text x="618" y="135" class="arch-link-label">gc</text>
+        <path d="M590,220 C630,230 620,215 660,215" class="arch-link"/><text x="618" y="210" class="arch-link-label">resolve</text>
+        <path d="M590,230 C640,280 620,280 660,280" class="arch-link"/><text x="620" y="272" class="arch-link-label">async</text>
+        <path d="M590,240 C650,355 620,350 660,350" class="arch-link"/><text x="620" y="342" class="arch-link-label">render</text>
+        <path d="M590,250 C660,420 620,420 660,420" class="arch-link"/><text x="620" y="412" class="arch-link-label">balance</text>
+        <path d="M590,195 C730,130 750,70 820,70" class="arch-link"/><text x="690" y="60" class="arch-link-label">physics</text>
+        <path d="M590,190 C740,155 750,145 820,145" class="arch-link"/><text x="700" y="135" class="arch-link-label">entities</text>
+        <path d="M590,185 C750,210 750,215 820,215" class="arch-link"/><text x="710" y="205" class="arch-link-label">detection</text>
+        <path d="M590,180 C760,270 750,280 820,280" class="arch-link"/><text x="720" y="270" class="arch-link-label">navigation</text>
+        <line x1="170" y1="102" x2="190" y2="102" class="arch-link solid"/><text x="180" y="95" class="arch-link-label">→</text>
+        <line x1="170" y1="272" x2="190" y2="272" class="arch-link solid"/><text x="180" y="265" class="arch-link-label">→</text>
+    </svg></div></div></section>
     <div class="section-divider"></div>
 
-    <section id="testimonials"><div class="container"><div class="section-header fade-up"><p class="section-number">04</p><h2 class="section-title">Trusted <em>Ecosystem</em></h2><div class="section-line"></div></div><div class="trusted-grid"><div class="trusted-card fade-up"><div class="trusted-icon">⬢</div><div class="trusted-name">Roblox</div></div><div class="trusted-card fade-up"><div class="trusted-icon">◇</div><div class="trusted-name">Luau</div></div><div class="trusted-card fade-up"><div class="trusted-icon">⬡</div><div class="trusted-name">GitHub</div></div><div class="trusted-card fade-up"><div class="trusted-icon">◆</div><div class="trusted-name">C#</div></div><div class="trusted-card fade-up"><div class="trusted-icon">◈</div><div class="trusted-name">VS Code</div></div></div></div></section>
+    <section id="toolchain"><div class="container"><div class="section-header fade-up"><p class="section-number">04</p><h2 class="section-title">Dev <em>Toolchain</em></h2><div class="section-line"></div></div><div class="lib-grid"><div class="lib-card fade-up">Container</div><div class="lib-card fade-up">SimpleWeight</div><div class="lib-card fade-up">BridgeNet2</div><div class="lib-card fade-up">ProfileStore</div><div class="lib-card fade-up">Replica</div><div class="lib-card fade-up">Signal</div><div class="lib-card fade-up">Maid</div><div class="lib-card fade-up">Promise</div><div class="lib-card fade-up">Janitor</div><div class="lib-card fade-up">Fusion</div><div class="lib-card fade-up">Jolt</div><div class="lib-card fade-up">Jecs</div><div class="lib-card fade-up">Rodux</div><div class="lib-card fade-up">ShapecastHB</div><div class="lib-card fade-up">SimplePath</div><div class="lib-card fade-up">QuickZone</div></div></div></section>
     <div class="section-divider"></div>
 
-    <section id="toolchain"><div class="container"><div class="section-header fade-up"><p class="section-number">05</p><h2 class="section-title">Dev <em>Toolchain</em></h2><div class="section-line"></div></div><div class="lib-grid"><div class="lib-card fade-up">Container</div><div class="lib-card fade-up">SimpleWeight</div><div class="lib-card fade-up">BridgeNet2</div><div class="lib-card fade-up">ProfileStore</div><div class="lib-card fade-up">Replica</div><div class="lib-card fade-up">Signal</div><div class="lib-card fade-up">Maid</div><div class="lib-card fade-up">Promise</div><div class="lib-card fade-up">Janitor</div><div class="lib-card fade-up">Fusion</div><div class="lib-card fade-up">Jolt</div><div class="lib-card fade-up">Jecs</div><div class="lib-card fade-up">Rodux</div><div class="lib-card fade-up">ShapecastHB</div><div class="lib-card fade-up">SimplePath</div><div class="lib-card fade-up">QuickZone</div></div></div></section>
-    <div class="section-divider"></div>
-
-    <section id="projects"><div class="container"><div class="section-header fade-up"><p class="section-number">06</p><h2 class="section-title">Deployed <em>Systems</em></h2><div class="section-line"></div></div><div class="projects-grid">
-        <a href="https://www.roblox.com/games/119051443230992/Dead-Mars" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://tr.rbxcdn.com/180DAY-c44d4550d0380876af70504c0fb7456d/768/432/Image/Webp/noFilter" alt="Dead Mars" loading="lazy"></div><div class="project-body"><div class="project-tags"><span class="project-tag">#multiplayer</span><span class="project-tag">#horror</span></div><h3 class="project-name">Dead Mars</h3><p class="project-role">Lead Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 570 CCU</span></div></a>
-        <a href="https://www.roblox.com/games/94939590381819/Wake-up-a-Brainrot" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://tr.rbxcdn.com/180DAY-873ef111a7b7f02c85453cfe7b155a06/768/432/Image/Webp/noFilter" alt="Wake up a Brainrot" loading="lazy"></div><div class="project-body"><div class="project-tags"><span class="project-tag">#social</span><span class="project-tag">#casual</span></div><h3 class="project-name">Wake up a Brainrot</h3><p class="project-role">Fullstack Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 319 CCU</span></div></a>
-        <a href="https://www.roblox.com/games/104724166902095/Smash-a-Lucky-Block" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://tr.rbxcdn.com/180DAY-bec7943ea9adb6721161002e87bff871/768/432/Image/Webp/noFilter" alt="Smash A Lucky Block" loading="lazy"></div><div class="project-body"><div class="project-tags"><span class="project-tag">#action</span><span class="project-tag">#physics</span></div><h3 class="project-name">Smash A Lucky Block</h3><p class="project-role">Fullstack + Netcode</p><span class="project-stat"><span class="live-dot"></span>PEAK 84 CCU</span></div></a>
-        <a href="https://www.roblox.com/games/117527250434588/Incremental-Template" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://t3.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Incremental Template" loading="lazy"></div><div class="project-body"><div class="project-tags"><span class="project-tag">#framework</span><span class="project-tag">#opensource</span></div><h3 class="project-name">Incremental Template</h3><p class="project-role">Architecture Engineer</p><span class="project-stat"><span class="live-dot"></span>DEVELOPMENT</span></div></a>
+    <section id="projects"><div class="container"><div class="section-header fade-up"><p class="section-number">05</p><h2 class="section-title">Deployed <em>Systems</em></h2><div class="section-line"></div></div><div class="projects-grid">
+        <a href="https://www.roblox.com/games/119051443230992/Dead-Mars" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://tr.rbxcdn.com/180DAY-c44d4550d0380876af70504c0fb7456d/768/432/Image/Webp/noFilter" alt="Dead Mars" loading="lazy"></div><div class="project-body"><h3 class="project-name">Dead Mars</h3><p class="project-role">Lead Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 570 CCU</span></div></a>
+        <a href="https://www.roblox.com/games/94939590381819/Wake-up-a-Brainrot" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://tr.rbxcdn.com/180DAY-873ef111a7b7f02c85453cfe7b155a06/768/432/Image/Webp/noFilter" alt="Wake up a Brainrot" loading="lazy"></div><div class="project-body"><h3 class="project-name">Wake up a Brainrot</h3><p class="project-role">Fullstack Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 319 CCU</span></div></a>
+        <a href="https://www.roblox.com/games/104724166902095/Smash-a-Lucky-Block" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://tr.rbxcdn.com/180DAY-bec7943ea9adb6721161002e87bff871/768/432/Image/Webp/noFilter" alt="Smash A Lucky Block" loading="lazy"></div><div class="project-body"><h3 class="project-name">Smash A Lucky Block</h3><p class="project-role">Fullstack + Netcode</p><span class="project-stat"><span class="live-dot"></span>PEAK 84 CCU</span></div></a>
+        <a href="https://www.roblox.com/games/117527250434588/Incremental-Template" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://t3.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Incremental Template" loading="lazy"></div><div class="project-body"><h3 class="project-name">Incremental Template</h3><p class="project-role">Architecture Engineer</p><span class="project-stat"><span class="live-dot"></span>DEVELOPMENT</span></div></a>
     </div></div></section>
     <div class="section-divider"></div>
 
-    <section id="contact"><div class="container"><div class="section-header fade-up"><p class="section-number">07</p><h2 class="section-title">Establish <em>Link</em></h2><div class="section-line"></div></div><div class="contact-wrapper fade-up">
+    <section id="contact"><div class="container"><div class="section-header fade-up"><p class="section-number">06</p><h2 class="section-title">Establish <em>Link</em></h2><div class="section-line"></div></div><div class="contact-wrapper fade-up">
         <div class="availability-indicator"><span class="availability-dot"></span> Open for commissions</div><br>
         <a href="https://discord.com/users/glogangs" target="_blank" rel="noopener" class="contact-card"><svg class="contact-icon" viewBox="0 0 24 24"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/></svg><div class="contact-info"><div class="contact-label">Discord</div><div class="contact-value">glogangs</div></div></a>
         <button class="copy-btn" id="copyDiscord">⧉ Copy</button><br>
@@ -383,79 +388,66 @@
             const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent) || window.innerWidth <= 768;
             if (isMobile) document.body.classList.add('mobile');
 
-            // === SCROLL PROGRESS ===
             const sp = document.getElementById('scrollProgress');
             window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - window.innerHeight; sp.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%'; });
 
-            // === EASTER EGG ===
             let lc = 0; const nb = document.getElementById('navBrand'), ee = document.getElementById('easterEgg');
             nb?.addEventListener('click', () => { lc++; if (lc >= 5) { lc = 0; ee.classList.add('active'); setTimeout(() => ee.classList.remove('active'), 2000); console.log('%c[YARIK1:AUTH] %cACCESS GRANTED', 'color:#ffe000', 'color:#e6b800'); } });
             setTimeout(() => { lc = 0; }, 2000);
 
-            // === TOAST SYSTEM ===
             function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
 
-            // === DYNAMIC TITLE + TYPING ===
             const titles = ['Yarik1 — System Engineer', 'Yarik1 — Online', 'Yarik1 — Available', 'Yarik1 — Secure'];
-            const subs = ['System Engineer', 'Online', 'Available', 'Secure'];
-            let ti = 0, si = 0; let isTabActive = true;
-            const ns = document.getElementById('navSubtitle');
+            let ti = 0; let isTabActive = true;
+            const titleEl = document.querySelector('title');
             document.addEventListener('visibilitychange', () => { isTabActive = !document.hidden; if (!isTabActive) document.title = 'Yarik1 — System Engineer'; });
-            function typeSub(text, cb) { let i = 0; ns.textContent = ''; const iv = setInterval(() => { ns.textContent += text[i]; i++; if (i >= text.length) { clearInterval(iv); if (cb) setTimeout(cb, 2500); } }, 70); }
-            function cycle() { if (isTabActive) { ti = (ti + 1) % titles.length; document.title = titles[ti]; } si = (si + 1) % subs.length; typeSub(subs[si]); }
-            typeSub('System Engineer'); setInterval(cycle, 5500);
 
-            // === LOADER ===
+            function typeTitle(text, idx, callback) {
+                if (idx === 0) document.title = '';
+                if (idx < text.length) {
+                    document.title += text[idx];
+                    setTimeout(() => typeTitle(text, idx + 1, callback), 55);
+                } else if (callback) {
+                    setTimeout(callback, 2200);
+                }
+            }
+
+            function cycleTitle() {
+                if (!isTabActive) { document.title = 'Yarik1 — System Engineer'; setTimeout(cycleTitle, 3000); return; }
+                ti = (ti + 1) % titles.length;
+                typeTitle(titles[ti], 0, cycleTitle);
+            }
+            typeTitle(titles[0], 0, cycleTitle);
+
             window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loader')?.classList.add('hidden'); console.log('%c[YARIK1:OK] %cAll systems ready', 'color:#ffe000', 'color:#b0b0c8'); }, 1800); });
 
-            // === CURSOR ===
             const cursor = document.getElementById('cursor');
-            if (!isMobile && cursor) { cursor.classList.add('visible'); document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px'; }); const hts = document.querySelectorAll('a,.nav-links a,.skill-row,.lib-card,.arch-group,.skill-group,.project-card,.contact-card,.hero-meta-item,.process-step,.export-btn,#backToTop,.bare-metal-toggle,.availability-indicator,.copy-btn,.trusted-card,.theme-toggle'); hts.forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));}); }
+            if (!isMobile && cursor) { cursor.classList.add('visible'); document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px'; }); const hts = document.querySelectorAll('a,.nav-links a,.skill-row,.lib-card,.arch-group,.skill-group,.project-card,.contact-card,.hero-meta-item,.process-step,.export-btn,#backToTop,.bare-metal-toggle,.availability-indicator,.copy-btn'); hts.forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));}); }
 
-            // === PARTICLES ===
             const pc = document.getElementById('particlesContainer'); document.addEventListener('click', (e) => { if (isMobile || document.body.classList.contains('bare-metal')) return; for (let i = 0; i < 8; i++) { const p = document.createElement('div'); p.className = 'click-particle'; const a = (Math.PI*2*i)/8, d = 20+Math.random()*30; p.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;`; pc.appendChild(p); p.addEventListener('animationend', () => p.remove()); } });
 
-            // === BACK TO TOP ===
             const bb = document.getElementById('backToTop'); window.addEventListener('scroll', () => bb.classList.toggle('visible', window.scrollY > 500)); bb.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-            // === EXPORT ===
             document.getElementById('exportDossier')?.addEventListener('click', () => { showToast('PREPARING DOSSIER'); setTimeout(() => window.print(), 200); });
-
-            // === COPY ===
             document.getElementById('copyDiscord')?.addEventListener('click', () => { navigator.clipboard.writeText('glogangs').then(() => showToast('COPIED TO CLIPBOARD')); });
 
-            // === BARE METAL ===
             const bmt = document.getElementById('bareMetalToggle'); let bm = localStorage.getItem('bareMetal') === 'true'; if (bm) document.body.classList.add('bare-metal');
             bmt?.addEventListener('click', () => { bm = !bm; document.body.classList.toggle('bare-metal', bm); localStorage.setItem('bareMetal', bm); showToast(bm ? 'BARE METAL ACTIVE' : 'CYBER MODE ACTIVE'); });
 
-            // === THEME TOGGLE ===
-            const tt = document.getElementById('themeToggle'); let light = localStorage.getItem('theme') === 'light'; if (light) document.body.classList.add('light');
-            tt?.addEventListener('click', () => { light = !light; document.body.classList.toggle('light', light); localStorage.setItem('theme', light ? 'light' : 'dark'); showToast(light ? 'LIGHT MODE' : 'DARK MODE'); });
+            document.addEventListener('keydown', (e) => { if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; const k = e.key.toLowerCase(); const sm = { '1': 'home', '2': 'process', '3': 'expertise', '4': 'architecture', '5': 'toolchain', '6': 'projects', '7': 'contact' }; if (sm[k]) { const s = document.getElementById(sm[k]); if (s) window.scrollTo({ top: s.offsetTop - 60, behavior: 'smooth' }); } if (k === '0') window.scrollTo({ top: 0, behavior: 'smooth' }); if (k === 'escape') { bm = !bm; document.body.classList.toggle('bare-metal', bm); localStorage.setItem('bareMetal', bm); } if (k === 'p' && e.ctrlKey) { e.preventDefault(); window.print(); } });
 
-            // === SHORTCUTS ===
-            document.addEventListener('keydown', (e) => { if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; const k = e.key.toLowerCase(); const sm = { '1': 'home', '2': 'process', '3': 'expertise', '4': 'architecture', '5': 'testimonials', '6': 'toolchain', '7': 'projects', '8': 'contact' }; if (sm[k]) { const s = document.getElementById(sm[k]); if (s) window.scrollTo({ top: s.offsetTop - 60, behavior: 'smooth' }); } if (k === '0') window.scrollTo({ top: 0, behavior: 'smooth' }); if (k === 'escape') { bm = !bm; document.body.classList.toggle('bare-metal', bm); localStorage.setItem('bareMetal', bm); } if (k === 'p' && e.ctrlKey) { e.preventDefault(); window.print(); } });
-
-            // === FADE-UP ===
             const fels = document.querySelectorAll('.fade-up'); const fob = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fob.unobserve(e.target); } }); }, { threshold: 0.12 }); fels.forEach(el => fob.observe(el));
 
-            // === LAZY LOAD IMAGES ===
-            const imgs = document.querySelectorAll('.project-thumb img[data-src]');
-            const imgOb = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { const img = e.target; img.src = img.dataset.src; img.onload = () => { img.classList.add('loaded'); img.previousElementSibling.style.display = 'none'; }; imgOb.unobserve(img); } }); }, { threshold: 0.1 });
-            imgs.forEach(img => imgOb.observe(img));
+            const imgs = document.querySelectorAll('.project-thumb img[data-src]'); const imgOb = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { const img = e.target; img.src = img.dataset.src; img.onload = () => { img.classList.add('loaded'); img.previousElementSibling.style.display = 'none'; }; imgOb.unobserve(img); } }); }, { threshold: 0.1 }); imgs.forEach(img => imgOb.observe(img));
 
-            // === HOLO CANVAS ===
             const canvas = document.getElementById('holoCanvas'); const ctx = canvas.getContext('2d'); let w, h, time = 0;
             function rc() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
             function draw() { if (document.body.classList.contains('bare-metal')) { requestAnimationFrame(draw); return; } ctx.clearRect(0, 0, w, h); const gs = 55, ox = (time * 0.06) % gs, oy = (time * 0.03) % gs, cx = w / 2, cy = h / 2, md = Math.sqrt(cx * cx + cy * cy); for (let x = -gs + ox; x < w + gs; x += gs) { const a = Math.max(0, 0.1 * (1 - Math.abs(x - cx) / cx * 1.3)); ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.strokeStyle = `rgba(230,184,0,${a})`; ctx.lineWidth = 0.5; ctx.stroke(); } for (let y = -gs + oy; y < h + gs; y += gs) { const a = Math.max(0, 0.1 * (1 - Math.abs(y - cy) / cy * 1.3)); ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.strokeStyle = `rgba(230,184,0,${a})`; ctx.lineWidth = 0.5; ctx.stroke(); } for (let x = -gs + ox; x < w + gs; x += gs) { for (let y = -gs + oy; y < h + gs; y += gs) { const d = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) / md; const a = Math.max(0, 0.4 * (1 - d * 1.4)); const p = 0.6 + 0.4 * Math.sin(time * 0.03 + x * 0.01 + y * 0.01); if (a > 0.02) { ctx.beginPath(); ctx.arc(x, y, 1.6, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,208,0,${a * p})`; ctx.fill(); } } } for (let i = 0; i < 3; i++) { const rx = w * (0.2 + i * 0.3) + Math.sin(time * 0.004 + i) * 50; const ry = h * (0.3 + i * 0.2) + Math.cos(time * 0.005 + i) * 40; const rr = 70 + i * 35 + Math.sin(time * 0.008 + i) * 18; ctx.beginPath(); ctx.arc(rx, ry, rr, 0, Math.PI * 2); ctx.strokeStyle = `rgba(230,184,0,${0.03 + i * 0.02})`; ctx.lineWidth = 0.7; ctx.stroke(); } time++; requestAnimationFrame(draw); }
             window.addEventListener('resize', rc); rc(); draw(); console.log('%c[YARIK1:SYS] %cCanvas initialized', 'color:#e6b800;font-weight:bold', 'color:#b0b0c8');
 
-            // === PARALLAX ===
             const pS = document.querySelectorAll('section'); window.addEventListener('scroll', () => { pS.forEach(s => { const r = s.getBoundingClientRect(); s.style.transform = `translateY(${(r.top + r.height / 2 - window.innerHeight / 2) * 0.02}px)`; }); }, { passive: true });
 
-            // === 3D AVATAR ===
             const av = document.getElementById('avatarCard'); let tX = 0, tY = 0, cX = 0, cY = 0; function lr(a, b, t) { return a + (b - a) * t; } function animAv() { cX = lr(cX, tX, 0.06); cY = lr(cY, tY, 0.06); if (av) av.style.transform = `rotateX(${cX}deg) rotateY(${cY}deg)`; requestAnimationFrame(animAv); } if (av) { animAv(); av.addEventListener('mousemove', e => { const r = av.getBoundingClientRect(); tX = ((e.clientY - r.top - r.height / 2) / (r.height / 2)) * -12; tY = ((e.clientX - r.left - r.width / 2) / (r.width / 2)) * 12; }); av.addEventListener('mouseleave', () => { tX = 0; tY = 0; }); }
 
-            // === MOBILE MENU ===
             const mb = document.getElementById('menuBtn'), nl = document.getElementById('navLinks'); mb?.addEventListener('click', () => { const a = nl.classList.toggle('active'); mb.textContent = a ? '✕' : '☰'; }); const secs = document.querySelectorAll('section[id]'), nas = document.querySelectorAll('.nav-links a'); window.addEventListener('scroll', () => { let c = ''; secs.forEach(s => { if (window.scrollY >= s.offsetTop - 150) c = s.getAttribute('id'); }); nas.forEach(a => { a.classList.remove('active'); if (a.getAttribute('href') === '#' + c) a.classList.add('active'); }); }, { passive: true }); document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', function(e) { e.preventDefault(); const t = document.querySelector(this.getAttribute('href')); if (t) { window.scrollTo({ top: t.offsetTop - 60, behavior: 'smooth' }); nl.classList.remove('active'); if (mb) mb.textContent = '☰'; } }); }); document.addEventListener('click', e => { if (!e.target.closest('nav') && nl.classList.contains('active')) { nl.classList.remove('active'); if (mb) mb.textContent = '☰'; } });
         })();
     </script>
