@@ -9,7 +9,8 @@
     <meta property="og:description" content="High-performance systems. Clean abstraction. Production-grade architecture.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ffe000'/%3E%3Cstop offset='100%25' style='stop-color:%23b89400'/%3E%3C/linearGradient%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='1'/%3E%3C/defs%3E%3Crect x='8' y='8' width='48' height='48' rx='10' fill='%23040408' stroke='url(%23g)' stroke-width='2'/%3E%3Cpath d='M24 44 L22 20 L42 20 L38 44Z' fill='url(%23g)' opacity='0.9'/%3E%3Ctext x='32' y='38' text-anchor='middle' font-family='monospace' font-size='12' font-weight='bold' fill='%23040408'%3E1%3C/text%3E%3C/svg%3E">
+    <!-- Красивая киберпанк иконка в виде золотого щита/шестеренки с "Y1" -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ffe000'/%3E%3Cstop offset='100%25' style='stop-color:%23b89400'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='8' y='8' width='48' height='48' rx='12' fill='%23040408' stroke='url(%23g)' stroke-width='2.5'/%3E%3Cpath d='M24 42 L20 20 L44 20 L40 42Z' fill='url(%23g)' opacity='0.95'/%3E%3Crect x='26' y='24' width='12' height='14' rx='2' fill='%23040408'/%3E%3Ctext x='32' y='36' text-anchor='middle' font-family='sans-serif' font-size='10' font-weight='bold' fill='url(%23g)'%3E1%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -118,7 +119,7 @@
         .hero-meta{display:flex;gap:1.2rem;font-family:var(--mono);font-size:0.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;flex-wrap:wrap}
         .hero-meta-item{padding:0.4rem 0.9rem;border:1px solid rgba(230,184,0,0.2);transition:all 0.3s;cursor:none;display:flex;align-items:center;gap:0.5rem}
         .hero-meta-item:hover{border-color:var(--gold-bright);color:var(--gold-pale);box-shadow:0 0 12px rgba(230,184,0,0.2)}
-        .hero-meta-item svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+        .hero-meta-item svg{width:16px;height:16px;flex-shrink:0}
 
         .avatar-scene{display:flex;justify-content:center;align-items:center;perspective:900px}
         .avatar-card{width:320px;height:380px;position:relative;transform-style:preserve-3d;transition:transform 0.1s ease-out;will-change:transform;cursor:none}
@@ -278,12 +279,31 @@
     </div></div>
 
     <section id="home"><div class="container"><div class="hero-content"><p class="hero-eyebrow fade-up">System Engineer</p><h1 class="hero-title fade-up">Yarik<em>1</em></h1><div class="hero-divider fade-up"></div><p class="hero-description fade-up">Architecting high-performance systems with clean abstraction. Scalable game frameworks, secure client-server architecture, maintainable codebases.</p><div class="hero-meta fade-up">
-        <div class="hero-meta-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Luau</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><text x="12" y="17" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">R</text></svg> Roblox</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg> Systems</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 24 24"><path d="M2 2l5.5 20h2l5.5-20h-2L8 18.5 3 2H2z"/><path d="M18 2l-5.5 20h-2L16 2h2z"/></svg> VS Code</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 24 24"><text x="12" y="19" text-anchor="middle" font-size="14" font-weight="bold" fill="currentColor">C#</text></svg> C#</div>
+        <!-- ЦВЕТНЫЕ ИКОНКИ -->
+        <div class="hero-meta-item">
+            <!-- Luau -->
+            <svg viewBox="0 0 24 24"><defs><linearGradient id="luauGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0055FF"/><stop offset="100%" style="stop-color:#00AAFF"/></linearGradient></defs><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="url(#luauGrad)" stroke-width="2" stroke-linejoin="round"/></svg> Luau
+        </div>
+        <div class="hero-meta-item">
+            <!-- Roblox -->
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4" fill="#000000" stroke="#E2231A" stroke-width="1.5"/><path d="M6 16.5L10.5 7L15 16.5H6Z" fill="#E2231A"/><circle cx="10.5" cy="14" r="1.5" fill="#FFFFFF"/></svg> Roblox
+        </div>
+        <div class="hero-meta-item">
+            <!-- Systems / Terminal -->
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" fill="none" stroke="#FFD700" stroke-width="1.5"/><path d="M6 9l2 2-2 2" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="13" x2="16" y2="13" fill="none" stroke="#00E5FF" stroke-width="2" stroke-linecap="round"/><rect x="8" y="19" width="8" height="2" rx="1" fill="#555570"/></svg> Systems
+        </div>
+        <div class="hero-meta-item">
+            <!-- GitHub -->
+            <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub
+        </div>
+        <div class="hero-meta-item">
+            <!-- VS Code -->
+            <svg viewBox="0 0 24 24"><defs><linearGradient id="vscGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#007ACC"/><stop offset="100%" style="stop-color:#1E8AD8"/></linearGradient></defs><path d="M17.5 2L24 6.5V17.5L17.5 22L6 18L0 20V4L6 6L17.5 2ZM16 6L6 16V8L16 6ZM6 16L16 20V8L6 16Z" fill="url(#vscGrad)"/></svg> VS Code
+        </div>
+        <div class="hero-meta-item">
+            <!-- C# -->
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4" fill="#68217A"/><text x="12" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFFFFF" font-family="monospace">C#</text></svg> C#
+        </div>
     </div></div><div class="avatar-scene fade-up"><div class="avatar-card" id="avatarCard"><div class="avatar-holo"></div><div class="avatar-border"></div><div class="avatar-front"><img src="./assets/avatar.png" alt="Yarik1" onerror="this.src='https://placehold.co/400x480/080810/e6b800?text=YARIK1'"></div></div></div></div></section>
     <div class="section-divider"></div>
 
