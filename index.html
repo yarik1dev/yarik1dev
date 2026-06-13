@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>YARIK1 // CYBERPUNK SYSTEM ENGINEER</title>
+    <title>YARIK1 — Roblox System Engineer | Neon Cyberpunk</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,100 +15,85 @@
         }
 
         :root {
-            --cyber-yellow: #FFD319;
-            --neon-gold: #FFB800;
-            --yellow-glow: rgba(255, 211, 25, 0.4);
-            --dark-bg: #0a0a0f;
-            --darker-bg: #050507;
-            --card-bg: rgba(15, 15, 25, 0.65);
-            --border-neon: rgba(255, 211, 25, 0.35);
-            --text-light: #ffffff;
-            --text-dim: #b0b0c0;
-            --accent-pink: #ff00c8;
-            --accent-cyan: #00e5ff;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            --neon-yellow: #ffdf40;
+            --flare-yellow: #ffcc22;
+            --dark-bg: #0b0b12;
+            --card-glass: rgba(12, 12, 20, 0.65);
+            --border-glow: rgba(255, 223, 64, 0.4);
+            --text-main: #f0f0f8;
+            --text-dim: #b9b9d0;
+            --hologram-cyan: #00e5ff;
+            --hologram-pink: #ff44cc;
         }
 
         body {
-            font-family: 'Space Grotesk', monospace;
-            background: var(--darker-bg);
-            color: var(--text-light);
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #050508;
+            color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.5;
-            cursor: default;
         }
 
-        /* glitch & scanlines */
-        body::before {
-            content: "";
+        /* animated holographic scanlines */
+        body::after {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 6px);
+            background: repeating-linear-gradient(0deg, rgba(0, 255, 255, 0.02) 0px, rgba(0, 255, 255, 0.02) 2px, transparent 2px, transparent 8px);
             pointer-events: none;
-            z-index: 9998;
+            z-index: 999;
         }
 
-        /* loader cyberpunk */
         #loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000000;
+            background: #010101;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            transition: opacity 0.4s, visibility 0.4s;
-            backdrop-filter: blur(2px);
+            transition: opacity 0.5s ease, visibility 0.5s;
+            backdrop-filter: blur(4px);
         }
-
         #loader.hidden {
             opacity: 0;
             visibility: hidden;
         }
-
-        .cyber-loader {
+        .loader-neon {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 20px;
         }
-        .loader-text {
-            font-family: monospace;
-            font-weight: bold;
-            letter-spacing: 6px;
-            color: var(--cyber-yellow);
-            text-shadow: 0 0 8px var(--cyber-yellow);
-            animation: blink 1.2s infinite;
-        }
         .loader-spinner {
-            width: 55px;
-            height: 55px;
-            border: 3px solid rgba(255, 211, 25, 0.2);
-            border-top: 3px solid var(--cyber-yellow);
-            border-right: 3px solid var(--neon-gold);
-            border-radius: 0;
-            transform: rotate(45deg);
-            animation: spinCyber 0.9s linear infinite;
-            box-shadow: 0 0 12px var(--cyber-yellow);
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 223, 64, 0.2);
+            border-top: 3px solid var(--neon-yellow);
+            border-right: 3px solid var(--flare-yellow);
+            border-radius: 12px;
+            animation: spinSkew 0.8s infinite ease-in-out;
+            box-shadow: 0 0 15px rgba(255, 223, 64, 0.6);
         }
-        @keyframes spinCyber {
-            to { transform: rotate(405deg); }
+        @keyframes spinSkew {
+            0% { transform: rotate(0deg) skew(0deg); }
+            100% { transform: rotate(360deg) skew(2deg); }
         }
-        @keyframes blink {
-            0%,100%{ opacity: 1; text-shadow:0 0 5px var(--cyber-yellow);}
-            50%{ opacity: 0.6; text-shadow:0 0 12px #ffcc33;}
+        .loader-text {
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 6px var(--neon-yellow);
+            font-size: 0.9rem;
         }
 
-        /* canvas background neon grid */
+        /* canvas holographic bg */
         #canvas-bg {
             position: fixed;
             top: 0;
@@ -116,29 +101,23 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.55;
+            opacity: 0.9;
         }
 
-        /* navigation */
+        /* navigation — slick cyber */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(5, 5, 7, 0.85);
+            background: rgba(5, 5, 12, 0.75);
             backdrop-filter: blur(16px);
-            border-bottom: 2px solid var(--cyber-yellow);
-            box-shadow: 0 0 15px rgba(255, 211, 25, 0.2);
+            border-bottom: 1px solid var(--border-glow);
+            box-shadow: 0 0 18px rgba(255, 223, 64, 0.2);
             z-index: 1000;
             padding: 1rem 0;
-            opacity: 0;
-            animation: slideDownGlitch 0.5s ease-out 0.2s forwards;
+            transform: translateY(0);
+            transition: all 0.3s;
         }
-
-        @keyframes slideDownGlitch {
-            0% { opacity: 0; transform: translateY(-30px); filter: blur(2px);}
-            100% { opacity: 1; transform: translateY(0); filter: blur(0);}
-        }
-
         nav .nav-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -147,57 +126,52 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .nav-logo {
             font-size: 1.8rem;
             font-weight: 800;
-            letter-spacing: 4px;
-            color: var(--cyber-yellow);
-            text-shadow: 0 0 5px var(--cyber-yellow);
-            position: relative;
-        }
-        .nav-logo::after {
-            content: "//_SYSTEM";
-            font-size: 0.7rem;
-            position: absolute;
-            bottom: -12px;
-            right: -20px;
-            color: var(--text-dim);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--neon-yellow), #ffaa33);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 4px rgba(255, 200, 0, 0.4);
         }
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2.5rem;
             list-style: none;
         }
         .nav-links a {
             color: var(--text-dim);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 0.9rem;
             transition: 0.2s;
+            letter-spacing: 1px;
             position: relative;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-        .nav-links a::before {
-            content: "[ ";
-            opacity: 0;
-            transition: 0.2s;
-        }
-        .nav-links a::after {
-            content: " ]";
-            opacity: 0;
-            transition: 0.2s;
-        }
-        .nav-links a:hover::before, .nav-links a:hover::after {
-            opacity: 1;
-            color: var(--cyber-yellow);
         }
         .nav-links a:hover {
-            color: var(--cyber-yellow);
-            text-shadow: 0 0 3px var(--cyber-yellow);
+            color: var(--neon-yellow);
+            text-shadow: 0 0 3px var(--neon-yellow);
         }
+        .nav-links a::before {
+            content: '✦';
+            opacity: 0;
+            margin-right: 5px;
+            transition: 0.2s;
+        }
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--neon-yellow);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
         section {
             position: relative;
             min-height: 100vh;
@@ -211,11 +185,6 @@
             width: 100%;
             margin: 0 auto;
         }
-        #home { opacity: 0; animation: fadeInUp 0.8s ease-out 0.3s forwards; }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr 0.9fr;
@@ -223,85 +192,89 @@
             align-items: center;
         }
         .hero-text h1 {
-            font-size: 6rem;
+            font-size: 5.8rem;
             font-weight: 800;
             line-height: 1;
-            margin-bottom: 1rem;
             letter-spacing: -2px;
-            background: linear-gradient(135deg, var(--cyber-yellow), #ffaa00);
+            background: linear-gradient(145deg, #ffffff, var(--neon-yellow));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 12px rgba(255,211,25,0.3);
+            margin-bottom: 0.8rem;
         }
-        .hero-text .role {
-            font-size: 1.2rem;
-            color: var(--cyber-yellow);
+        .hero-tag {
+            display: inline-block;
+            font-size: 1rem;
             font-weight: 500;
-            letter-spacing: 5px;
-            margin-bottom: 1.8rem;
-            border-left: 3px solid var(--cyber-yellow);
-            padding-left: 18px;
+            color: var(--neon-yellow);
+            border-left: 3px solid var(--neon-yellow);
+            padding-left: 14px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
         }
         .hero-description {
             font-size: 1.1rem;
             color: var(--text-dim);
             max-width: 520px;
-            border-right: 2px dashed var(--border-neon);
-            padding-right: 20px;
+            line-height: 1.6;
+            backdrop-filter: blur(2px);
         }
         .avatar-wrapper {
             position: relative;
             width: 380px;
             height: 380px;
+            margin: 0 auto;
         }
-        .avatar-glow {
+        /* hologram ring effect */
+        .hologram-ring {
             position: absolute;
             inset: -15px;
-            background: radial-gradient(circle, var(--cyber-yellow), transparent);
-            opacity: 0.3;
-            filter: blur(35px);
-            animation: pulseYellow 2.5s infinite alternate;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 223, 64, 0.5);
+            box-shadow: 0 0 20px rgba(255, 223, 64, 0.3), inset 0 0 12px rgba(0, 229, 255, 0.3);
+            animation: floatHolo 3s infinite alternate;
+            pointer-events: none;
         }
-        @keyframes pulseYellow {
-            0% { opacity: 0.2; transform: scale(0.98);}
-            100% { opacity: 0.55; transform: scale(1.07);}
+        @keyframes floatHolo {
+            0% { transform: translateY(0px) scale(1); opacity: 0.6;}
+            100% { transform: translateY(-8px) scale(1.02); opacity: 1;}
         }
         .avatar {
             width: 100%;
             height: 100%;
-            border-radius: 20px;
-            border: 2px solid var(--cyber-yellow);
+            border-radius: 28px;
             overflow: hidden;
-            background: #11111a;
-            box-shadow: 0 0 40px rgba(255, 211, 25, 0.2);
-            transform: rotate(2deg);
-            transition: 0.2s;
+            background: #101018;
+            border: 1.5px solid var(--neon-yellow);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 0 2px rgba(255, 223, 64, 0.2);
+            transition: 0.3s;
         }
-        .avatar img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(10%) contrast(1.1);}
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.02) contrast(1.1);
+        }
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
         }
         .section-title {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 3.2rem;
+            font-weight: 700;
             letter-spacing: -1px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, var(--cyber-yellow), #ffe170);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 5px rgba(255, 223, 64, 0.5);
         }
         .section-subtitle {
-            font-size: 0.9rem;
-            color: var(--cyber-yellow);
-            letter-spacing: 4px;
+            color: var(--text-dim);
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            margin-top: 0.7rem;
             text-transform: uppercase;
-            margin-top: 8px;
-            font-weight: 500;
         }
-        /* skills tags */
+
+        /* skill tags holographic */
         .skills-cloud {
             display: flex;
             flex-wrap: wrap;
@@ -311,88 +284,79 @@
             margin: 0 auto;
         }
         .skill-tag {
-            background: rgba(0,0,0,0.7);
+            background: rgba(10, 10, 20, 0.7);
             backdrop-filter: blur(4px);
             padding: 0.7rem 1.6rem;
-            border: 1px solid var(--cyber-yellow);
-            border-radius: 0px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            transition: all 0.2s;
-            color: var(--text-light);
-            box-shadow: 0 0 4px rgba(255,211,25,0.2);
+            border: 1px solid var(--border-glow);
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: #e6e6ff;
+            transition: all 0.25s;
+            border-radius: 40px;
         }
         .skill-tag:hover {
-            background: var(--cyber-yellow);
-            color: black;
+            background: var(--neon-yellow);
+            color: #0a0a12;
             border-color: white;
-            transform: skewX(-5deg) scale(1.02);
-            box-shadow: 0 0 18px var(--cyber-yellow);
+            transform: translateY(-4px);
+            box-shadow: 0 0 18px var(--neon-yellow);
         }
-        /* library cards cyber */
+
+        /* library cards — lively glass */
         .libraries-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 1.8rem;
+            gap: 1.5rem;
         }
         .library-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border-neon);
-            padding: 1.5rem 0.8rem;
+            background: var(--card-glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 1.3rem 0.6rem;
             text-align: center;
-            transition: 0.25s ease;
-            position: relative;
-            clip-path: polygon(0% 0%, 100% 0%, 96% 100%, 4% 100%);
-        }
-        .library-card::after {
-            content: "▼";
-            position: absolute;
-            bottom: -8px;
-            left: 45%;
-            font-size: 12px;
-            color: var(--cyber-yellow);
-            opacity: 0;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: default;
         }
         .library-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--cyber-yellow);
-            background: rgba(255, 211, 25, 0.08);
-            box-shadow: 0 12px 28px rgba(255,211,25,0.2);
+            transform: translateY(-6px);
+            border-color: var(--neon-yellow);
+            background: rgba(255, 223, 64, 0.1);
+            box-shadow: 0 0 20px rgba(255, 223, 64, 0.3);
         }
-        .library-card:hover::after { opacity: 1; }
         .library-name {
-            font-weight: 700;
-            color: var(--cyber-yellow);
-            letter-spacing: 1px;
+            font-weight: 600;
+            color: var(--neon-yellow);
+            letter-spacing: 0.5px;
         }
-        /* games grid */
+
+        /* games grid hologram cards */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
+            gap: 2rem;
         }
         .game-card {
-            background: #0c0c14;
-            border: 1px solid var(--border-neon);
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: rgba(8, 8, 16, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-glow);
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.35s ease;
             text-decoration: none;
             color: inherit;
             display: block;
-            position: relative;
-            overflow: hidden;
         }
         .game-card:hover {
             transform: translateY(-10px);
-            border-color: var(--cyber-yellow);
-            box-shadow: 0 20px 40px rgba(255,211,25,0.2);
+            border-color: var(--neon-yellow);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,223,64,0.4);
         }
         .game-thumbnail {
             width: 100%;
-            height: 260px;
+            height: 250px;
             overflow: hidden;
-            position: relative;
         }
         .game-thumbnail img {
             width: 100%;
@@ -404,121 +368,115 @@
             transform: scale(1.05);
         }
         .game-info {
-            padding: 2rem;
-            background: linear-gradient(0deg, #05050a, transparent);
+            padding: 1.8rem;
         }
         .game-title {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             font-weight: 700;
             letter-spacing: -0.5px;
-            color: var(--cyber-yellow);
+            color: var(--neon-yellow);
         }
         .game-role {
-            font-size: 0.8rem;
-            color: #ffb347;
-            margin: 8px 0 12px;
+            font-size: 0.75rem;
+            color: #ffaa66;
+            margin: 5px 0 12px;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
         .game-ccu {
             display: inline-block;
-            background: rgba(255,211,25,0.1);
-            border-left: 3px solid var(--cyber-yellow);
-            padding: 0.5rem 1.2rem;
-            font-size: 0.85rem;
+            background: rgba(255, 223, 64, 0.1);
+            border-radius: 40px;
+            padding: 0.4rem 1.3rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            font-family: monospace;
+            border: 0.5px solid var(--border-glow);
+            color: var(--text-main);
         }
-        /* contact section */
+
+        /* contact neon hologram */
         .contact-card {
             display: inline-flex;
             align-items: center;
-            gap: 1.5rem;
-            background: #0a0a10;
-            border: 1.5px solid var(--cyber-yellow);
-            padding: 1.8rem 3.5rem;
+            gap: 1.2rem;
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--neon-yellow);
+            border-radius: 100px;
+            padding: 1rem 2.8rem;
             text-decoration: none;
-            transition: all 0.2s;
-            margin-top: 2rem;
-            backdrop-filter: blur(8px);
+            transition: 0.25s;
+            margin-top: 1rem;
         }
         .contact-card:hover {
-            background: var(--cyber-yellow);
+            background: var(--neon-yellow);
             transform: scale(1.02);
-            box-shadow: 0 0 30px var(--cyber-yellow);
+            box-shadow: 0 0 28px var(--neon-yellow);
         }
         .contact-card:hover .contact-value, .contact-card:hover .contact-label {
-            color: #000;
-        }
-        .contact-card:hover svg {
-            fill: black;
+            color: #05050c;
         }
         .contact-icon {
-            width: 42px;
-            height: 42px;
-            fill: var(--cyber-yellow);
+            width: 36px;
+            height: 36px;
+            fill: var(--neon-yellow);
+        }
+        .contact-card:hover .contact-icon {
+            fill: #0a0a12;
         }
         .contact-info {
             text-align: left;
         }
         .contact-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: var(--text-dim);
         }
         .contact-value {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            font-family: monospace;
         }
         footer {
             text-align: center;
-            padding: 2.5rem;
-            border-top: 1px solid var(--border-neon);
+            padding: 2rem;
+            border-top: 1px solid var(--border-glow);
             color: var(--text-dim);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
         }
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--cyber-yellow);
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
+
         @media (max-width: 1000px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem;}
-            .hero-description { margin: 0 auto; border-right: none;}
-            .avatar-wrapper { margin: 0 auto; width: 300px; height: 300px;}
+            .hero-description { margin: 0 auto;}
+            .avatar-wrapper { width: 300px; height: 300px;}
             .games-grid { grid-template-columns: 1fr;}
-            .libraries-grid { grid-template-columns: repeat(3,1fr);}
         }
         @media (max-width: 768px) {
-            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: #030308; padding: 2rem; gap: 1.5rem; border-top: 1px solid var(--cyber-yellow);}
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #05050cee; flex-direction: column; padding: 2rem; gap: 1.5rem; border-top: 1px solid var(--neon-yellow); backdrop-filter: blur(20px);}
             .nav-links.active { display: flex; }
             .mobile-menu-btn { display: block; }
-            .hero-text h1 { font-size: 3.3rem; }
-            .section-title { font-size: 2.3rem; }
+            .hero-text h1 { font-size: 3.5rem; }
+            .section-title { font-size: 2.4rem; }
             .libraries-grid { grid-template-columns: repeat(2,1fr);}
-            section { padding: 6rem 1.5rem;}
+            section { padding: 5rem 1.5rem;}
         }
-        .glitch-text {
-            animation: glitch 1.5s infinite;
+
+        /* holographic floating icons */
+        .floating-glow {
+            animation: levitate 3s infinite alternate;
         }
-        @keyframes glitch {
-            0% { text-shadow: -1px 0 var(--accent-pink), 1px 0 var(--accent-cyan);}
-            50% { text-shadow: 2px 0 var(--accent-pink), -2px 0 var(--accent-cyan);}
-            100% { text-shadow: -1px 0 var(--accent-pink), 1px 0 var(--accent-cyan);}
+        @keyframes levitate {
+            from { transform: translateY(0px);}
+            to { transform: translateY(-6px);}
         }
     </style>
 </head>
 <body>
     <div id="loader">
-        <div class="cyber-loader">
+        <div class="loader-neon">
             <div class="loader-spinner"></div>
-            <div class="loader-text">>_ BOOTING YARIK1.EXE</div>
+            <div class="loader-text">⟳ loading YARIK1 system</div>
         </div>
     </div>
 
@@ -527,13 +485,13 @@
     <nav>
         <div class="nav-container">
             <div class="nav-logo">YARIK1</div>
-            <button class="mobile-menu-btn" id="menuBtn">☰</button>
+            <button class="mobile-menu-btn" id="menuBtn">⌂</button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#experience">Expertise</a></li>
                 <li><a href="#libraries">Stack</a></li>
                 <li><a href="#games">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact">Connect</a></li>
             </ul>
         </div>
     </nav>
@@ -542,18 +500,18 @@
         <div class="section-container">
             <div class="hero-grid">
                 <div class="hero-text">
-                    <h1>YARIK1<span style="font-size: 3rem;">_</span></h1>
-                    <p class="role">&lt; Middle System Engineer /&gt;</p>
+                    <h1>Yarik1</h1>
+                    <div class="hero-tag">middle system engineer · clean architecture</div>
                     <p class="hero-description">
-                        [ CYBERPUNK ARCHITECT ] : building resilient, high-velocity systems with brutal efficiency. <br>
-                        Clean code, server authority, neon logic.
+                        I design scalable, high-performance systems with a focus on server safety and immersive gameplay. 
+                        Clean code, real-time logic, and seamless experiences.
                     </p>
                 </div>
                 <div class="avatar-section">
                     <div class="avatar-wrapper">
-                        <div class="avatar-glow"></div>
-                        <div class="avatar">
-                            <img src="./assets/avatar.png" alt="Yarik1" onerror="this.src='https://via.placeholder.com/400?text=YARIK1+neon'">
+                        <div class="hologram-ring"></div>
+                        <div class="avatar floating-glow">
+                            <img src="./assets/avatar.png" alt="Yarik1 avatar" onerror="this.src='https://via.placeholder.com/400?text=YARIK1'">
                         </div>
                     </div>
                 </div>
@@ -564,17 +522,18 @@
     <section id="experience">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">[ CORE_OVERCLOCK ]</h2>
-                <p class="section-subtitle">// EXPERTISE MATRIX</p>
+                <h2 class="section-title">core tools</h2>
+                <p class="section-subtitle">technical territory</p>
             </div>
             <div class="skills-cloud">
                 <span class="skill-tag">System Architecture</span>
-                <span class="skill-tag">Latency Execution</span>
-                <span class="skill-tag">Scalable Loops</span>
-                <span class="skill-tag">Client/Server Warp</span>
-                <span class="skill-tag">Maintainable Abyss</span>
-                <span class="skill-tag">Anti-Exploit Core</span>
-                <span class="skill-tag">Memory Profiling</span>
+                <span class="skill-tag">Performance Tuning</span>
+                <span class="skill-tag">Game Loops</span>
+                <span class="skill-tag">Client-Server</span>
+                <span class="skill-tag">Maintainable Code</span>
+                <span class="skill-tag">Anti-Exploit</span>
+                <span class="skill-tag">Data Stores</span>
+                <span class="skill-tag">Remote Events</span>
             </div>
         </div>
     </section>
@@ -582,8 +541,8 @@
     <section id="libraries">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">// TECH_WEAPONS</h2>
-                <p class="section-subtitle">LIBRARIES & TOOLS //</p>
+                <h2 class="section-title">tech arsenal</h2>
+                <p class="section-subtitle">libraries & frameworks</p>
             </div>
             <div class="libraries-grid">
                 <div class="library-card"><div class="library-name">Container</div></div>
@@ -607,8 +566,8 @@
     <section id="games">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">[ LIVE_DEPLOYMENTS ]</h2>
-                <p class="section-subtitle">SCALED / FROM SCRATCH</p>
+                <h2 class="section-title">live projects</h2>
+                <p class="section-subtitle">scaled & original works</p>
             </div>
             <div class="games-grid">
                 <a href="https://www.roblox.com/games/119051443230992/Dead-Mars" target="_blank" class="game-card">
@@ -616,29 +575,29 @@
                         <img src="https://tr.rbxcdn.com/180DAY-c44d4550d0380876af70504c0fb7456d/768/432/Image/Webp/noFilter" alt="Dead Mars">
                     </div>
                     <div class="game-info">
-                        <h3 class="game-title">DEAD MARS</h3>
-                        <p class="game-role">MAIN DEVELOPER</p>
-                        <span class="game-ccu">PEAK CCU: 570 ⚡</span>
+                        <h3 class="game-title">Dead Mars</h3>
+                        <p class="game-role">Main Developer</p>
+                        <span class="game-ccu">PEAK CCU: 570 ▲</span>
                     </div>
                 </a>
                 <a href="https://www.roblox.com/games/94939590381819/Wake-up-a-Brainrot" target="_blank" class="game-card">
                     <div class="game-thumbnail">
-                        <img src="https://tr.rbxcdn.com/180DAY-873ef111a7b7f02c85453cfe7b155a06/768/432/Image/Webp/noFilter" alt="Brainrot">
+                        <img src="https://tr.rbxcdn.com/180DAY-873ef111a7b7f02c85453cfe7b155a06/768/432/Image/Webp/noFilter" alt="Wake up a Brainrot">
                     </div>
                     <div class="game-info">
-                        <h3 class="game-title">WAKE UP A BRAINROT</h3>
-                        <p class="game-role">FULLSTACK DEV</p>
-                        <span class="game-ccu">PEAK CCU: 319 🔥</span>
+                        <h3 class="game-title">Wake up a Brainrot</h3>
+                        <p class="game-role">Fullstack Developer</p>
+                        <span class="game-ccu">PEAK CCU: 319 ⚡</span>
                     </div>
                 </a>
                 <a href="https://www.roblox.com/games/104724166902095/Smash-a-Lucky-Block" target="_blank" class="game-card">
                     <div class="game-thumbnail">
-                        <img src="https://tr.rbxcdn.com/180DAY-bec7943ea9adb6721161002e87bff871/768/432/Image/Webp/noFilter" alt="Lucky Block">
+                        <img src="https://tr.rbxcdn.com/180DAY-bec7943ea9adb6721161002e87bff871/768/432/Image/Webp/noFilter" alt="Smash A Lucky Block">
                     </div>
                     <div class="game-info">
-                        <h3 class="game-title">SMASH A LUCKY BLOCK</h3>
-                        <p class="game-role">FULLSTACK + NETCODE</p>
-                        <span class="game-ccu">PEAK CCU: 84</span>
+                        <h3 class="game-title">Smash A Lucky Block</h3>
+                        <p class="game-role">Fullstack Developer</p>
+                        <span class="game-ccu">PEAK CCU: 84 </span>
                     </div>
                 </a>
                 <a href="https://www.roblox.com/games/117527250434588/Incremental-Template" target="_blank" class="game-card">
@@ -646,9 +605,9 @@
                         <img src="https://t3.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Incremental Template">
                     </div>
                     <div class="game-info">
-                        <h3 class="game-title">INCREMENTAL TEMPLATE</h3>
-                        <p class="game-role">ARCHITECTURE ENGINEER</p>
-                        <span class="game-ccu">[CLASSIFIED]</span>
+                        <h3 class="game-title">Incremental Template</h3>
+                        <p class="game-role">Architecture Engineer</p>
+                        <span class="game-ccu">in development</span>
                     </div>
                 </a>
             </div>
@@ -659,15 +618,15 @@
         <div class="section-container">
             <div class="contact-content" style="text-align: center;">
                 <div class="section-header">
-                    <h2 class="section-title">// CONNECTION //</h2>
-                    <p class="section-subtitle">OPEN FOR MERCENARY WORK</p>
+                    <h2 class="section-title">let's connect</h2>
+                    <p class="section-subtitle">available for freelance & collaborations</p>
                 </div>
                 <a href="https://discord.com/users/glogangs" target="_blank" class="contact-card">
                     <svg class="contact-icon" viewBox="0 0 24 24">
                         <path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/>
                     </svg>
                     <div class="contact-info">
-                        <div class="contact-label">DISCORD // HANDLE</div>
+                        <div class="contact-label">Discord</div>
                         <div class="contact-value">glogangs</div>
                     </div>
                 </a>
@@ -676,11 +635,10 @@
     </section>
 
     <footer>
-        <p>YARIK1 // SYSTEM ENGINEER [ CYBERPUNK EDITION ] © 2026 // ALL SYSTEMS ONLINE</p>
+        <p>Yarik1 · Roblox system engineering · © 2026 · all systems nominal</p>
     </footer>
 
     <script>
-        // canvas: neon yellow grid + particles
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -688,22 +646,20 @@
 
         let particles = [];
         const mouse = { x: null, y: null, radius: 220 };
-        const particleCount = Math.min(180, Math.floor((canvas.width * canvas.height) / 12000));
+        const PARTICLE_COUNT = Math.min(200, Math.floor((canvas.width * canvas.height) / 11000));
 
-        class NeonParticle {
+        class HoloParticle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.2 + 0.6;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.baseX = this.x;
-                this.baseY = this.y;
+                this.size = Math.random() * 2.2 + 0.8;
+                this.vx = (Math.random() - 0.5) * 0.45;
+                this.vy = (Math.random() - 0.5) * 0.45;
             }
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                if (mouse.x != null && mouse.y != null) {
+                if (mouse.x && mouse.y) {
                     let dx = mouse.x - this.x;
                     let dy = mouse.y - this.y;
                     let dist = Math.hypot(dx, dy);
@@ -720,54 +676,56 @@
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -0.98;
             }
             draw() {
-                ctx.fillStyle = `rgba(255, 211, 25, 0.65)`;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 223, 80, 0.6)`;
                 ctx.fill();
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = "#ffdf40";
             }
         }
 
-        function initParticles() {
+        function initBg() {
             particles = [];
-            for(let i=0;i<particleCount;i++) particles.push(new NeonParticle());
+            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new HoloParticle());
         }
-        function drawGrid() {
-            ctx.strokeStyle = "rgba(255, 211, 25, 0.18)";
-            ctx.lineWidth = 1;
-            let step = 50;
-            for(let x = 0; x < canvas.width; x += step){
+
+        function drawNeonGrid() {
+            ctx.strokeStyle = "rgba(255, 223, 64, 0.12)";
+            ctx.lineWidth = 0.8;
+            const step = 65;
+            for (let x = 0; x < canvas.width; x += step) {
                 ctx.beginPath();
-                ctx.moveTo(x,0);
-                ctx.lineTo(x,canvas.height);
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
                 ctx.stroke();
             }
-            for(let y = 0; y < canvas.height; y += step){
+            for (let y = 0; y < canvas.height; y += step) {
                 ctx.beginPath();
-                ctx.moveTo(0,y);
-                ctx.lineTo(canvas.width,y);
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
                 ctx.stroke();
             }
-            // diagonal glitch lines
-            ctx.beginPath();
-            ctx.strokeStyle = "rgba(255,200,0,0.1)";
-            for(let i=0;i<12;i++) {
+            for (let i = 0; i < 6; i++) {
                 ctx.beginPath();
-                ctx.moveTo(i*150, 0);
-                ctx.lineTo(canvas.width, i*100);
+                ctx.moveTo(i * 200, 0);
+                ctx.lineTo(canvas.width, i * 150);
+                ctx.strokeStyle = "rgba(0, 229, 255, 0.07)";
                 ctx.stroke();
             }
         }
-        function connectNeon() {
-            for(let i=0; i<particles.length; i++) {
-                for(let j=i+1; j<particles.length; j++) {
+
+        function connectHolo() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x;
                     let dy = particles[i].y - particles[j].y;
                     let dist = Math.hypot(dx, dy);
-                    if(dist < 130) {
-                        let opacity = 1 - (dist / 130);
-                        ctx.strokeStyle = `rgba(255, 210, 25, ${opacity * 0.35})`;
-                        ctx.lineWidth = 0.8;
+                    if (dist < 110) {
+                        let opacity = 1 - dist / 110;
                         ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 200, 70, ${opacity * 0.35})`;
+                        ctx.lineWidth = 0.7;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
@@ -775,40 +733,44 @@
                 }
             }
         }
-        function animateBg() {
+
+        function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawGrid();
-            for(let p of particles) {
+            drawNeonGrid();
+            for (let p of particles) {
                 p.update();
                 p.draw();
             }
-            connectNeon();
-            requestAnimationFrame(animateBg);
+            connectHolo();
+            requestAnimationFrame(animateCanvas);
         }
+
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initParticles();
+            initBg();
         });
         window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
         window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
         window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 550);
-            initParticles();
-            animateBg();
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 500);
+            initBg();
+            animateCanvas();
         });
+
         const menuBtn = document.getElementById('menuBtn');
-        const navLinks = document.getElementById('navLinks');
-        menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+        const navLinksEl = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', () => navLinksEl.classList.toggle('active'));
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === "#") return;
-                const target = document.querySelector(targetId);
-                if(target) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    navLinks.classList.remove('active');
+                    navLinksEl.classList.remove('active');
                 }
             });
         });
