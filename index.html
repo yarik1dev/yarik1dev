@@ -3,449 +3,821 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Yarik1 — System Engineer</title>
-    <meta name="description" content="Yarik1 — Middle System Engineer specializing in scalable game frameworks, secure client-server architecture, and high-performance Luau systems.">
-    <meta property="og:title" content="Yarik1 — System Engineer">
-    <meta property="og:description" content="High-performance systems. Clean abstraction. Production-grade architecture.">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ffe000'/%3E%3Cstop offset='100%25' style='stop-color:%23b89400'/%3E%3C/defs%3E%3Crect x='8' y='8' width='48' height='48' rx='12' fill='%23040408' stroke='url(%23g)' stroke-width='2.5'/%3E%3Cpath d='M24 42 L20 20 L44 20 L40 42Z' fill='url(%23g)' opacity='0.95'/%3E%3Crect x='26' y='24' width='12' height='14' rx='2' fill='%23040408'/%3E%3Ctext x='32' y='36' text-anchor='middle' font-family='sans-serif' font-size='10' font-weight='bold' fill='url(%23g)'%3E1%3C/text%3E%3C/svg%3E">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>YARIK1 // CYBERBANK // SYSTEM ENGINEER</title>
+    <meta name="description" content="Yarik1 — Middle System Engineer. Secure, high-performance digital infrastructure. CyberBank core access.">
+    <meta name="theme-color" content="#00ffcc">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --bg: #040408; --panel: #080810;
-            --gold: #e6b800; --gold-bright: #ffe000; --gold-pale: #b89400; --gold-dim: #5c4a00;
-            --text: #e8e8f0; --text2: #b0b0c8; --text3: #6a6a85;
-            --border: rgba(230,184,0,0.2); --border-bright: rgba(255,224,0,0.5);
-            --glow: 0 0 20px rgba(230,184,0,0.15); --glow-strong: 0 0 50px rgba(255,208,0,0.35);
-            --font: 'Space Grotesk', sans-serif; --mono: 'JetBrains Mono', monospace;
-        }
-        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-        body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased;cursor:none}
-        body.mobile{cursor:auto}
-        body.bare-metal .holo-corner,body.bare-metal .holo-ring,body.bare-metal #holoCanvas,body.bare-metal .scanlines,body.bare-metal #cursor,body.bare-metal .terminal-ticker,body.bare-metal #particlesContainer,body.bare-metal #backToTop,body.bare-metal .section-divider,body.bare-metal .scroll-progress{display:none!important}
-        body.bare-metal{cursor:auto!important}body.bare-metal section{padding:60px 3rem}body.bare-metal nav{background:#040408;border-bottom:1px solid #222}
-
-        .scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--gold-bright);z-index:1001;box-shadow:0 0 8px var(--gold),0 0 16px var(--gold);transition:width 0.1s linear}
-        #easterEgg{position:fixed;inset:0;z-index:10000;pointer-events:none;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s}
-        #easterEgg.active{opacity:1}
-        #easterEgg .egg-text{font-family:var(--mono);font-size:2rem;letter-spacing:8px;color:var(--gold-bright);text-shadow:0 0 30px var(--gold),0 0 60px var(--gold);animation:eggPulse 0.3s ease-out}
-        @keyframes eggPulse{0%{transform:scale(2);opacity:0}100%{transform:scale(1);opacity:1}}
-
-        #cursor{position:fixed;z-index:9999;pointer-events:none;width:28px;height:28px;transform:translate(-50%,-50%);opacity:0}
-        #cursor.visible{opacity:1}
-        .cursor-corner{position:absolute;width:8px;height:8px;border-color:var(--gold-bright);border-style:solid;transition:border-color 0.2s}
-        .cursor-corner.tl{top:0;left:0;border-width:1.5px 0 0 1.5px}.cursor-corner.tr{top:0;right:0;border-width:1.5px 1.5px 0 0}
-        .cursor-corner.bl{bottom:0;left:0;border-width:0 0 1.5px 1.5px}.cursor-corner.br{bottom:0;right:0;border-width:0 1.5px 1.5px 0}
-        .cursor-dot{position:absolute;top:50%;left:50%;width:3px;height:3px;background:var(--gold-bright);transform:translate(-50%,-50%);box-shadow:0 0 6px var(--gold),0 0 12px var(--gold);transition:background 0.2s,box-shadow 0.2s}
-        #cursor.hover .cursor-corner{border-color:#fff}#cursor.hover .cursor-dot{background:#fff;box-shadow:0 0 8px #fff,0 0 16px #fff}
-
-        #holoCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.75}
-        .scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px)}
-        #particlesContainer{position:fixed;inset:0;z-index:998;pointer-events:none}
-        .click-particle{position:absolute;width:4px;height:4px;background:var(--gold-bright);box-shadow:0 0 6px var(--gold);animation:particleBurst 0.7s ease-out forwards;pointer-events:none}
-        @keyframes particleBurst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
-
-        .holo-corner{position:fixed;z-index:3;pointer-events:none}
-        .holo-corner-tl{top:80px;left:2rem;width:100px;height:100px;border-top:1px solid rgba(230,184,0,0.5);border-left:1px solid rgba(230,184,0,0.5);animation:cornerPulse 4s ease-in-out infinite}
-        .holo-corner-tr{top:80px;right:2rem;width:100px;height:100px;border-top:1px solid rgba(230,184,0,0.5);border-right:1px solid rgba(230,184,0,0.5);animation:cornerPulse 4s ease-in-out 1.5s infinite}
-        .holo-corner-bl{bottom:2rem;left:2rem;width:100px;height:100px;border-bottom:1px solid rgba(230,184,0,0.5);border-left:1px solid rgba(230,184,0,0.5);animation:cornerPulse 4s ease-in-out 0.8s infinite}
-        .holo-corner-br{bottom:2rem;right:2rem;width:100px;height:100px;border-bottom:1px solid rgba(230,184,0,0.5);border-right:1px solid rgba(230,184,0,0.5);animation:cornerPulse 4s ease-in-out 2.2s infinite}
-        .holo-corner::after{content:'';position:absolute;width:6px;height:6px;background:var(--gold-bright);box-shadow:0 0 10px var(--gold),0 0 20px var(--gold)}
-        .holo-corner-tl::after{top:-3px;left:-3px}.holo-corner-tr::after{top:-3px;right:-3px}.holo-corner-bl::after{bottom:-3px;left:-3px}.holo-corner-br::after{bottom:-3px;right:-3px}
-        @keyframes cornerPulse{0%,100%{opacity:0.4}50%{opacity:0.9}}
-        .holo-ring{position:fixed;z-index:2;pointer-events:none;border-radius:50%;border:1px solid rgba(230,184,0,0.2);animation:ringFloat 6s ease-in-out infinite}
-        .holo-ring:nth-child(1){width:140px;height:140px;top:12%;left:-5%}.holo-ring:nth-child(2){width:100px;height:100px;top:75%;right:-3%;animation-delay:2s}
-        @keyframes ringFloat{0%,100%{transform:translate(0,0) scale(1);opacity:0.25}25%{transform:translate(15px,-20px) scale(1.05);opacity:0.5}50%{transform:translate(-10px,-10px) scale(0.95);opacity:0.35}75%{transform:translate(10px,15px) scale(1.02);opacity:0.45}}
-
-        .section-divider{position:relative;z-index:4;height:60px;display:flex;align-items:center;justify-content:center;pointer-events:none}
-        .section-divider::before{content:'';width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),var(--gold-pale),var(--gold-dim),transparent)}
-        .section-divider::after{content:'◆';font-size:0.5rem;color:var(--gold-dim);position:absolute;background:var(--bg);padding:0 1rem}
-
-        #loader{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:10001;transition:opacity 0.5s ease,visibility 0.5s;gap:2.5rem}
-        #loader.hidden{opacity:0;visibility:hidden}
-        .loader-geo{width:80px;height:80px;position:relative}
-        .loader-piece{position:absolute;width:25px;height:25px;border:2px solid var(--gold);opacity:0;animation:pieceAssemble 1.5s ease-in-out infinite}
-        .loader-piece:nth-child(1){top:0;left:0;animation-delay:0s}.loader-piece:nth-child(2){top:0;right:0;animation-delay:0.2s}
-        .loader-piece:nth-child(3){bottom:0;left:0;animation-delay:0.4s}.loader-piece:nth-child(4){bottom:0;right:0;animation-delay:0.6s}
-        @keyframes pieceAssemble{0%{transform:scale(0) rotate(0deg);opacity:0}40%{transform:scale(1.2) rotate(90deg);opacity:1;box-shadow:0 0 15px rgba(230,184,0,0.5)}60%{transform:scale(1) rotate(90deg);opacity:1}100%{transform:scale(1) rotate(90deg);opacity:0.3}}
-        .loader-text{font-family:var(--mono);font-size:0.7rem;letter-spacing:6px;color:var(--gold-pale)}
-        .loader-text span{display:inline-block;opacity:0;animation:charAppear 1.8s ease-in-out infinite}
-        .loader-text span:nth-child(1){animation-delay:0s}.loader-text span:nth-child(2){animation-delay:0.1s}.loader-text span:nth-child(3){animation-delay:0.2s}.loader-text span:nth-child(4){animation-delay:0.3s}.loader-text span:nth-child(5){animation-delay:0.4s}.loader-text span:nth-child(6){animation-delay:0.5s}.loader-text span:nth-child(7){animation-delay:0.6s}.loader-text span:nth-child(8){animation-delay:0.7s}.loader-text span:nth-child(9){animation-delay:0.8s}.loader-text span:nth-child(10){animation-delay:0.9s}.loader-text span:nth-child(11){animation-delay:1.0s}
-        @keyframes charAppear{0%,100%{opacity:0.2}30%{opacity:1;text-shadow:0 0 10px var(--gold)}60%{opacity:0.3}}
-
-        #backToTop{position:fixed;bottom:3rem;right:2rem;z-index:999;width:40px;height:40px;border:1px solid var(--border);background:rgba(4,4,8,0.8);backdrop-filter:blur(10px);cursor:none;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(20px);transition:all 0.4s;pointer-events:none}
-        #backToTop.visible{opacity:1;transform:translateY(0);pointer-events:auto}
-        #backToTop:hover{border-color:var(--gold-bright);box-shadow:0 0 20px rgba(230,184,0,0.3)}
-        #backToTop::after{content:'';width:10px;height:10px;border-top:2px solid var(--gold);border-right:2px solid var(--gold);transform:rotate(-45deg) translateY(2px);transition:all 0.3s}
-        #backToTop:hover::after{border-color:var(--gold-bright);box-shadow:0 0 8px var(--gold)}
-
-        .export-btn{display:inline-flex;align-items:center;gap:0.6rem;background:transparent;border:1px solid var(--border);color:var(--text2);font-family:var(--mono);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;padding:0.5rem 1.2rem;cursor:none;transition:all 0.3s;margin-top:1rem}
-        .export-btn:hover{border-color:var(--gold-bright);color:var(--gold-bright);box-shadow:0 0 20px rgba(230,184,0,0.2)}
-        .bare-metal-toggle{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--mono);font-size:0.55rem;color:var(--text3);background:none;border:1px solid transparent;padding:0.3rem 0.6rem;cursor:none;transition:all 0.3s;letter-spacing:1px}
-        .bare-metal-toggle:hover{border-color:var(--border);color:var(--gold-pale)}
-
-        #toast{position:fixed;bottom:4rem;left:50%;transform:translateX(-50%);z-index:10000;font-family:var(--mono);font-size:0.6rem;letter-spacing:2px;color:var(--gold-bright);background:rgba(4,4,8,0.95);border:1px solid var(--border);padding:0.6rem 1.8rem;opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;transform:translateX(-50%) translateY(10px)}
-        #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-        nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(4,4,8,0.9);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border-bottom:1px solid var(--border);padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between}
-        .nav-brand{font-family:var(--mono);font-size:1rem;font-weight:600;color:var(--gold-bright);letter-spacing:2px;text-shadow:0 0 15px rgba(230,184,0,0.4);display:flex;align-items:center;gap:0.6rem;cursor:pointer}
-        .nav-brand span{font-weight:400;color:var(--text3);font-size:0.6rem;letter-spacing:2px;text-shadow:none}
-        .nav-links{display:flex;list-style:none;gap:0;align-items:center}
-        .nav-links a{font-family:var(--mono);font-size:0.6rem;font-weight:500;color:var(--text2);text-decoration:none;text-transform:uppercase;letter-spacing:2px;padding:0.5rem 1.2rem;transition:all 0.3s;border:1px solid transparent;cursor:none}
-        .nav-links a:hover{color:var(--gold-bright);border-color:rgba(230,184,0,0.3);background:rgba(230,184,0,0.04);box-shadow:0 0 15px rgba(230,184,0,0.1)}
-        .nav-links a.active{color:var(--gold);border-color:var(--border);background:rgba(230,184,0,0.06)}
-        .mobile-toggle{display:none;background:none;border:1px solid var(--border);color:var(--gold);font-size:1rem;width:38px;height:38px;cursor:pointer;align-items:center;justify-content:center;font-family:var(--mono);transition:all 0.3s}
-        .mobile-toggle:hover{border-color:var(--gold-bright);box-shadow:0 0 15px rgba(230,184,0,0.25)}
-
-        section{position:relative;z-index:4;min-height:100vh;display:flex;align-items:center;padding:100px 3rem;transition:transform 0.1s linear;will-change:transform}
-        #process{min-height:auto;padding:100px 3rem 80px}
-        .container{max-width:1200px;width:100%;margin:0 auto}
-
-        .fade-up{opacity:0;transform:translateY(25px);transition:opacity 0.7s ease,transform 0.7s ease}
-        .fade-up.visible{opacity:1;transform:translateY(0)}
-
-        #home .container{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-        .hero-content{display:flex;flex-direction:column;gap:1.5rem}
-        .hero-eyebrow{font-family:var(--mono);font-size:0.6rem;letter-spacing:5px;color:var(--gold-pale);text-transform:uppercase}
-        .hero-title{font-size:5.5rem;font-weight:800;line-height:0.95;letter-spacing:-2px;background:linear-gradient(135deg,#fff8d6 0%,var(--gold-bright) 30%,#fff8d6 60%,var(--gold-bright) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldShimmer 4s ease-in-out infinite}
-        .hero-title em{font-style:normal}
-        @keyframes goldShimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-        .hero-divider{width:80px;height:2px;background:var(--gold);box-shadow:0 0 15px rgba(230,184,0,0.4)}
-        .hero-description{font-size:1rem;font-weight:300;color:var(--text2);max-width:480px;line-height:1.7}
-        .hero-meta{display:flex;gap:1.2rem;font-family:var(--mono);font-size:0.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;flex-wrap:wrap}
-        .hero-meta-item{padding:0.4rem 0.9rem;border:1px solid rgba(230,184,0,0.2);transition:all 0.3s;cursor:none;display:flex;align-items:center;gap:0.5rem}
-        .hero-meta-item:hover{border-color:var(--gold-bright);color:var(--gold-pale);box-shadow:0 0 12px rgba(230,184,0,0.2)}
-        .hero-meta-item svg{width:18px;height:18px;flex-shrink:0}
-
-        .avatar-scene{display:flex;justify-content:center;align-items:center;perspective:900px}
-        .avatar-card{width:320px;height:380px;position:relative;transform-style:preserve-3d;will-change:transform;cursor:none;transition:transform 0.05s linear}
-        .avatar-front{position:absolute;inset:0;backface-visibility:hidden;clip-path:polygon(0 0,86% 0,100% 7%,100% 100%,14% 100%,0 93%)}
-        .avatar-front img{width:100%;height:100%;object-fit:cover}
-        .avatar-border{position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:var(--gold);clip-path:polygon(0 0,86% 0,100% 7%,100% 100%,14% 100%,0 93%);z-index:-1;opacity:0.6}
-        .avatar-holo{position:absolute;inset:-16px;z-index:-2;border:1px solid rgba(230,184,0,0.3);clip-path:polygon(0 0,86% 0,100% 7%,100% 100%,14% 100%,0 93%);animation:holoBreath 3s ease-in-out infinite;pointer-events:none}
-        @keyframes holoBreath{0%,100%{opacity:0.2;box-shadow:0 0 8px rgba(230,184,0,0.1)}50%{opacity:0.7;box-shadow:0 0 30px rgba(230,184,0,0.35)}}
-
-        .section-header{text-align:center;margin-bottom:5rem}
-        .section-number{font-family:var(--mono);font-size:0.6rem;letter-spacing:5px;color:var(--gold-dim);margin-bottom:0.8rem}
-        .section-title{font-size:2.8rem;font-weight:700;letter-spacing:-1px}
-        .section-title em{font-style:normal;color:var(--gold-bright)}
-        .section-line{width:50px;height:2px;background:var(--gold);margin:0.9rem auto 0;box-shadow:0 0 10px rgba(230,184,0,0.3)}
-
-        .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1000px;margin:0 auto}
-        .process-step{background:var(--panel);border:1px solid var(--border);padding:2rem 1.5rem;text-align:center;transition:all 0.3s;cursor:none}
-        .process-step:hover{border-color:var(--border-bright);box-shadow:0 0 25px rgba(230,184,0,0.2);transform:translateY(-3px)}
-        .process-icon{width:40px;height:40px;margin:0 auto 1rem;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:1rem;color:var(--gold);transition:all 0.3s}
-        .process-step:hover .process-icon{box-shadow:0 0 20px rgba(230,184,0,0.4);background:rgba(230,184,0,0.05)}
-        .process-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:2px;color:var(--gold-pale);text-transform:uppercase;margin-bottom:0.4rem}
-        .process-desc{font-size:0.75rem;color:var(--text3);line-height:1.4}
-
-        .skills-svg-container{width:100%;max-width:950px;margin:0 auto;overflow:visible}
-        .skills-svg-container svg{width:100%;height:auto;min-height:480px}
-        .skill-node-rect{fill:var(--panel);stroke:rgba(230,184,0,0.3);stroke-width:1.2;transition:all 0.3s}
-        .skill-node-text{font-family:var(--mono);font-size:9px;fill:var(--text2);text-anchor:middle;dominant-baseline:central;letter-spacing:1px;transition:all 0.3s}
-        .skill-node-sub{font-family:var(--mono);font-size:6.5px;fill:var(--text3);text-anchor:middle;dominant-baseline:central;letter-spacing:0.5px;transition:all 0.3s}
-        .skill-link{stroke:rgba(230,184,0,0.2);stroke-width:1.2;fill:none;stroke-dasharray:5 5;animation:skillFlow 3s linear infinite}
-        .skill-link.solid{stroke-dasharray:none;animation:none}
-        .skill-link-label{font-family:var(--mono);font-size:5.5px;fill:var(--gold-dim);text-anchor:middle;letter-spacing:0.5px}
-        .skill-group:hover .skill-node-rect{stroke:rgba(255,224,0,0.6);fill:#0a0a14;filter:drop-shadow(0 0 6px rgba(230,184,0,0.3))}
-        .skill-group:hover .skill-node-text{fill:#ffe000}
-        .skill-group:hover .skill-node-sub{fill:#b89400}
-        @keyframes skillFlow{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-20}}
-
-        .arch-svg-container{width:100%;max-width:1000px;margin:0 auto;overflow:visible}
-        .arch-svg-container svg{width:100%;height:auto;min-height:500px}
-        .arch-node-rect{fill:var(--panel);stroke:rgba(230,184,0,0.3);stroke-width:1.2;transition:all 0.3s}
-        .arch-node-text{font-family:var(--mono);font-size:10px;fill:var(--text2);text-anchor:middle;dominant-baseline:central;letter-spacing:1px;transition:all 0.3s}
-        .arch-node-sub{font-family:var(--mono);font-size:7px;fill:var(--text3);text-anchor:middle;dominant-baseline:central;letter-spacing:0.5px;transition:all 0.3s}
-        .arch-link{stroke:rgba(230,184,0,0.25);stroke-width:1.5;fill:none;stroke-dasharray:6 4;animation:dataFlow 2s linear infinite}
-        .arch-link.solid{stroke-dasharray:none;animation:none}
-        .arch-link-label{font-family:var(--mono);font-size:6.5px;fill:var(--gold-dim);text-anchor:middle;letter-spacing:0.5px}
-        .arch-group:hover .arch-node-rect{stroke:rgba(255,224,0,0.6);fill:#0a0a14;filter:drop-shadow(0 0 8px rgba(230,184,0,0.4))}
-        .arch-group:hover .arch-node-text{fill:#ffe000}
-        .arch-group:hover .arch-node-sub{fill:#b89400}
-        @keyframes dataFlow{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-20}}
-
-        .lib-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;max-width:860px;margin:0 auto}
-        .lib-card{background:var(--panel);border:1px solid var(--border);padding:1.3rem 0.6rem;text-align:center;font-family:var(--mono);font-size:0.65rem;font-weight:500;letter-spacing:1px;color:var(--text2);transition:all 0.3s;cursor:none;text-transform:uppercase;position:relative}
-        .lib-card:hover{border-color:var(--border-bright);background:#0a0a14;color:var(--gold-bright);box-shadow:0 0 25px rgba(230,184,0,0.2),inset 0 0 20px rgba(230,184,0,0.03);transform:translateY(-2px)}
-        .lib-card::before{content:'';position:absolute;top:-1px;left:20%;right:20%;height:1px;background:var(--gold);opacity:0;transition:opacity 0.3s}
-        .lib-card:hover::before{opacity:0.8}
-
-        .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
-        .project-card{background:var(--panel);border:1px solid var(--border);text-decoration:none;color:inherit;display:block;transition:all 0.4s;position:relative;cursor:none;overflow:hidden}
-        .project-card:hover{border-color:var(--border-bright);box-shadow:var(--glow-strong);transform:translateY(-4px)}
-        .project-thumb{width:100%;height:220px;overflow:hidden;border-bottom:1px solid var(--border);position:relative;background:var(--panel)}
-        .project-thumb .shimmer{position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(230,184,0,0.06) 50%,transparent 100%);animation:shimmer 2s infinite}
-        @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-        .project-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s;position:relative;z-index:1;opacity:0;transition:opacity 0.4s}
-        .project-thumb img.loaded{opacity:1}
-        .project-card:hover .project-thumb img{transform:scale(1.05)}
-        .project-body{padding:1.8rem;position:relative;z-index:2}
-        .project-name{font-size:1.4rem;font-weight:700;margin-bottom:0.3rem;color:var(--text)}
-        .project-role{font-family:var(--mono);font-size:0.65rem;letter-spacing:2px;color:var(--gold-pale);text-transform:uppercase;margin-bottom:1rem}
-        .project-stat{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.7rem;color:var(--text3);letter-spacing:1px;border:1px solid var(--border);padding:0.4rem 1.2rem;transition:all 0.3s}
-        .project-stat .live-dot{width:7px;height:7px;background:var(--gold-dim);border-radius:50%;transition:all 0.3s;animation:dotPulse 2s ease-in-out infinite}
-        @keyframes dotPulse{0%,100%{opacity:0.4}50%{opacity:1}}
-        .project-card:hover .project-stat{border-color:var(--gold);color:var(--gold);box-shadow:0 0 15px rgba(230,184,0,0.2)}
-        .project-card:hover .project-stat .live-dot{background:var(--gold-bright);box-shadow:0 0 12px var(--gold);animation-duration:0.8s}
-
-        .availability-indicator{display:inline-flex;align-items:center;gap:0.6rem;font-family:var(--mono);font-size:0.65rem;letter-spacing:2px;color:var(--gold-pale);padding:0.5rem 1.2rem;border:1px solid var(--border);transition:all 0.3s;cursor:none}
-        .availability-dot{width:8px;height:8px;background:var(--gold-bright);border-radius:50%;box-shadow:0 0 10px var(--gold),0 0 20px var(--gold);animation:availPulse 2s ease-in-out infinite}
-        @keyframes availPulse{0%,100%{opacity:0.6;transform:scale(0.9)}50%{opacity:1;transform:scale(1.2)}}
-
-        .contact-wrapper{text-align:center}
-        .contact-card{display:inline-flex;align-items:center;gap:1rem;background:var(--panel);border:1px solid var(--border);padding:1rem 2.5rem;text-decoration:none;color:var(--text);transition:all 0.4s;margin-top:1rem;position:relative;cursor:none}
-        .contact-card::after{content:'';position:absolute;inset:-2px;border:1px solid transparent;transition:all 0.4s}
-        .contact-card:hover::after{border-color:var(--border-bright);box-shadow:0 0 30px rgba(230,184,0,0.3),inset 0 0 20px rgba(230,184,0,0.05)}
-        .contact-card:hover{border-color:var(--border-bright);background:#0a0a14;box-shadow:var(--glow-strong)}
-        .contact-icon{width:22px;height:22px;fill:var(--gold);flex-shrink:0}
-        .contact-info{text-align:left}
-        .contact-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:3px;color:var(--text3);text-transform:uppercase}
-        .contact-value{font-family:var(--mono);font-size:0.85rem;font-weight:600;color:var(--gold-bright);letter-spacing:1px}
-        .copy-btn{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--mono);font-size:0.55rem;color:var(--text3);background:none;border:1px solid var(--border);padding:0.3rem 0.7rem;cursor:none;transition:all 0.3s;letter-spacing:1px;margin-left:0.5rem}
-        .copy-btn:hover{border-color:var(--gold-bright);color:var(--gold-pale);box-shadow:0 0 10px rgba(230,184,0,0.2)}
-
-        .terminal-ticker{position:fixed;bottom:0;left:0;right:0;z-index:5;background:rgba(4,4,8,0.85);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:0.4rem 0;overflow:hidden;pointer-events:none}
-        .ticker-track{display:flex;width:max-content;animation:tickerScroll 40s linear infinite}
-        .ticker-text{font-family:var(--mono);font-size:0.55rem;letter-spacing:2px;color:var(--gold-pale);white-space:nowrap;flex-shrink:0;padding-right:3rem}
-        .ticker-text span{color:var(--text3);margin:0 1.5rem}
-        @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-        footer{position:relative;z-index:4;text-align:center;padding:2rem 2rem 3rem;border-top:1px solid var(--border);font-family:var(--mono);font-size:0.55rem;letter-spacing:3px;color:var(--text3);text-transform:uppercase}
-
-        @media print{
-            body{background:#fff!important;color:#000!important;cursor:auto!important}
-            #cursor,.scroll-progress,.holo-corner,.holo-ring,#holoCanvas,.scanlines,#particlesContainer,#backToTop,.terminal-ticker,#easterEgg,#loader,.section-divider,.export-btn,.copy-btn,.bare-metal-toggle,.mobile-toggle,.nav-links a:not(.active){display:none!important}
-            nav{position:static;border-bottom:2px solid #000;background:#fff!important;padding:1rem}
-            .nav-brand{color:#000!important;text-shadow:none!important}
-            section{min-height:auto!important;padding:40px 2rem!important;page-break-inside:avoid}
-            .hero-title{font-size:3rem!important;color:#000!important;background:none!important;-webkit-text-fill-color:#000!important;animation:none!important}
-            .fade-up{opacity:1!important;transform:none!important}
+            --cyber-dark: #03050A;
+            --cyber-deep: #070C1A;
+            --cyber-panel: #0A1120;
+            --cyber-neon: #00FFCC;
+            --cyber-neon-glow: rgba(0, 255, 204, 0.4);
+            --cyber-neon-dim: #00BFA5;
+            --cyber-gold: #FFD966;
+            --cyber-mint: #A7FFEB;
+            --cyber-red: #FF3366;
+            --text-primary: #EFF6FF;
+            --text-secondary: #94A3B8;
+            --text-tertiary: #475569;
+            --border-cyber: rgba(0, 255, 204, 0.25);
+            --shadow-neon: 0 0 12px rgba(0, 255, 204, 0.3);
+            --glow-pulse: 0 0 20px rgba(0, 255, 204, 0.5);
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
-        @media(max-width:1024px){
-            #home .container{grid-template-columns:1fr;gap:3rem;text-align:center}
-            .hero-description,.hero-divider{margin:0 auto}.hero-meta{justify-content:center}
-            .avatar-card{width:260px;height:310px}.projects-grid{grid-template-columns:1fr}
-            .lib-grid{grid-template-columns:repeat(3,1fr)}.process-grid{grid-template-columns:repeat(2,1fr)}
-            .holo-corner,.holo-ring{display:none}
+        body {
+            background: radial-gradient(circle at 20% 30%, var(--cyber-deep), var(--cyber-dark));
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            cursor: none;
+            line-height: 1.5;
         }
-        @media(max-width:768px){
-            nav{padding:0 1.5rem}.nav-brand span{display:none}
-            .nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:rgba(4,4,8,0.98);backdrop-filter:blur(25px);flex-direction:column;padding:1.5rem;gap:0;border-bottom:1px solid var(--border)}
-            .nav-links.active{display:flex}.nav-links a{border:none;padding:0.8rem 1rem;cursor:pointer}
-            .mobile-toggle{display:flex;cursor:pointer}section{padding:80px 1.5rem}
-            .hero-title{font-size:3.2rem}.section-title{font-size:1.9rem}
-            .lib-grid{grid-template-columns:repeat(2,1fr)}
-            body{cursor:auto}#cursor{display:none}body.mobile{cursor:auto}.terminal-ticker{display:none}
+
+        body.mobile {
+            cursor: auto;
+        }
+
+        /* Custom Cyber Cursor */
+        .cyber-cursor {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: var(--cyber-neon);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            filter: blur(1px);
+            box-shadow: 0 0 18px var(--cyber-neon);
+            transition: transform 0.1s ease, width 0.2s, height 0.2s;
+            transform: translate(-50%, -50%);
+        }
+        .cyber-cursor-trail {
+            position: fixed;
+            width: 28px;
+            height: 28px;
+            border: 1.5px solid rgba(0, 255, 204, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.08s;
+            transform: translate(-50%, -50%);
+        }
+        body.mobile .cyber-cursor,
+        body.mobile .cyber-cursor-trail {
+            display: none;
+        }
+
+        /* Glitch effect container */
+        .glitch-text {
+            text-shadow: 0.05em 0 0 rgba(255, 0, 100, 0.4), -0.05em -0.025em 0 rgba(0, 255, 204, 0.3);
+            animation: glitch-shake 0.3s infinite alternate;
+        }
+        @keyframes glitch-shake {
+            0% { transform: translate(0); }
+            100% { transform: translate(0.5px, -0.5px); }
+        }
+
+        /* GRID + SCANLINES */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0px, rgba(0, 255, 204, 0.02) 2px, transparent 3px);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Particles Container */
+        #particle-field {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Loader - Cyber Terminal */
+        .cyber-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--cyber-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20000;
+            backdrop-filter: blur(8px);
+            transition: opacity 0.6s ease, visibility 0.6s;
+        }
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-terminal {
+            background: #000000aa;
+            border: 1px solid var(--cyber-neon);
+            padding: 2rem 3rem;
+            box-shadow: 0 0 40px var(--cyber-neon-glow);
+            font-family: var(--font-mono);
+        }
+        .loader-terminal p {
+            color: var(--cyber-neon);
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+        }
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: #1a2a2f;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .loader-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--cyber-neon);
+            box-shadow: 0 0 8px var(--cyber-neon);
+            animation: bootProgress 1.8s ease-out forwards;
+        }
+        @keyframes bootProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Navbar – Holographic */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 3%;
+            right: 3%;
+            background: rgba(7, 12, 26, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-cyber);
+            border-radius: 60px;
+            padding: 0.6rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .brand {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+        .brand-main {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--cyber-neon), var(--cyber-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        .brand-badge {
+            font-size: 0.6rem;
+            color: var(--cyber-neon-dim);
+            border-left: 1px solid var(--border-cyber);
+            padding-left: 12px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.2s;
+            padding: 6px 0;
+            border-bottom: 1px solid transparent;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--cyber-neon);
+            border-bottom-color: var(--cyber-neon);
+            text-shadow: 0 0 6px var(--cyber-neon);
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--cyber-neon);
+            color: var(--cyber-neon);
+            padding: 6px 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Sections + Container */
+        section {
+            position: relative;
+            z-index: 5;
+            padding: 120px 3rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Hero Section – CyberBank */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .hero-badge {
+            font-family: var(--font-mono);
+            color: var(--cyber-neon);
+            border: 1px solid var(--cyber-neon);
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            margin-bottom: 1.2rem;
+            backdrop-filter: blur(5px);
+        }
+        h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(125deg, #FFFFFF, var(--cyber-neon), var(--cyber-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+        .hero-desc {
+            color: var(--text-secondary);
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+            border-left: 2px solid var(--cyber-neon);
+            padding-left: 1.2rem;
+        }
+        .balance-card {
+            background: rgba(0, 255, 204, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-cyber);
+            border-radius: 32px;
+            padding: 1.5rem;
+            display: inline-flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--cyber-neon-dim);
+            text-transform: uppercase;
+        }
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .avatar-cyber {
+            background: radial-gradient(circle at 30% 20%, rgba(0,255,204,0.15), transparent);
+            border-radius: 30px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border-cyber);
+            transform: rotate(2deg);
+            transition: 0.3s;
+        }
+        .avatar-cyber img {
+            max-width: 100%;
+            filter: drop-shadow(0 0 15px var(--cyber-neon-glow));
+            border-radius: 24px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-tag {
+            font-family: var(--font-mono);
+            color: var(--cyber-neon);
+            letter-spacing: 6px;
+            font-size: 0.7rem;
+        }
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+        .section-title span {
+            color: var(--cyber-neon);
+            border-bottom: 2px solid var(--cyber-neon);
+        }
+
+        /* Process Grid */
+        .process-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.8rem;
+        }
+        .process-card {
+            background: rgba(10, 17, 32, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-cyber);
+            border-radius: 24px;
+            padding: 1.8rem;
+            text-align: center;
+            transition: 0.25s ease;
+        }
+        .process-card:hover {
+            border-color: var(--cyber-neon);
+            box-shadow: var(--shadow-neon);
+            transform: translateY(-4px);
+        }
+        .proc-icon {
+            font-size: 2rem;
+            background: linear-gradient(145deg, var(--cyber-neon), var(--cyber-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Tech Stack / Cyber Bank Vault */
+        .tech-vault {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .vault-item {
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            font-family: var(--font-mono);
+            font-weight: 500;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+        .vault-item:hover {
+            background: rgba(0, 255, 204, 0.15);
+            box-shadow: var(--shadow-neon);
+            border-color: var(--cyber-neon);
+        }
+
+        /* Project Cards – Neon Finance */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        .project-card {
+            background: rgba(7, 12, 26, 0.7);
+            border: 1px solid var(--border-cyber);
+            border-radius: 28px;
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--cyber-neon);
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.2);
+        }
+        .project-img {
+            height: 200px;
+            background: linear-gradient(145deg, #0F172A, #020617);
+            position: relative;
+            overflow: hidden;
+        }
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: 0.5s;
+        }
+        .project-card:hover .project-img img {
+            opacity: 1;
+            transform: scale(1.03);
+        }
+        .project-info {
+            padding: 1.5rem;
+        }
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .project-stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--cyber-neon);
+        }
+
+        /* Contact – Blockchain-like */
+        .contact-terminal {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 32px;
+            border: 1px solid var(--border-cyber);
+            padding: 2rem;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .discord-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--cyber-panel);
+            border-radius: 60px;
+            padding: 0.8rem 1.8rem;
+            margin: 1rem 0;
+            border: 1px solid var(--cyber-neon-dim);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .discord-chip:hover {
+            background: rgba(0, 255, 204, 0.1);
+            box-shadow: var(--shadow-neon);
+        }
+        button {
+            background: none;
+            border: 1px solid var(--cyber-neon);
+            color: var(--cyber-neon);
+            font-family: var(--font-mono);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            cursor: none;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: var(--cyber-neon);
+            color: #03050A;
+            box-shadow: 0 0 12px var(--cyber-neon);
+        }
+
+        /* Scroll to Top + Toast */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0, 255, 204, 0.2);
+            border: 1px solid var(--cyber-neon);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+            opacity: 0;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .scroll-top.visible {
+            opacity: 1;
+        }
+        .toast-message {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000000cc;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--cyber-neon);
+            padding: 0.6rem 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            border-radius: 60px;
+            z-index: 10001;
+            transition: 0.2s;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            border-top: 1px solid var(--border-cyber);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .process-cards { grid-template-columns: repeat(2,1fr); }
+            .projects-grid { grid-template-columns: 1fr; }
+            nav .nav-links { display: none; flex-direction: column; background: #050a16f0; position: absolute; top: 70px; right: 20px; left: 20px; border-radius: 24px; padding: 1rem; gap: 1rem; backdrop-filter: blur(32px);}
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            body { cursor: auto; }
+            .cyber-cursor, .cyber-cursor-trail { display: none; }
+            section { padding: 100px 1.5rem; }
+            h1 { font-size: 3rem; }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="scroll-progress" id="scrollProgress"></div>
-    <div id="easterEgg"><div class="egg-text">ACCESS GRANTED</div></div>
-    <div id="toast"></div>
-    <div id="loader"><div class="loader-geo"><div class="loader-piece"></div><div class="loader-piece"></div><div class="loader-piece"></div><div class="loader-piece"></div></div><div class="loader-text"><span>I</span><span>N</span><span>I</span><span>T</span><span>I</span><span>A</span><span>L</span><span>I</span><span>Z</span><span>I</span><span>N</span><span>G</span></div></div>
-    <div id="cursor"><div class="cursor-corner tl"></div><div class="cursor-corner tr"></div><div class="cursor-corner bl"></div><div class="cursor-corner br"></div><div class="cursor-dot"></div></div>
-    <div id="particlesContainer"></div>
-    <canvas id="holoCanvas"></canvas>
-    <div class="scanlines"></div>
-    <div class="holo-corner holo-corner-tl"></div><div class="holo-corner holo-corner-tr"></div><div class="holo-corner holo-corner-bl"></div><div class="holo-corner holo-corner-br"></div>
-    <div class="holo-ring"></div><div class="holo-ring"></div>
-    <div id="backToTop"></div>
+    <div class="cyber-grid"></div>
+    <div class="scanline"></div>
+    <div id="particle-field"></div>
+
+    <div class="cyber-loader" id="loader">
+        <div class="loader-terminal">
+            <p>> CYBERBANK_OS v2.7 // BOOT_SEQUENCE</p>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+            <p style="margin-top: 12px; font-size: 0.6rem;">[ AUTHENTICATING: YARIK1 ]</p>
+        </div>
+    </div>
+
+    <div class="cyber-cursor" id="customCursor"></div>
+    <div class="cyber-cursor-trail" id="cursorTrail"></div>
+    <div class="scroll-top" id="back2Top">⬆</div>
+    <div class="toast-message" id="toastMsg"></div>
 
     <nav>
-        <div class="nav-brand">YARIK1<span>System Engineer</span></div>
-        <button class="mobile-toggle" id="menuBtn" aria-label="Menu">☰</button>
-        <ul class="nav-links" id="navLinks">
+        <div class="brand">
+            <div class="brand-main">◈ YARIK1</div>
+            <div class="brand-badge">SYS.ENG // CYBERBANK</div>
+        </div>
+        <button class="menu-toggle" id="menuBtn">≡</button>
+        <ul class="nav-links" id="navList">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#process">Process</a></li>
-            <li><a href="#expertise">Expertise</a></li>
-            <li><a href="#architecture">Architecture</a></li>
-            <li><a href="#toolchain">Toolchain</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><button class="bare-metal-toggle" id="bareMetalToggle">◈</button></li>
+            <li><a href="#expertise">Vault</a></li>
+            <li><a href="#projects">Ledger</a></li>
+            <li><a href="#contact">Access</a></li>
         </ul>
     </nav>
 
-    <div class="terminal-ticker"><div class="ticker-track">
-        <div class="ticker-text">> SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span></div>
-        <div class="ticker-text">> SYS.ONLINE <span>//</span> NODE: YARIK1 <span>//</span> STATUS: OPERATIONAL <span>//</span> UPTIME: 847H <span>//</span> CONNECTIONS: STABLE <span>//</span> ENCRYPTION: ACTIVE <span>//</span></div>
-    </div></div>
+    <section id="home">
+        <div class="container hero-grid">
+            <div class="fade-up">
+                <div class="hero-badge">◈ SYSTEM ENGINEER // LEVEL 7</div>
+                <h1>Yarik<span style="color: var(--cyber-neon);">1</span></h1>
+                <div class="hero-desc">Architecting ultra-scalable game frameworks, low-latency netcode and secure financial-grade client-server architecture. <span style="color: var(--cyber-neon);">99.99% reliability</span>.</div>
+                <div class="balance-card">
+                    <div class="stat"><span class="stat-label">DEPLOYED NODES</span><span class="stat-value">+570 CCU</span></div>
+                    <div class="stat"><span class="stat-label">UPTIME</span><span class="stat-value">847H</span></div>
+                    <div class="stat"><span class="stat-label">ENCRYPTION</span><span class="stat-value">ACTIVE</span></div>
+                </div>
+            </div>
+            <div class="avatar-cyber fade-up">
+                <img src="https://placehold.co/500x500/0A1120/00FFCC?text=YARIK1+CYBER" alt="Yarik1 Avatar" style="width:100%; border-radius:24px;">
+            </div>
+        </div>
+    </section>
 
-    <section id="home"><div class="container"><div class="hero-content"><p class="hero-eyebrow fade-up">System Engineer</p><h1 class="hero-title fade-up">Yarik<em>1</em></h1><div class="hero-divider fade-up"></div><p class="hero-description fade-up">Architecting high-performance systems with clean abstraction. Scalable game frameworks, secure client-server architecture, maintainable codebases.</p><div class="hero-meta fade-up">
-        <div class="hero-meta-item"><svg viewBox="0 0 100 100"><defs><linearGradient id="luauGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0055FF"/><stop offset="100%" style="stop-color:#00AAFF"/></linearGradient></defs><polygon points="50,5 10,25 50,45 90,25" fill="none" stroke="url(#luauGrad)" stroke-width="6" stroke-linejoin="round"/><polygon points="10,50 50,70 90,50" fill="none" stroke="url(#luauGrad)" stroke-width="5" stroke-linejoin="round"/><polygon points="10,75 50,95 90,75" fill="none" stroke="url(#luauGrad)" stroke-width="4" stroke-linejoin="round"/></svg> Luau</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 100 100"><defs><linearGradient id="rbxGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#E8E8E8"/><stop offset="100%" style="stop-color:#A0A0A0"/></linearGradient></defs><rect x="8" y="8" width="84" height="84" rx="16" fill="none" stroke="url(#rbxGrad)" stroke-width="6" transform="rotate(45,50,50)"/><rect x="22" y="22" width="56" height="56" rx="8" fill="none" stroke="url(#rbxGrad)" stroke-width="3" transform="rotate(45,50,50)" opacity="0.6"/></svg> Roblox</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 100 100"><rect x="10" y="15" width="80" height="55" rx="8" fill="none" stroke="#FFD700" stroke-width="5"/><path d="M25 40l10 10-10 10" fill="none" stroke="#FFD700" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><line x1="40" y1="55" x2="70" y2="55" stroke="#00E5FF" stroke-width="5" stroke-linecap="round"/><rect x="30" y="78" width="40" height="8" rx="4" fill="#555570"/></svg> Systems</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 100 100" fill="#FFFFFF"><path d="M50 5C25.15 5 5 25.15 5 50c0 19.9 12.89 36.75 30.77 42.7 2.25.42 3.08-.98 3.08-2.17 0-1.07-.04-4.63-.04-8.4-11.3 2.1-14.23-2.78-15.13-5.33-.5-1.3-2.68-5.33-4.6-6.4-1.57-.85-3.82-2.95-.05-3 3.55-.05 6.08 3.27 6.92 4.62 4.05 6.82 10.52 4.9 13.1 3.72.4-2.93 1.58-4.9 2.88-6.02-10-.38-20.48-5.02-20.48-22.25 0-4.9 1.75-8.92 4.62-12.07-.46-1.12-2.02-5.73.44-11.93 0 0 3.77-1.18 12.38 4.62 3.6-1 7.42-1.5 11.25-1.5s7.65.5 11.25 1.5c8.6-5.85 12.37-4.62 12.37-4.62 2.47 6.2.9 10.8.45 11.93 2.87 3.15 4.6 7.12 4.6 12.07 0 17.3-10.52 21.87-20.55 22.2 1.62 1.4 3.05 4.15 3.05 8.38 0 6.05-.05 10.9-.05 12.4 0 1.2.82 2.62 3.08 2.17C82.1 86.75 95 69.9 95 50 95 25.15 74.85 5 50 5z"/></svg> GitHub</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 100 100"><defs><linearGradient id="vscGrad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#007ACC"/><stop offset="100%" style="stop-color:#1E8AD8"/></linearGradient></defs><path d="M80 15L95 25V75L80 85L35 70L5 80V20L35 30L80 15Z" fill="url(#vscGrad2)"/><path d="M35 30L5 48V52L35 70L80 82V62L35 48L35 30Z" fill="url(#vscGrad2)" opacity="0.75"/><path d="M5 20L35 30V70L5 80V20Z" fill="#007ACC" opacity="0.4"/></svg> VS Code</div>
-        <div class="hero-meta-item"><svg viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" rx="18" fill="#68217A"/><rect x="14" y="14" width="72" height="72" rx="14" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.3"/><text x="50" y="72" text-anchor="middle" font-size="52" font-weight="bold" fill="#FFFFFF" font-family="monospace">C#</text></svg> C#</div>
-    </div></div><div class="avatar-scene fade-up"><div class="avatar-card" id="avatarCard"><div class="avatar-holo"></div><div class="avatar-border"></div><div class="avatar-front"><img src="./assets/avatar.png" alt="Yarik1" onerror="this.src='https://placehold.co/400x480/080810/e6b800?text=YARIK1'"></div></div></div></div></section>
-    <div class="section-divider"></div>
+    <section id="process">
+        <div class="container">
+            <div class="section-header fade-up"><div class="section-tag">[ CORE_PROTOCOL ]</div><h2 class="section-title">How I <span>Operate</span></h2></div>
+            <div class="process-cards">
+                <div class="process-card fade-up"><div class="proc-icon">⚡</div><h3>Audit</h3><p style="color: var(--text-secondary); font-size: 0.85rem;">System mapping, bottleneck detection & risk analysis</p></div>
+                <div class="process-card fade-up"><div class="proc-icon">🔒</div><h3>Encrypt</h3><p style="color: var(--text-secondary);">Modular interfaces, secure bridges, zero-trust layers</p></div>
+                <div class="process-card fade-up"><div class="proc-icon">⚙️</div><h3>Optimize</h3><p style="color: var(--text-secondary);">Memory pools, parallel execution, network throttling</p></div>
+                <div class="process-card fade-up"><div class="proc-icon">📡</div><h3>Deploy</h3><p style="color: var(--text-secondary);">24/7 telemetry, auto-scaling, disaster recovery</p></div>
+            </div>
+        </div>
+    </section>
 
-    <section id="process"><div class="container"><div class="section-header fade-up"><p class="section-number">01</p><h2 class="section-title">How I <em>Work</em></h2><div class="section-line"></div></div><div class="process-grid"><div class="process-step fade-up"><div class="process-icon">◇</div><div class="process-label">Design</div><div class="process-desc">Architecture planning, data flow mapping, modular boundary definition</div></div><div class="process-step fade-up"><div class="process-icon">▣</div><div class="process-label">Abstract</div><div class="process-desc">Interface contracts, dependency injection, reusable component isolation</div></div><div class="process-step fade-up"><div class="process-icon">◈</div><div class="process-label">Optimize</div><div class="process-desc">Memory profiling, network throttling, cold-path elimination</div></div><div class="process-step fade-up"><div class="process-icon">◆</div><div class="process-label">Ship</div><div class="process-desc">Stress testing, telemetry integration, production deployment</div></div></div></div></section>
-    <div class="section-divider"></div>
+    <section id="expertise">
+        <div class="container">
+            <div class="section-header fade-up"><div class="section-tag">[ TECH_VAULT ]</div><h2 class="section-title">Cyber<span> Stack</span></h2></div>
+            <div class="tech-vault">
+                <div class="vault-item">Luau / TypeChecked</div><div class="vault-item">BridgeNet2</div><div class="vault-item">Replica / Signal</div>
+                <div class="vault-item">Maid / Janitor</div><div class="vault-item">Rodux / Fusion</div><div class="vault-item">Jecs / Jolt</div>
+                <div class="vault-item">ProfileStore</div><div class="vault-item">SimpleWeight</div><div class="vault-item">Container DI</div>
+                <div class="vault-item">C# / .NET Core</div><div class="vault-item">ECS Architecture</div><div class="vault-item">Promises</div>
+            </div>
+        </div>
+    </section>
 
-    <section id="expertise"><div class="container"><div class="section-header fade-up"><p class="section-number">02</p><h2 class="section-title">Technical <em>Spectrum</em></h2><div class="section-line"></div></div><div class="skills-svg-container fade-up"><svg viewBox="0 0 950 520" xmlns="http://www.w3.org/2000/svg">
-        <rect x="20" y="15" width="210" height="155" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="34" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">CORE SYSTEMS</text>
-        <rect x="20" y="190" width="210" height="135" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="209" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">NETWORK LAYER</text>
-        <rect x="20" y="345" width="210" height="135" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="30" y="364" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">DATA & STORAGE</text>
-        <rect x="260" y="15" width="210" height="155" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="270" y="34" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">DESIGN PATTERNS</text>
-        <rect x="260" y="190" width="210" height="135" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="270" y="209" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">RUNTIME & PERF</text>
-        <rect x="500" y="15" width="200" height="215" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="510" y="34" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">SYNC & REPLICATION</text>
-        <rect x="500" y="250" width="200" height="230" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="510" y="269" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">SECURITY & AUTH</text>
-        <rect x="730" y="15" width="190" height="465" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="740" y="34" font-family="JetBrains Mono" font-size="7" fill="#5c4a00" letter-spacing="2">MEMORY & LIFECYCLE</text>
-        <g class="skill-group"><rect x="45" y="65" width="160" height="40" rx="3" class="skill-node-rect" stroke="rgba(230,184,0,0.5)"/><text x="125" y="80" class="skill-node-text" fill="#ffe000" font-size="10">System Architecture</text><text x="125" y="94" class="skill-node-sub">Core Orchestration</text></g>
-        <g class="skill-group"><rect x="45" y="220" width="160" height="40" rx="3" class="skill-node-rect"/><text x="125" y="235" class="skill-node-text">Network Optimization</text><text x="125" y="249" class="skill-node-sub">BridgeNet2 · Throttling</text></g>
-        <g class="skill-group"><rect x="45" y="375" width="160" height="40" rx="3" class="skill-node-rect"/><text x="125" y="390" class="skill-node-text">Data Caching</text><text x="125" y="404" class="skill-node-sub">ProfileStore · QuickZone</text></g>
-        <g class="skill-group"><rect x="285" y="65" width="160" height="40" rx="3" class="skill-node-rect"/><text x="365" y="80" class="skill-node-text">Modular Design</text><text x="365" y="94" class="skill-node-sub">DI · Container · Maid</text></g>
-        <g class="skill-group"><rect x="285" y="220" width="160" height="40" rx="3" class="skill-node-rect"/><text x="365" y="235" class="skill-node-text">Performance Tuning</text><text x="365" y="249" class="skill-node-sub">Memory & CPU Profiling</text></g>
-        <g class="skill-group"><rect x="520" y="65" width="160" height="40" rx="3" class="skill-node-rect"/><text x="600" y="80" class="skill-node-text">Client-Server Sync</text><text x="600" y="94" class="skill-node-sub">Replica · Signal</text></g>
-        <g class="skill-group"><rect x="520" y="125" width="160" height="40" rx="3" class="skill-node-rect"/><text x="600" y="140" class="skill-node-text">Real-time Replication</text><text x="600" y="154" class="skill-node-sub">BridgeNet2 · Jecs</text></g>
-        <g class="skill-group"><rect x="520" y="285" width="160" height="40" rx="3" class="skill-node-rect"/><text x="600" y="300" class="skill-node-text">Server Security</text><text x="600" y="314" class="skill-node-sub">Auth · Validation</text></g>
-        <g class="skill-group"><rect x="520" y="345" width="160" height="40" rx="3" class="skill-node-rect"/><text x="600" y="360" class="skill-node-text">Memory Management</text><text x="600" y="374" class="skill-node-sub">Janitor · GC Control</text></g>
-        <g class="skill-group"><rect x="750" y="65" width="150" height="40" rx="3" class="skill-node-rect"/><text x="825" y="80" class="skill-node-text">Scalable Game Loops</text><text x="825" y="94" class="skill-node-sub">Heartbeat · Step</text></g>
-        <g class="skill-group"><rect x="750" y="260" width="150" height="40" rx="3" class="skill-node-rect"/><text x="825" y="275" class="skill-node-text">Maid / Janitor</text><text x="825" y="289" class="skill-node-sub">Cleanup & GC</text></g>
-        <path d="M205,85 C250,85 250,85 285,85" class="skill-link solid"/><text x="245" y="78" class="skill-link-label">depends</text>
-        <path d="M205,240 C250,240 250,240 285,240" class="skill-link solid"/><text x="245" y="232" class="skill-link-label">optimizes</text>
-        <path d="M205,395 C250,395 250,310 285,310" class="skill-link"/><text x="245" y="348" class="skill-link-label">feeds</text>
-        <path d="M445,85 C490,85 490,85 520,85" class="skill-link solid"/><text x="482" y="77" class="skill-link-label">structures</text>
-        <path d="M445,240 C490,240 490,155 520,155" class="skill-link"/><text x="482" y="195" class="skill-link-label">profiles</text>
-        <path d="M680,85 C720,85 720,85 750,85" class="skill-link solid"/><text x="715" y="77" class="skill-link-label">drives</text>
-        <path d="M680,145 C720,145 720,280 750,280" class="skill-link"/><text x="715" y="210" class="skill-link-label">cleans</text>
-    </svg></div></div></section>
-    <div class="section-divider"></div>
+    <section id="projects">
+        <div class="container">
+            <div class="section-header fade-up"><div class="section-tag">[ DEPLOYED_SYSTEMS ]</div><h2 class="section-title">Live <span>Contracts</span></h2></div>
+            <div class="projects-grid">
+                <a href="https://www.roblox.com/games/119051443230992/Dead-Mars" target="_blank" class="project-card fade-up"><div class="project-img"><img data-src="https://tr.rbxcdn.com/180DAY-c44d4550d0380876af70504c0fb7456d/768/432/Image/Webp/noFilter" alt="Dead Mars"></div><div class="project-info"><div class="project-title">DEAD MARS</div><div class="project-stats"><span>⚡ Lead Architect</span><span>📊 570 CCU Peak</span></div></div></a>
+                <a href="https://www.roblox.com/games/94939590381819/Wake-up-a-Brainrot" target="_blank" class="project-card fade-up"><div class="project-img"><img data-src="https://tr.rbxcdn.com/180DAY-873ef111a7b7f02c85453cfe7b155a06/768/432/Image/Webp/noFilter" alt="Wake up"></div><div class="project-info"><div class="project-title">WAKE UP A BRAINROT</div><div class="project-stats"><span>🛡️ Fullstack + Netcode</span><span>📊 319 CCU</span></div></div></a>
+                <a href="https://www.roblox.com/games/104724166902095/Smash-a-Lucky-Block" target="_blank" class="project-card fade-up"><div class="project-img"><img data-src="https://tr.rbxcdn.com/180DAY-bec7943ea9adb6721161002e87bff871/768/432/Image/Webp/noFilter" alt="Smash"></div><div class="project-info"><div class="project-title">SMASH A LUCKY BLOCK</div><div class="project-stats"><span>🎲 Netcode Engineer</span><span>📊 84 CCU</span></div></div></a>
+                <div class="project-card fade-up"><div class="project-img"><img data-src="https://t3.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Incremental"></div><div class="project-info"><div class="project-title">INCREMENTAL TEMPLATE</div><div class="project-stats"><span>🧠 Architecture Core</span><span>🔧 Development</span></div></div></div>
+            </div>
+        </div>
+    </section>
 
-    <section id="architecture"><div class="container"><div class="section-header fade-up"><p class="section-number">03</p><h2 class="section-title">System <em>Architecture</em></h2><div class="section-line"></div></div><div class="arch-svg-container fade-up"><svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-        <rect x="30" y="20" width="250" height="150" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="40" y="40" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">NETWORKING LAYER</text>
-        <rect x="30" y="190" width="250" height="130" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="40" y="210" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">STATE LAYER</text>
-        <rect x="30" y="340" width="250" height="130" rx="4" fill="none" stroke="rgba(230,184,0,0.1)" stroke-width="1"/><text x="40" y="360" font-family="JetBrains Mono" font-size="8" fill="#5c4a00" letter-spacing="2">DATA & STORAGE</text>
-        <g class="arch-group"><rect x="390" y="190" width="200" height="60" rx="3" class="arch-node-rect" stroke="rgba(230,184,0,0.6)"/><text x="490" y="212" class="arch-node-text" fill="#ffe000" font-size="11">CORE SYSTEM</text><text x="490" y="232" class="arch-node-sub">Orchestration · Boot · Loop</text></g>
-        <g class="arch-group"><rect x="60" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="115" y="75" class="arch-node-text">BridgeNet2</text><text x="115" y="89" class="arch-node-sub">Remote Transport</text></g>
-        <g class="arch-group"><rect x="190" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="245" y="75" class="arch-node-text">Replica</text><text x="245" y="89" class="arch-node-sub">State Streaming</text></g>
-        <g class="arch-group"><rect x="60" y="230" width="110" height="42" rx="3" class="arch-node-rect"/><text x="115" y="245" class="arch-node-text">Signal</text><text x="115" y="259" class="arch-node-sub">Event Bus</text></g>
-        <g class="arch-group"><rect x="190" y="230" width="110" height="42" rx="3" class="arch-node-rect"/><text x="245" y="245" class="arch-node-text">Rodux</text><text x="245" y="259" class="arch-node-sub">State Container</text></g>
-        <g class="arch-group"><rect x="60" y="380" width="110" height="42" rx="3" class="arch-node-rect"/><text x="115" y="395" class="arch-node-text">ProfileStore</text><text x="115" y="409" class="arch-node-sub">Persistent Data</text></g>
-        <g class="arch-group"><rect x="190" y="380" width="110" height="42" rx="3" class="arch-node-rect"/><text x="245" y="395" class="arch-node-text">QuickZone</text><text x="245" y="409" class="arch-node-sub">Spatial Caching</text></g>
-        <g class="arch-group"><rect x="660" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="75" class="arch-node-text">Maid</text><text x="715" y="89" class="arch-node-sub">Cleanup Manager</text></g>
-        <g class="arch-group"><rect x="660" y="125" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="140" class="arch-node-text">Janitor</text><text x="715" y="154" class="arch-node-sub">GC Helper</text></g>
-        <g class="arch-group"><rect x="660" y="195" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="210" class="arch-node-text">Container</text><text x="715" y="224" class="arch-node-sub">DI / Service Locator</text></g>
-        <g class="arch-group"><rect x="660" y="260" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="275" class="arch-node-text">Promise</text><text x="715" y="289" class="arch-node-sub">Async Flow</text></g>
-        <g class="arch-group"><rect x="660" y="330" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="345" class="arch-node-text">Fusion</text><text x="715" y="359" class="arch-node-sub">Reactive UI</text></g>
-        <g class="arch-group"><rect x="660" y="400" width="110" height="42" rx="3" class="arch-node-rect"/><text x="715" y="415" class="arch-node-text">SimpleWeight</text><text x="715" y="429" class="arch-node-sub">Load Balancer</text></g>
-        <g class="arch-group"><rect x="820" y="60" width="110" height="42" rx="3" class="arch-node-rect"/><text x="875" y="75" class="arch-node-text">Jolt</text><text x="875" y="89" class="arch-node-sub">Physics ECS</text></g>
-        <g class="arch-group"><rect x="820" y="125" width="110" height="42" rx="3" class="arch-node-rect"/><text x="875" y="140" class="arch-node-text">Jecs</text><text x="875" y="154" class="arch-node-sub">Entity Framework</text></g>
-        <g class="arch-group"><rect x="820" y="195" width="110" height="42" rx="3" class="arch-node-rect"/><text x="875" y="210" class="arch-node-text">ShapecastHB</text><text x="875" y="224" class="arch-node-sub">Hitbox Detection</text></g>
-        <g class="arch-group"><rect x="820" y="260" width="110" height="42" rx="3" class="arch-node-rect"/><text x="875" y="275" class="arch-node-text">SimplePath</text><text x="875" y="289" class="arch-node-sub">Pathfinding</text></g>
-        <path d="M390,205 C330,205 220,90 200,90" class="arch-link"/><text x="280" y="82" class="arch-link-label">remote comm</text>
-        <path d="M390,218 C330,218 300,90 300,90" class="arch-link"/><text x="330" y="80" class="arch-link-label">state push</text>
-        <path d="M390,228 C330,250 220,250 200,250" class="arch-link"/><text x="280" y="242" class="arch-link-label">events</text>
-        <path d="M390,240 C330,265 300,255 300,255" class="arch-link"/><text x="330" y="250" class="arch-link-label">dispatch</text>
-        <path d="M390,248 C330,400 220,400 200,400" class="arch-link"/><text x="280" y="392" class="arch-link-label">persist</text>
-        <path d="M590,200 C620,160 620,80 660,80" class="arch-link"/><text x="605" y="72" class="arch-link-label">cleanup</text>
-        <path d="M590,210 C630,180 620,145 660,145" class="arch-link"/><text x="618" y="135" class="arch-link-label">gc</text>
-        <path d="M590,220 C630,230 620,215 660,215" class="arch-link"/><text x="618" y="210" class="arch-link-label">resolve</text>
-        <path d="M590,230 C640,280 620,280 660,280" class="arch-link"/><text x="620" y="272" class="arch-link-label">async</text>
-        <path d="M590,240 C650,355 620,350 660,350" class="arch-link"/><text x="620" y="342" class="arch-link-label">render</text>
-        <path d="M590,250 C660,420 620,420 660,420" class="arch-link"/><text x="620" y="412" class="arch-link-label">balance</text>
-        <path d="M590,195 C730,130 750,70 820,70" class="arch-link"/><text x="690" y="60" class="arch-link-label">physics</text>
-        <path d="M590,190 C740,155 750,145 820,145" class="arch-link"/><text x="700" y="135" class="arch-link-label">entities</text>
-        <path d="M590,185 C750,210 750,215 820,215" class="arch-link"/><text x="710" y="205" class="arch-link-label">detection</text>
-        <path d="M590,180 C760,270 750,280 820,280" class="arch-link"/><text x="720" y="270" class="arch-link-label">navigation</text>
-        <line x1="170" y1="102" x2="190" y2="102" class="arch-link solid"/><text x="180" y="95" class="arch-link-label">→</text>
-        <line x1="170" y1="272" x2="190" y2="272" class="arch-link solid"/><text x="180" y="265" class="arch-link-label">→</text>
-    </svg></div></div></section>
-    <div class="section-divider"></div>
+    <section id="contact">
+        <div class="container">
+            <div class="section-header fade-up"><div class="section-tag">[ ACCESS_CREDENTIALS ]</div><h2 class="section-title">Establish <span>Secure Link</span></h2></div>
+            <div class="contact-terminal fade-up">
+                <div class="discord-chip" id="discordCopyBtn">
+                    <span style="font-size: 1.6rem;">💠</span> <span style="font-family: monospace;">glogangs</span> <span style="font-size: 0.7rem;">[DISCORD]</span>
+                </div>
+                <button id="exportBtn">⟁ EXPORT DOSSIER (PDF)</button>
+                <div style="margin-top: 1rem;"><span class="hero-badge" style="background: none;">🟢 OPEN FOR COMMISSIONS // SECURE CHANNEL</span></div>
+            </div>
+        </div>
+    </section>
 
-    <section id="toolchain"><div class="container"><div class="section-header fade-up"><p class="section-number">04</p><h2 class="section-title">Dev <em>Toolchain</em></h2><div class="section-line"></div></div><div class="lib-grid"><div class="lib-card fade-up">Container</div><div class="lib-card fade-up">SimpleWeight</div><div class="lib-card fade-up">BridgeNet2</div><div class="lib-card fade-up">ProfileStore</div><div class="lib-card fade-up">Replica</div><div class="lib-card fade-up">Signal</div><div class="lib-card fade-up">Maid</div><div class="lib-card fade-up">Promise</div><div class="lib-card fade-up">Janitor</div><div class="lib-card fade-up">Fusion</div><div class="lib-card fade-up">Jolt</div><div class="lib-card fade-up">Jecs</div><div class="lib-card fade-up">Rodux</div><div class="lib-card fade-up">ShapecastHB</div><div class="lib-card fade-up">SimplePath</div><div class="lib-card fade-up">QuickZone</div></div></div></section>
-    <div class="section-divider"></div>
-
-    <section id="projects"><div class="container"><div class="section-header fade-up"><p class="section-number">05</p><h2 class="section-title">Deployed <em>Systems</em></h2><div class="section-line"></div></div><div class="projects-grid">
-        <a href="https://www.roblox.com/games/119051443230992/Dead-Mars" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://tr.rbxcdn.com/180DAY-c44d4550d0380876af70504c0fb7456d/768/432/Image/Webp/noFilter" alt="Dead Mars" loading="lazy"></div><div class="project-body"><h3 class="project-name">Dead Mars</h3><p class="project-role">Lead Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 570 CCU</span></div></a>
-        <a href="https://www.roblox.com/games/94939590381819/Wake-up-a-Brainrot" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://tr.rbxcdn.com/180DAY-873ef111a7b7f02c85453cfe7b155a06/768/432/Image/Webp/noFilter" alt="Wake up a Brainrot" loading="lazy"></div><div class="project-body"><h3 class="project-name">Wake up a Brainrot</h3><p class="project-role">Fullstack Developer</p><span class="project-stat"><span class="live-dot"></span>PEAK 319 CCU</span></div></a>
-        <a href="https://www.roblox.com/games/104724166902095/Smash-a-Lucky-Block" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://tr.rbxcdn.com/180DAY-bec7943ea9adb6721161002e87bff871/768/432/Image/Webp/noFilter" alt="Smash A Lucky Block" loading="lazy"></div><div class="project-body"><h3 class="project-name">Smash A Lucky Block</h3><p class="project-role">Fullstack + Netcode</p><span class="project-stat"><span class="live-dot"></span>PEAK 84 CCU</span></div></a>
-        <a href="https://www.roblox.com/games/117527250434588/Incremental-Template" target="_blank" rel="noopener" class="project-card fade-up"><div class="project-thumb"><div class="shimmer"></div><img data-src="https://t3.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Incremental Template" loading="lazy"></div><div class="project-body"><h3 class="project-name">Incremental Template</h3><p class="project-role">Architecture Engineer</p><span class="project-stat"><span class="live-dot"></span>DEVELOPMENT</span></div></a>
-    </div></div></section>
-    <div class="section-divider"></div>
-
-    <section id="contact"><div class="container"><div class="section-header fade-up"><p class="section-number">06</p><h2 class="section-title">Establish <em>Link</em></h2><div class="section-line"></div></div><div class="contact-wrapper fade-up">
-        <div class="availability-indicator"><span class="availability-dot"></span> Open for commissions</div><br>
-        <a href="https://discord.com/users/glogangs" target="_blank" rel="noopener" class="contact-card"><svg class="contact-icon" viewBox="0 0 24 24"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/></svg><div class="contact-info"><div class="contact-label">Discord</div><div class="contact-value">glogangs</div></div></a>
-        <button class="copy-btn" id="copyDiscord">⧉ Copy</button><br>
-        <button class="export-btn" id="exportDossier">⬡ Export Dossier</button>
-    </div></div></section>
-    <footer>YARIK1 / System Engineering / 2026</footer>
+    <footer>© 2026 YARIK1 — CYBERBANK INFRASTRUCTURE // ENCRYPTED CHANNEL v.3.0</footer>
 
     <script>
-        console.log('%c[YARIK1:SYS] %cInitializing core modules...', 'color:#e6b800;font-weight:bold', 'color:#b0b0c8');
-        (function() {
-            const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent) || window.innerWidth <= 768;
-            if (isMobile) document.body.classList.add('mobile');
+        (function(){
+            // --- Loader
+            const loader = document.getElementById('loader');
+            window.addEventListener('load', () => { setTimeout(() => loader.classList.add('loader-hidden'), 1900); });
 
-            const sp = document.getElementById('scrollProgress');
-            window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - window.innerHeight; sp.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%'; });
-
-            let lc = 0; const nb = document.querySelector('.nav-brand'), ee = document.getElementById('easterEgg');
-            nb?.addEventListener('click', () => { lc++; if (lc >= 5) { lc = 0; ee.classList.add('active'); setTimeout(() => ee.classList.remove('active'), 2000); console.log('%c[YARIK1:AUTH] %cACCESS GRANTED', 'color:#ffe000', 'color:#e6b800'); } });
-            setTimeout(() => { lc = 0; }, 2000);
-
-            function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
-
-            window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loader')?.classList.add('hidden'); console.log('%c[YARIK1:OK] %cAll systems ready', 'color:#ffe000', 'color:#b0b0c8'); }, 1800); });
-
-            const cursor = document.getElementById('cursor');
-            if (!isMobile && cursor) { cursor.classList.add('visible'); document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px'; }); const hts = document.querySelectorAll('a,.nav-links a,.skill-row,.lib-card,.arch-group,.skill-group,.project-card,.contact-card,.hero-meta-item,.process-step,.export-btn,#backToTop,.bare-metal-toggle,.availability-indicator,.copy-btn'); hts.forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));}); }
-
-            const pc = document.getElementById('particlesContainer'); document.addEventListener('click', (e) => { if (isMobile || document.body.classList.contains('bare-metal')) return; for (let i = 0; i < 8; i++) { const p = document.createElement('div'); p.className = 'click-particle'; const a = (Math.PI*2*i)/8, d = 20+Math.random()*30; p.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;`; pc.appendChild(p); p.addEventListener('animationend', () => p.remove()); } });
-
-            const bb = document.getElementById('backToTop'); window.addEventListener('scroll', () => bb.classList.toggle('visible', window.scrollY > 500)); bb.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-            document.getElementById('exportDossier')?.addEventListener('click', () => { showToast('PREPARING DOSSIER'); setTimeout(() => window.print(), 200); });
-            document.getElementById('copyDiscord')?.addEventListener('click', () => { navigator.clipboard.writeText('glogangs').then(() => showToast('COPIED TO CLIPBOARD')); });
-
-            const bmt = document.getElementById('bareMetalToggle'); let bm = localStorage.getItem('bareMetal') === 'true'; if (bm) document.body.classList.add('bare-metal');
-            bmt?.addEventListener('click', () => { bm = !bm; document.body.classList.toggle('bare-metal', bm); localStorage.setItem('bareMetal', bm); showToast(bm ? 'BARE METAL ACTIVE' : 'CYBER MODE ACTIVE'); });
-
-            document.addEventListener('keydown', (e) => { if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; const k = e.key.toLowerCase(); const sm = { '1': 'home', '2': 'process', '3': 'expertise', '4': 'architecture', '5': 'toolchain', '6': 'projects', '7': 'contact' }; if (sm[k]) { const s = document.getElementById(sm[k]); if (s) window.scrollTo({ top: s.offsetTop - 60, behavior: 'smooth' }); } if (k === '0') window.scrollTo({ top: 0, behavior: 'smooth' }); if (k === 'escape') { bm = !bm; document.body.classList.toggle('bare-metal', bm); localStorage.setItem('bareMetal', bm); } if (k === 'p' && e.ctrlKey) { e.preventDefault(); window.print(); } });
-
-            const fels = document.querySelectorAll('.fade-up'); const fob = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fob.unobserve(e.target); } }); }, { threshold: 0.12 }); fels.forEach(el => fob.observe(el));
-
-            const imgs = document.querySelectorAll('.project-thumb img[data-src]'); const imgOb = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { const img = e.target; img.src = img.dataset.src; img.onload = () => { img.classList.add('loaded'); img.previousElementSibling.style.display = 'none'; }; imgOb.unobserve(img); } }); }, { threshold: 0.1 }); imgs.forEach(img => imgOb.observe(img));
-
-            const canvas = document.getElementById('holoCanvas'); const ctx = canvas.getContext('2d'); let w, h, time = 0;
-            function rc() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-            function draw() { if (document.body.classList.contains('bare-metal')) { requestAnimationFrame(draw); return; } ctx.clearRect(0, 0, w, h); const gs = 55, ox = (time * 0.06) % gs, oy = (time * 0.03) % gs, cx = w / 2, cy = h / 2, md = Math.sqrt(cx * cx + cy * cy); for (let x = -gs + ox; x < w + gs; x += gs) { const a = Math.max(0, 0.1 * (1 - Math.abs(x - cx) / cx * 1.3)); ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.strokeStyle = `rgba(230,184,0,${a})`; ctx.lineWidth = 0.5; ctx.stroke(); } for (let y = -gs + oy; y < h + gs; y += gs) { const a = Math.max(0, 0.1 * (1 - Math.abs(y - cy) / cy * 1.3)); ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.strokeStyle = `rgba(230,184,0,${a})`; ctx.lineWidth = 0.5; ctx.stroke(); } for (let x = -gs + ox; x < w + gs; x += gs) { for (let y = -gs + oy; y < h + gs; y += gs) { const d = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) / md; const a = Math.max(0, 0.4 * (1 - d * 1.4)); const p = 0.6 + 0.4 * Math.sin(time * 0.03 + x * 0.01 + y * 0.01); if (a > 0.02) { ctx.beginPath(); ctx.arc(x, y, 1.6, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,208,0,${a * p})`; ctx.fill(); } } } for (let i = 0; i < 3; i++) { const rx = w * (0.2 + i * 0.3) + Math.sin(time * 0.004 + i) * 50; const ry = h * (0.3 + i * 0.2) + Math.cos(time * 0.005 + i) * 40; const rr = 70 + i * 35 + Math.sin(time * 0.008 + i) * 18; ctx.beginPath(); ctx.arc(rx, ry, rr, 0, Math.PI * 2); ctx.strokeStyle = `rgba(230,184,0,${0.03 + i * 0.02})`; ctx.lineWidth = 0.7; ctx.stroke(); } time++; requestAnimationFrame(draw); }
-            window.addEventListener('resize', rc); rc(); draw(); console.log('%c[YARIK1:SYS] %cCanvas initialized', 'color:#e6b800;font-weight:bold', 'color:#b0b0c8');
-
-            const pS = document.querySelectorAll('section'); window.addEventListener('scroll', () => { pS.forEach(s => { const r = s.getBoundingClientRect(); s.style.transform = `translateY(${(r.top + r.height / 2 - window.innerHeight / 2) * 0.02}px)`; }); }, { passive: true });
-
-            // Avatar 3D rotation with mouse
-            const avatar = document.getElementById('avatarCard');
-            let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
-            if (avatar && !isMobile) {
+            // --- Cursor fx for non-mobile
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 768;
+            if(!isMobile){
+                const cursor = document.getElementById('customCursor');
+                const trail = document.getElementById('cursorTrail');
                 document.addEventListener('mousemove', (e) => {
-                    const rect = avatar.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    mouseX = (e.clientX - centerX) / (rect.width / 2) * -20;
-                    mouseY = (e.clientY - centerY) / (rect.height / 2) * 15;
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                    trail.style.left = e.clientX + 'px';
+                    trail.style.top = e.clientY + 'px';
                 });
-                function animateAvatar() {
-                    curX += (mouseX - curX) * 0.08;
-                    curY += (mouseY - curY) * 0.08;
-                    avatar.style.transform = `rotateX(${curY}deg) rotateY(${curX}deg)`;
-                    requestAnimationFrame(animateAvatar);
-                }
-                animateAvatar();
-                avatar.addEventListener('mouseleave', () => {
-                    mouseX = 0; mouseY = 0;
+                const interactive = document.querySelectorAll('a, button, .process-card, .project-card, .vault-item, .discord-chip');
+                interactive.forEach(el => {
+                    el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1.6)'; trail.style.transform = 'translate(-50%, -50%) scale(1.2)'; });
+                    el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; trail.style.transform = 'translate(-50%, -50%) scale(1)'; });
                 });
-            }
+            } else { document.body.classList.add('mobile'); }
 
-            const mb = document.getElementById('menuBtn'), nl = document.getElementById('navLinks'); mb?.addEventListener('click', () => { const a = nl.classList.toggle('active'); mb.textContent = a ? '✕' : '☰'; }); const secs = document.querySelectorAll('section[id]'), nas = document.querySelectorAll('.nav-links a'); window.addEventListener('scroll', () => { let c = ''; secs.forEach(s => { if (window.scrollY >= s.offsetTop - 150) c = s.getAttribute('id'); }); nas.forEach(a => { a.classList.remove('active'); if (a.getAttribute('href') === '#' + c) a.classList.add('active'); }); }, { passive: true }); document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', function(e) { e.preventDefault(); const t = document.querySelector(this.getAttribute('href')); if (t) { window.scrollTo({ top: t.offsetTop - 60, behavior: 'smooth' }); nl.classList.remove('active'); if (mb) mb.textContent = '☰'; } }); }); document.addEventListener('click', e => { if (!e.target.closest('nav') && nl.classList.contains('active')) { nl.classList.remove('active'); if (mb) mb.textContent = '☰'; } });
+            // --- Toast
+            function showToast(msg){
+                const toast = document.getElementById('toastMsg');
+                toast.textContent = msg;
+                toast.style.opacity = '1';
+                setTimeout(() => toast.style.opacity = '0', 2000);
+            }
+            // copy Discord
+            document.getElementById('discordCopyBtn')?.addEventListener('click', () => { navigator.clipboard.writeText('glogangs'); showToast('[COPY] glogangs added to clipboard'); });
+            document.getElementById('exportBtn')?.addEventListener('click', () => { showToast('Generating Secure Dossier...'); setTimeout(() => window.print(), 300); });
+
+            // scroll progress / back to top
+            const backBtn = document.getElementById('back2Top');
+            window.addEventListener('scroll', () => { backBtn.classList.toggle('visible', window.scrollY > 400); });
+            backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // smooth navigation + active link
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            function setActive(){
+                let current = '';
+                sections.forEach(sec => { if(window.scrollY >= sec.offsetTop - 180) current = sec.getAttribute('id'); });
+                navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === `#${current}`) link.classList.add('active'); });
+            }
+            window.addEventListener('scroll', setActive);
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e){
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const target = document.getElementById(targetId);
+                    if(target) window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+                    document.getElementById('navList')?.classList.remove('active');
+                    document.getElementById('menuBtn') && (document.getElementById('menuBtn').innerHTML = '≡');
+                });
+            });
+
+            // mobile menu
+            const menuBtn = document.getElementById('menuBtn');
+            const navList = document.getElementById('navList');
+            menuBtn?.addEventListener('click', () => {
+                navList.classList.toggle('active');
+                menuBtn.innerHTML = navList.classList.contains('active') ? '✕' : '≡';
+            });
+
+            // fade-up observer
+            const faders = document.querySelectorAll('.fade-up');
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            faders.forEach(el => obs.observe(el));
+
+            // lazy load images
+            const lazyImgs = document.querySelectorAll('img[data-src]');
+            const imgObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting){
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        imgObserver.unobserve(img);
+                    }
+                });
+            });
+            lazyImgs.forEach(img => imgObserver.observe(img));
+
+            // dynamic particles on click (cyber effect)
+            const particleContainer = document.getElementById('particle-field');
+            document.addEventListener('click', (e) => {
+                if(isMobile) return;
+                for(let i=0;i<6;i++){
+                    const part = document.createElement('div');
+                    part.style.position = 'absolute';
+                    part.style.width = '3px';
+                    part.style.height = '3px';
+                    part.style.background = '#00FFCC';
+                    part.style.borderRadius = '50%';
+                    part.style.left = e.clientX + 'px';
+                    part.style.top = e.clientY + 'px';
+                    part.style.boxShadow = '0 0 12px #00ffcc';
+                    part.style.pointerEvents = 'none';
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = 15 + Math.random() * 35;
+                    const dx = Math.cos(angle) * dist;
+                    const dy = Math.sin(angle) * dist;
+                    part.style.transition = 'all 0.5s ease-out';
+                    particleContainer.appendChild(part);
+                    requestAnimationFrame(() => {
+                        part.style.transform = `translate(${dx}px, ${dy}px)`;
+                        part.style.opacity = '0';
+                    });
+                    setTimeout(() => part.remove(), 600);
+                }
+            });
+            // extra: background floating cyber nodes
+            const canvasNode = document.createElement('canvas');
+            canvasNode.style.position = 'fixed';
+            canvasNode.style.top = 0; canvasNode.style.left = 0; canvasNode.style.width = '100%'; canvasNode.style.height = '100%';
+            canvasNode.style.pointerEvents = 'none'; canvasNode.style.zIndex = '0';
+            document.body.appendChild(canvasNode);
+            const ctx = canvasNode.getContext('2d');
+            function resizeCanvas(){ canvasNode.width = window.innerWidth; canvasNode.height = window.innerHeight; }
+            resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+            let dots = [];
+            for(let i=0;i<60;i++) dots.push({x:Math.random()*canvasNode.width, y:Math.random()*canvasNode.height, vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2});
+            function animateNet(){
+                if(!canvasNode) return;
+                ctx.clearRect(0,0,canvasNode.width, canvasNode.height);
+                ctx.strokeStyle = 'rgba(0, 255, 204, 0.12)';
+                ctx.lineWidth = 0.5;
+                for(let i=0;i<dots.length;i++){
+                    dots[i].x += dots[i].vx; dots[i].y += dots[i].vy;
+                    if(dots[i].x<0) dots[i].x = canvasNode.width;
+                    if(dots[i].x>canvasNode.width) dots[i].x=0;
+                    if(dots[i].y<0) dots[i].y=canvasNode.height;
+                    if(dots[i].y>canvasNode.height) dots[i].y=0;
+                    for(let j=i+1;j<dots.length;j++){
+                        const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y, dist = Math.hypot(dx,dy);
+                        if(dist < 120){
+                            ctx.beginPath(); ctx.moveTo(dots[i].x,dots[i].y); ctx.lineTo(dots[j].x,dots[j].y); ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateNet);
+            }
+            animateNet();
         })();
     </script>
 </body>
