@@ -18,18 +18,19 @@
     }
 
     :root {
-      --bg: #1a1a1e;
-      --bg-secondary: #222226;
-      --glass-bg: rgba(255, 255, 255, 0.06);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-hover: rgba(255, 255, 255, 0.10);
-      --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+      --bg: #141416;
+      --bg-secondary: #1c1c20;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --glass-hover: rgba(255, 255, 255, 0.08);
+      --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
       --glass-blur: 32px;
       --text-primary: #f5f5f7;
-      --text-secondary: #86868b;
-      --text-tertiary: #636366;
+      --text-secondary: #8e8e93;
+      --text-tertiary: #5e5e62;
       --accent: #0a84ff;
-      --accent-dim: rgba(10, 132, 255, 0.15);
+      --accent-dim: rgba(10, 132, 255, 0.12);
+      --accent-glow: rgba(10, 132, 255, 0.08);
       --radius: 16px;
       --radius-sm: 10px;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
@@ -79,8 +80,8 @@
       pointer-events: none;
     }
     .loader-ring {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       border: 2px solid var(--glass-border);
       border-top-color: var(--accent);
@@ -90,8 +91,8 @@
       to { transform: rotate(360deg); }
     }
     .loader-text {
-      margin-top: 1rem;
-      font-size: 0.6rem;
+      margin-top: 0.8rem;
+      font-size: 0.55rem;
       font-weight: 500;
       letter-spacing: 4px;
       color: var(--text-secondary);
@@ -110,7 +111,7 @@
       background: var(--accent);
       width: 0%;
       transition: width 0.08s linear;
-      opacity: 0.5;
+      opacity: 0.4;
     }
 
     /* ============================================
@@ -125,7 +126,7 @@
       width: calc(100% - 32px);
       max-width: 1000px;
       padding: 0 1.6rem;
-      height: 48px;
+      height: 46px;
       background: var(--glass-bg);
       backdrop-filter: blur(var(--glass-blur));
       -webkit-backdrop-filter: blur(var(--glass-blur));
@@ -135,15 +136,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: all 0.3s;
+      transition: all 0.4s ease;
     }
     nav.scrolled {
-      background: rgba(26, 26, 30, 0.85);
-      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(20, 20, 22, 0.88);
+      border-color: rgba(255, 255, 255, 0.08);
     }
 
     .nav-brand {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: -0.3px;
       color: var(--text-primary);
@@ -154,7 +155,7 @@
     .nav-brand span {
       font-weight: 400;
       color: var(--text-secondary);
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       letter-spacing: 0.5px;
     }
 
@@ -169,10 +170,10 @@
       font-weight: 500;
       color: var(--text-secondary);
       text-decoration: none;
-      padding: 0.25rem 0.85rem;
+      padding: 0.2rem 0.85rem;
       border-radius: 40px;
       transition: all 0.25s;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.3px;
     }
     .nav-links a:hover {
       color: var(--text-primary);
@@ -183,26 +184,6 @@
       background: var(--accent-dim);
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.2rem;
-    }
-    .nav-actions button {
-      background: none;
-      border: none;
-      font-size: 0.9rem;
-      cursor: pointer;
-      color: var(--text-secondary);
-      padding: 0.2rem 0.4rem;
-      border-radius: 30px;
-      transition: 0.25s;
-      font-family: var(--font);
-    }
-    .nav-actions button:hover {
-      background: var(--glass-hover);
-      color: var(--text-primary);
-    }
     .mobile-toggle {
       display: none;
       background: none;
@@ -242,18 +223,18 @@
 
     .section-header {
       text-align: center;
-      margin-bottom: 3.2rem;
+      margin-bottom: 3rem;
     }
     .section-label {
-      font-size: 0.55rem;
+      font-size: 0.5rem;
       font-weight: 600;
-      letter-spacing: 2.5px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--text-tertiary);
       margin-bottom: 0.3rem;
     }
     .section-title {
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       font-weight: 700;
       letter-spacing: -1.5px;
       line-height: 1.1;
@@ -309,14 +290,19 @@
       50% { opacity: 1; transform: scale(1.2); }
     }
     .hero-title {
-      font-size: 4rem;
+      font-size: 4.2rem;
       font-weight: 800;
       letter-spacing: -2.5px;
       line-height: 0.95;
+      background: linear-gradient(135deg, #ffffff 40%, #8e8e93 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .hero-title em {
       font-style: normal;
       color: var(--accent);
+      -webkit-text-fill-color: var(--accent);
     }
     .hero-desc {
       font-size: 1rem;
@@ -344,7 +330,7 @@
       letter-spacing: 0.2px;
     }
     .hero-meta-item:hover {
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.12);
       color: var(--text-primary);
     }
 
@@ -367,78 +353,33 @@
     }
     .avatar-glass:hover {
       transform: scale(1.01);
-      border-color: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.1);
     }
     .avatar-glass img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: grayscale(0.15) contrast(1.05);
+      filter: grayscale(0.1) contrast(1.05);
     }
     .avatar-glass::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(10, 132, 255, 0.04), transparent 60%);
+      background: linear-gradient(135deg, rgba(10, 132, 255, 0.03), transparent 60%);
       pointer-events: none;
     }
     .avatar-ring {
       position: absolute;
       inset: -4px;
       border-radius: var(--radius);
-      border: 1px solid rgba(10, 132, 255, 0.08);
+      border: 1px solid rgba(10, 132, 255, 0.06);
       pointer-events: none;
       animation: ring-pulse 4s ease-in-out infinite;
     }
     @keyframes ring-pulse {
       0%, 100% { opacity: 0.2; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.01); }
-    }
-
-    /* ============================================
-       PROCESS — Glass Cards
-       ============================================ */
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-    }
-    .process-step {
-      background: var(--glass-bg);
-      backdrop-filter: blur(var(--glass-blur));
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-sm);
-      padding: 1.6rem 1rem;
-      text-align: center;
-      transition: all 0.35s;
-      box-shadow: var(--glass-shadow);
-    }
-    .process-step:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.12);
-      background: var(--glass-hover);
-    }
-    .process-icon {
-      font-size: 1.6rem;
-      font-weight: 300;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-      display: block;
-      opacity: 0.7;
-    }
-    .process-label {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      color: var(--text-primary);
-    }
-    .process-desc {
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-      margin-top: 0.1rem;
-      font-weight: 400;
+      50% { opacity: 0.5; transform: scale(1.01); }
     }
 
     /* ============================================
@@ -462,7 +403,7 @@
     }
     .showcase-item:hover {
       transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.1);
       background: var(--glass-hover);
     }
     .showcase-item video {
@@ -477,7 +418,7 @@
       left: 0;
       right: 0;
       padding: 1rem 1rem 0.6rem;
-      background: linear-gradient(transparent, rgba(26, 26, 30, 0.85));
+      background: linear-gradient(transparent, rgba(20, 20, 22, 0.85));
       backdrop-filter: blur(4px);
       display: flex;
       flex-direction: column;
@@ -519,7 +460,7 @@
       box-shadow: var(--glass-shadow);
     }
     .lib-card:hover {
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.12);
       color: var(--text-primary);
       background: var(--glass-hover);
       transform: translateY(-2px);
@@ -546,7 +487,7 @@
     }
     .project-card:hover {
       transform: translateY(-5px);
-      border-color: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.1);
       background: var(--glass-hover);
     }
     .project-thumb {
@@ -606,7 +547,7 @@
       padding: 0.1rem 0.7rem;
       border: 1px solid var(--glass-border);
       border-radius: 40px;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
     }
     .project-stat .dot {
       width: 4px;
@@ -659,7 +600,7 @@
       box-shadow: var(--glass-shadow);
     }
     .contact-card:hover {
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.12);
       background: var(--glass-hover);
       transform: translateY(-2px);
     }
@@ -695,7 +636,7 @@
       margin-left: 0.3rem;
     }
     .copy-btn:hover {
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.15);
       color: var(--text-primary);
       background: var(--glass-hover);
     }
@@ -713,7 +654,7 @@
       margin-top: 1rem;
     }
     .export-btn:hover {
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.15);
       color: var(--text-primary);
       background: var(--glass-hover);
     }
@@ -748,7 +689,7 @@
       pointer-events: auto;
     }
     #backToTop:hover {
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.12);
       background: var(--glass-hover);
     }
     #backToTop::after {
@@ -808,30 +749,6 @@
     }
 
     /* ============================================
-       BARE METAL
-       ============================================ */
-    body.bare-metal {
-      --glass-bg: rgba(255, 255, 255, 0.04);
-      --glass-border: rgba(255, 255, 255, 0.06);
-      --glass-blur: 0px;
-      --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      background: #141416;
-    }
-    body.bare-metal .avatar-glass::after,
-    body.bare-metal .avatar-ring,
-    body.bare-metal .scroll-progress,
-    body.bare-metal .hero-badge .dot,
-    body.bare-metal .project-stat .dot,
-    body.bare-metal .availability .dot {
-      display: none !important;
-    }
-    body.bare-metal .process-step:hover,
-    body.bare-metal .project-card:hover,
-    body.bare-metal .showcase-item:hover {
-      transform: none !important;
-    }
-
-    /* ============================================
        RESPONSIVE
        ============================================ */
     @media (max-width: 1024px) {
@@ -845,7 +762,6 @@
       .hero-meta { justify-content: center; }
       .hero-badge { align-self: center; }
       .avatar-glass { width: 220px; height: 270px; }
-      .process-grid { grid-template-columns: repeat(2, 1fr); }
       .showcase-grid { grid-template-columns: 1fr 1fr; }
     }
 
@@ -863,7 +779,7 @@
         top: 52px;
         left: 0;
         right: 0;
-        background: rgba(26, 26, 30, 0.95);
+        background: rgba(20, 20, 22, 0.96);
         backdrop-filter: blur(var(--glass-blur));
         border: 1px solid var(--glass-border);
         border-radius: var(--radius-sm);
@@ -883,13 +799,9 @@
       .mobile-toggle {
         display: block;
       }
-      .nav-actions button:not(.mobile-toggle) {
-        display: none;
-      }
       section { padding: 70px 1rem 50px; }
       .hero-title { font-size: 2.6rem; }
-      .section-title { font-size: 1.8rem; }
-      .process-grid { grid-template-columns: 1fr 1fr; }
+      .section-title { font-size: 2rem; }
       .showcase-grid { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
       .lib-grid { gap: 0.3rem; }
@@ -899,7 +811,6 @@
     @media (max-width: 480px) {
       .hero-title { font-size: 2rem; }
       .avatar-glass { width: 170px; height: 210px; }
-      .process-grid { grid-template-columns: 1fr; }
     }
 
     @media print {
@@ -907,11 +818,11 @@
       nav { position: static !important; transform: none !important; width: 100% !important; border-radius: 0 !important; background: #f5f5f5 !important; }
       .scroll-progress, #backToTop, #toast, #loader { display: none !important; }
       .avatar-glass::after, .avatar-ring { display: none !important; }
-      .hero-title em { color: #0066cc !important; }
+      .hero-title { background: none !important; -webkit-text-fill-color: #000 !important; color: #000 !important; }
+      .hero-title em { -webkit-text-fill-color: #0066cc !important; color: #0066cc !important; }
       .section-title em { color: #0066cc !important; }
-      .project-card, .process-step, .showcase-item { border: 1px solid #ddd !important; box-shadow: none !important; background: #fafafa !important; }
+      .project-card, .showcase-item { border: 1px solid #ddd !important; box-shadow: none !important; background: #fafafa !important; }
       .fade-up { opacity: 1 !important; transform: none !important; }
-      .glass-bg, .glass-hover { background: #f5f5f5 !important; }
     }
   </style>
 </head>
@@ -941,16 +852,12 @@
     </div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="active">Home</a></li>
-      <li><a href="#process">Process</a></li>
       <li><a href="#showcase">Showcase</a></li>
       <li><a href="#toolchain">Toolchain</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="nav-actions">
-      <button id="bareMetalToggle" title="Bare Metal mode">◈</button>
-      <button class="mobile-toggle" id="menuBtn">☰</button>
-    </div>
+    <button class="mobile-toggle" id="menuBtn">☰</button>
   </nav>
 
   <!-- ============================================================
@@ -979,41 +886,6 @@
         <div class="avatar-glass">
           <div class="avatar-ring"></div>
           <img src="./assets/avatar.png" alt="Yarik1" onerror="this.src='https://placehold.co/400x480/2a2a2e/0a84ff?text=YARIK1'" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-  PROCESS
-  ============================================================ -->
-  <section id="process">
-    <div class="container">
-      <div class="section-header fade-up">
-        <p class="section-label">Methodology</p>
-        <h2 class="section-title">How I <em>Work</em></h2>
-        <p class="section-desc">From architecture to deployment — a clean, iterative flow.</p>
-      </div>
-      <div class="process-grid">
-        <div class="process-step fade-up">
-          <span class="process-icon">◇</span>
-          <div class="process-label">Design</div>
-          <div class="process-desc">Architecture planning, data flow, modular boundaries</div>
-        </div>
-        <div class="process-step fade-up">
-          <span class="process-icon">▣</span>
-          <div class="process-label">Abstract</div>
-          <div class="process-desc">Interfaces, DI, reusable component isolation</div>
-        </div>
-        <div class="process-step fade-up">
-          <span class="process-icon">◈</span>
-          <div class="process-label">Optimize</div>
-          <div class="process-desc">Memory, network, cold‑path elimination</div>
-        </div>
-        <div class="process-step fade-up">
-          <span class="process-icon">◆</span>
-          <div class="process-label">Ship</div>
-          <div class="process-desc">Stress test, telemetry, production deployment</div>
         </div>
       </div>
     </div>
@@ -1220,30 +1092,15 @@
         nav.classList.toggle('scrolled', window.scrollY > 40);
       });
 
-      // ——— Bare Metal ———
-      let bareMetal = localStorage.getItem('bareMetal') === 'true';
-      if (bareMetal) document.body.classList.add('bare-metal');
-      document.getElementById('bareMetalToggle')?.addEventListener('click', () => {
-        bareMetal = !bareMetal;
-        document.body.classList.toggle('bare-metal', bareMetal);
-        localStorage.setItem('bareMetal', bareMetal);
-        showToast(bareMetal ? 'Bare Metal' : 'Glass');
-      });
-
       // ——— Keyboard ———
       document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-        const map = { '1': 'home', '2': 'process', '3': 'showcase', '4': 'toolchain', '5': 'projects', '6': 'contact' };
+        const map = { '1': 'home', '2': 'showcase', '3': 'toolchain', '4': 'projects', '5': 'contact' };
         if (map[e.key]) {
           const el = document.getElementById(map[e.key]);
           if (el) window.scrollTo({ top: el.offsetTop - 72, behavior: 'smooth' });
         }
         if (e.key === '0') window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (e.key === 'Escape') {
-          bareMetal = !bareMetal;
-          document.body.classList.toggle('bare-metal', bareMetal);
-          localStorage.setItem('bareMetal', bareMetal);
-        }
       });
 
       // ——— Fade-up ———
@@ -1317,8 +1174,8 @@
         });
       });
 
-      console.log('%c[Yarik1] %cDark Glass · systems online',
-        'color:#0a84ff;font-weight:700', 'color:#86868b');
+      console.log('%c[Yarik1] %cDark Glass · refined',
+        'color:#0a84ff;font-weight:700', 'color:#8e8e93');
     })();
   </script>
 </body>
