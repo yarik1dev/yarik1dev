@@ -336,80 +336,52 @@
       object-fit: cover;
       display: block;
     }
-    .showcase-item .video-controls {
+    .showcase-item .video-overlay {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 0.8rem 1rem;
-      background: linear-gradient(transparent, rgba(11, 11, 14, 0.85));
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .showcase-item:hover .video-controls { opacity: 1; }
-    .showcase-item .video-controls button {
-      background: var(--glass-bg);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--glass-border);
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--text-primary);
-      font-size: 0.7rem;
-      cursor: pointer;
-      transition: 0.2s;
-      font-family: var(--font);
+      background: rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
     }
-    .showcase-item .video-controls button:hover {
-      background: var(--glass-hover);
-      border-color: rgba(255, 255, 255, 0.2);
+    .showcase-item:hover .video-overlay { opacity: 1; }
+    .showcase-item .video-overlay .play-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 1.2rem;
+      color: white;
+      transition: 0.3s;
+      pointer-events: none;
     }
-    .showcase-item .video-controls .time {
-      font-size: 0.55rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      font-variant-numeric: tabular-nums;
-    }
-    .showcase-item .video-controls .progress {
-      flex: 1;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 2px;
-      cursor: pointer;
-      position: relative;
-    }
-    .showcase-item .video-controls .progress .bar {
-      height: 100%;
-      width: 0%;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: width 0.1s linear;
-    }
-    .showcase-overlay {
+    .showcase-item:hover .video-overlay .play-icon { transform: scale(1.05); border-color: rgba(255, 255, 255, 0.5); }
+    .showcase-item .bottom {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 1rem 1rem 3.2rem;
-      background: linear-gradient(transparent, rgba(11, 11, 14, 0.7));
+      padding: 1rem 1.2rem 1rem;
+      background: linear-gradient(transparent, rgba(11, 11, 14, 0.75));
       pointer-events: none;
     }
-    .showcase-overlay .tag {
+    .showcase-item .bottom .tag {
       font-size: 0.45rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--accent);
     }
-    .showcase-overlay .desc {
-      font-size: 0.75rem;
+    .showcase-item .bottom .desc {
+      font-size: 0.8rem;
       font-weight: 500;
       color: var(--text-primary);
     }
@@ -725,7 +697,6 @@
       .projects-grid { grid-template-columns: 1fr; }
       .lib-grid { gap: 0.3rem; }
       .lib-card { font-size: 0.55rem; padding: 0.25rem 0.8rem; }
-      .showcase-item .video-controls { opacity: 1; }
     }
 
     @media (max-width: 480px) {
@@ -743,7 +714,6 @@
       .section-title em { color: #0066cc !important; }
       .project-card, .showcase-item { border: 1px solid #ddd !important; box-shadow: none !important; background: #fafafa !important; }
       .fade-up { opacity: 1 !important; transform: none !important; }
-      .showcase-item .video-controls { display: none !important; }
     }
   </style>
 </head>
@@ -808,46 +778,34 @@
         <p class="section-desc">Live examples of production systems in action.</p>
       </div>
       <div class="showcase-grid">
-        <div class="showcase-item fade-up" data-video="showcase1">
+        <div class="showcase-item fade-up">
           <video src="./assets/showcase1.mp4" muted loop playsinline preload="metadata"></video>
-          <div class="showcase-overlay">
-            <span class="tag">RNG Roll</span>
-            <span class="desc">Random Number Generation · Spin System</span>
+          <div class="video-overlay">
+            <div class="play-icon">▶</div>
           </div>
-          <div class="video-controls">
-            <button class="play-btn" aria-label="Play">▶</button>
-            <span class="time">0:00 / 0:00</span>
-            <div class="progress">
-              <div class="bar"></div>
-            </div>
+          <div class="bottom">
+            <div class="tag">RNG Roll</div>
+            <div class="desc">Random Number Generation · Spin System</div>
           </div>
         </div>
-        <div class="showcase-item fade-up" data-video="showcase2">
+        <div class="showcase-item fade-up">
           <video src="./assets/showcase2.mp4" muted loop playsinline preload="metadata"></video>
-          <div class="showcase-overlay">
-            <span class="tag">Advanced Spin Wheel</span>
-            <span class="desc">Weighted Probability · Reward Distribution</span>
+          <div class="video-overlay">
+            <div class="play-icon">▶</div>
           </div>
-          <div class="video-controls">
-            <button class="play-btn" aria-label="Play">▶</button>
-            <span class="time">0:00 / 0:00</span>
-            <div class="progress">
-              <div class="bar"></div>
-            </div>
+          <div class="bottom">
+            <div class="tag">Advanced Spin Wheel</div>
+            <div class="desc">Weighted Probability · Reward Distribution</div>
           </div>
         </div>
-        <div class="showcase-item fade-up" data-video="showcase3">
+        <div class="showcase-item fade-up">
           <video src="./assets/showcase3.mp4" muted loop playsinline preload="metadata"></video>
-          <div class="showcase-overlay">
-            <span class="tag">Duel Framework</span>
-            <span class="desc">PvP System · Matchmaking · ELO</span>
+          <div class="video-overlay">
+            <div class="play-icon">▶</div>
           </div>
-          <div class="video-controls">
-            <button class="play-btn" aria-label="Play">▶</button>
-            <span class="time">0:00 / 0:00</span>
-            <div class="progress">
-              <div class="bar"></div>
-            </div>
+          <div class="bottom">
+            <div class="tag">Duel Framework</div>
+            <div class="desc">PvP System · Matchmaking · ELO</div>
           </div>
         </div>
       </div>
@@ -1073,106 +1031,64 @@
         });
       });
 
-      // Video controls
+      // Simple video controls — play/pause on click, sound on hover
       document.querySelectorAll('.showcase-item').forEach(item => {
         const video = item.querySelector('video');
-        const playBtn = item.querySelector('.play-btn');
-        const timeDisplay = item.querySelector('.time');
-        const progressBar = item.querySelector('.bar');
+        const overlay = item.querySelector('.video-overlay');
+        const playIcon = overlay?.querySelector('.play-icon');
 
-        let isPlaying = false;
+        let hoverPlay = false;
 
-        function togglePlay() {
+        // Click toggles play/pause
+        item.addEventListener('click', function(e) {
+          if (e.target.closest('.bottom')) return;
           if (video.paused) {
-            video.play();
-            isPlaying = true;
-            playBtn.textContent = '⏸';
+            video.muted = false;
+            video.play().then(() => {
+              if (playIcon) playIcon.textContent = '⏸';
+              hoverPlay = true;
+            }).catch(() => {});
           } else {
             video.pause();
-            isPlaying = false;
-            playBtn.textContent = '▶';
-          }
-        }
-
-        function updateProgress() {
-          if (video.duration) {
-            const percent = (video.currentTime / video.duration) * 100;
-            progressBar.style.width = percent + '%';
-            const mins = Math.floor(video.currentTime / 60);
-            const secs = Math.floor(video.currentTime % 60);
-            const totalMins = Math.floor(video.duration / 60);
-            const totalSecs = Math.floor(video.duration % 60);
-            timeDisplay.textContent =
-              mins + ':' + (secs < 10 ? '0' : '') + secs +
-              ' / ' +
-              totalMins + ':' + (totalSecs < 10 ? '0' : '') + totalSecs;
-          }
-        }
-
-        video.addEventListener('timeupdate', updateProgress);
-        video.addEventListener('loadedmetadata', updateProgress);
-
-        // Click on video toggles play/pause
-        video.addEventListener('click', togglePlay);
-
-        // Play button
-        playBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          togglePlay();
-        });
-
-        // Progress bar click
-        const progress = item.querySelector('.progress');
-        progress.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const rect = this.getBoundingClientRect();
-          const pos = (e.clientX - rect.left) / rect.width;
-          if (video.duration) {
-            video.currentTime = pos * video.duration;
+            if (playIcon) playIcon.textContent = '▶';
+            hoverPlay = false;
           }
         });
 
-        // Hover: play sound
-        let hoverTimeout;
+        // Hover: play with sound
         item.addEventListener('mouseenter', () => {
-          if (video.muted) {
-            video.muted = false;
-            // Restore previous volume if needed
-          }
-          // If video is paused, start playing on hover with sound
           if (video.paused) {
+            video.muted = false;
             video.play().catch(() => {});
+            if (playIcon) playIcon.textContent = '⏸';
+            hoverPlay = true;
+          } else {
+            video.muted = false;
           }
         });
 
-        // Добавляем логику для остановки при уходе мыши
+        // Leave: pause only if it was started by hover
         item.addEventListener('mouseleave', () => {
-          // Если видео играет и не было нажато на play — оставляем играть
-          // Но если было нажато play — не трогаем
-          // Проверяем, играет ли видео и не было ли клика по play
-          if (!isPlaying && !video.paused) {
-            // Автоматическое воспроизведение по ховеру — останавливаем
-            // но только если не было ручного запуска
-            if (!item.dataset.manuallyStarted) {
-              video.pause();
-            }
+          if (video.paused) return;
+          if (hoverPlay) {
+            video.pause();
+            if (playIcon) playIcon.textContent = '▶';
+            hoverPlay = false;
           }
         });
 
-        // Если пользователь кликнул play — запоминаем
-        playBtn.addEventListener('click', function() {
-          item.dataset.manuallyStarted = 'true';
-        });
-        video.addEventListener('click', function() {
-          item.dataset.manuallyStarted = 'true';
+        // Update play icon when video ends
+        video.addEventListener('ended', () => {
+          if (playIcon) playIcon.textContent = '▶';
+          hoverPlay = false;
         });
 
-        // Stop video when leaving page
+        // Handle visibility change — pause all
         document.addEventListener('visibilitychange', () => {
           if (document.hidden) {
             document.querySelectorAll('.showcase-item video').forEach(v => v.pause());
-            document.querySelectorAll('.play-btn').forEach(b => b.textContent = '▶');
-            isPlaying = false;
+            document.querySelectorAll('.play-icon').forEach(icon => icon.textContent = '▶');
+            hoverPlay = false;
           }
         });
       });
