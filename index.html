@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Yarik1 · Dark Glass</title>
+  <title>Yarik1 · Roblox Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
   <style>
-    /* ============================================
-       ROOT — Dark Glass · Apple minimal
-       ============================================ */
     * {
       margin: 0;
       padding: 0;
@@ -18,28 +15,24 @@
     }
 
     :root {
-      --bg: #141416;
-      --bg-secondary: #1c1c20;
-      --glass-bg: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.06);
-      --glass-hover: rgba(255, 255, 255, 0.08);
-      --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-      --glass-blur: 32px;
+      --bg: #0b0b0e;
+      --bg-secondary: #131317;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.07);
+      --glass-hover: rgba(255, 255, 255, 0.09);
+      --glass-shadow: 0 8px 48px rgba(0, 0, 0, 0.6);
+      --glass-blur: 36px;
       --text-primary: #f5f5f7;
       --text-secondary: #8e8e93;
       --text-tertiary: #5e5e62;
       --accent: #0a84ff;
-      --accent-dim: rgba(10, 132, 255, 0.12);
-      --accent-glow: rgba(10, 132, 255, 0.08);
+      --accent-dim: rgba(10, 132, 255, 0.10);
       --radius: 16px;
       --radius-sm: 10px;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
+    html { scroll-behavior: smooth; }
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -49,20 +42,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--text-tertiary);
-      border-radius: 20px;
-    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--text-tertiary); border-radius: 20px; }
 
-    /* ============================================
-       LOADER
-       ============================================ */
     #loader {
       position: fixed;
       inset: 0;
@@ -74,11 +57,7 @@
       justify-content: center;
       transition: opacity 0.8s ease, visibility 0.8s;
     }
-    #loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     .loader-ring {
       width: 36px;
       height: 36px;
@@ -87,9 +66,7 @@
       border-top-color: var(--accent);
       animation: spin 0.9s cubic-bezier(0.6, 0, 0.4, 1) infinite;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
     .loader-text {
       margin-top: 0.8rem;
       font-size: 0.55rem;
@@ -99,9 +76,6 @@
       text-transform: uppercase;
     }
 
-    /* ============================================
-       SCROLL PROGRESS
-       ============================================ */
     .scroll-progress {
       position: fixed;
       top: 0;
@@ -114,9 +88,6 @@
       opacity: 0.4;
     }
 
-    /* ============================================
-       NAV — Dark Glass
-       ============================================ */
     nav {
       position: fixed;
       top: 16px;
@@ -126,7 +97,7 @@
       width: calc(100% - 32px);
       max-width: 1000px;
       padding: 0 1.6rem;
-      height: 46px;
+      height: 48px;
       background: var(--glass-bg);
       backdrop-filter: blur(var(--glass-blur));
       -webkit-backdrop-filter: blur(var(--glass-blur));
@@ -139,10 +110,9 @@
       transition: all 0.4s ease;
     }
     nav.scrolled {
-      background: rgba(20, 20, 22, 0.88);
+      background: rgba(11, 11, 14, 0.88);
       border-color: rgba(255, 255, 255, 0.08);
     }
-
     .nav-brand {
       font-size: 0.8rem;
       font-weight: 600;
@@ -158,7 +128,6 @@
       font-size: 0.55rem;
       letter-spacing: 0.5px;
     }
-
     .nav-links {
       display: flex;
       list-style: none;
@@ -175,15 +144,8 @@
       transition: all 0.25s;
       letter-spacing: 0.3px;
     }
-    .nav-links a:hover {
-      color: var(--text-primary);
-      background: var(--glass-hover);
-    }
-    .nav-links a.active {
-      color: var(--text-primary);
-      background: var(--accent-dim);
-    }
-
+    .nav-links a:hover { color: var(--text-primary); background: var(--glass-hover); }
+    .nav-links a.active { color: var(--text-primary); background: var(--accent-dim); }
     .mobile-toggle {
       display: none;
       background: none;
@@ -194,9 +156,6 @@
       padding: 0.2rem 0.4rem;
     }
 
-    /* ============================================
-       SECTION BASE
-       ============================================ */
     section {
       position: relative;
       z-index: 2;
@@ -205,26 +164,15 @@
       align-items: center;
       min-height: 100vh;
     }
-    .container {
-      max-width: 1050px;
-      width: 100%;
-      margin: 0 auto;
-    }
-
+    .container { max-width: 1050px; width: 100%; margin: 0 auto; }
     .fade-up {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
+    .section-header { text-align: center; margin-bottom: 3rem; }
     .section-label {
       font-size: 0.5rem;
       font-weight: 600;
@@ -239,10 +187,7 @@
       letter-spacing: -1.5px;
       line-height: 1.1;
     }
-    .section-title em {
-      font-style: normal;
-      color: var(--accent);
-    }
+    .section-title em { font-style: normal; color: var(--accent); }
     .section-desc {
       font-size: 0.95rem;
       color: var(--text-secondary);
@@ -250,20 +195,13 @@
       font-weight: 400;
     }
 
-    /* ============================================
-       HOME — Hero
-       ============================================ */
     #home .container {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3.5rem;
       align-items: center;
     }
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+    .hero-content { display: flex; flex-direction: column; gap: 1rem; }
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -333,12 +271,7 @@
       border-color: rgba(255, 255, 255, 0.12);
       color: var(--text-primary);
     }
-
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    .hero-visual { display: flex; justify-content: center; align-items: center; }
     .avatar-glass {
       width: 300px;
       height: 360px;
@@ -351,10 +284,7 @@
       position: relative;
       transition: 0.4s;
     }
-    .avatar-glass:hover {
-      transform: scale(1.01);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
+    .avatar-glass:hover { transform: scale(1.01); border-color: rgba(255, 255, 255, 0.1); }
     .avatar-glass img {
       width: 100%;
       height: 100%;
@@ -382,13 +312,10 @@
       50% { opacity: 0.5; transform: scale(1.01); }
     }
 
-    /* ============================================
-       SHOWCASE — Video
-       ============================================ */
     .showcase-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
+      gap: 1.5rem;
     }
     .showcase-item {
       border-radius: var(--radius-sm);
@@ -400,45 +327,93 @@
       aspect-ratio: 16/9;
       position: relative;
       transition: 0.35s;
+      cursor: pointer;
     }
-    .showcase-item:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.1);
-      background: var(--glass-hover);
-    }
+    .showcase-item:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.1); }
     .showcase-item video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
+    .showcase-item .video-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.8rem 1rem;
+      background: linear-gradient(transparent, rgba(11, 11, 14, 0.85));
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .showcase-item:hover .video-controls { opacity: 1; }
+    .showcase-item .video-controls button {
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: var(--font);
+    }
+    .showcase-item .video-controls button:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .showcase-item .video-controls .time {
+      font-size: 0.55rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+    .showcase-item .video-controls .progress {
+      flex: 1;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+    .showcase-item .video-controls .progress .bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.1s linear;
+    }
     .showcase-overlay {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 1rem 1rem 0.6rem;
-      background: linear-gradient(transparent, rgba(20, 20, 22, 0.85));
-      backdrop-filter: blur(4px);
-      display: flex;
-      flex-direction: column;
+      padding: 1rem 1rem 3.2rem;
+      background: linear-gradient(transparent, rgba(11, 11, 14, 0.7));
+      pointer-events: none;
     }
-    .showcase-tag {
+    .showcase-overlay .tag {
       font-size: 0.45rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--accent);
     }
-    .showcase-desc {
+    .showcase-overlay .desc {
       font-size: 0.75rem;
       font-weight: 500;
       color: var(--text-primary);
     }
 
-    /* ============================================
-       TOOLCHAIN — Pill chips
-       ============================================ */
     .lib-grid {
       display: flex;
       flex-wrap: wrap;
@@ -466,9 +441,6 @@
       transform: translateY(-2px);
     }
 
-    /* ============================================
-       PROJECTS — Glass Cards
-       ============================================ */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -515,20 +487,10 @@
       transition: 0.5s;
       opacity: 0;
     }
-    .project-thumb img.loaded {
-      opacity: 1;
-    }
-    .project-card:hover .project-thumb img {
-      transform: scale(1.03);
-    }
-    .project-body {
-      padding: 1.2rem 1.4rem;
-    }
-    .project-name {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
+    .project-thumb img.loaded { opacity: 1; }
+    .project-card:hover .project-thumb img { transform: scale(1.03); }
+    .project-body { padding: 1.2rem 1.4rem; }
+    .project-name { font-size: 1rem; font-weight: 700; letter-spacing: -0.3px; }
     .project-role {
       font-size: 0.5rem;
       font-weight: 600;
@@ -557,12 +519,7 @@
       animation: pulse-dot 2s infinite;
     }
 
-    /* ============================================
-       CONTACT
-       ============================================ */
-    .contact-wrapper {
-      text-align: center;
-    }
+    .contact-wrapper { text-align: center; }
     .availability {
       display: inline-flex;
       align-items: center;
@@ -604,12 +561,7 @@
       background: var(--glass-hover);
       transform: translateY(-2px);
     }
-    .contact-card svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--accent);
-      flex-shrink: 0;
-    }
+    .contact-card svg { width: 20px; height: 20px; fill: var(--accent); flex-shrink: 0; }
     .contact-label {
       font-size: 0.45rem;
       font-weight: 600;
@@ -617,11 +569,7 @@
       letter-spacing: 1.5px;
       color: var(--text-tertiary);
     }
-    .contact-value {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
+    .contact-value { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
     .copy-btn {
       background: none;
       border: 1px solid var(--glass-border);
@@ -659,9 +607,6 @@
       background: var(--glass-hover);
     }
 
-    /* ============================================
-       BACK TO TOP — Glass
-       ============================================ */
     #backToTop {
       position: fixed;
       bottom: 1.8rem;
@@ -683,11 +628,7 @@
       transition: 0.35s;
       pointer-events: none;
     }
-    #backToTop.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+    #backToTop.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
     #backToTop:hover {
       border-color: rgba(255, 255, 255, 0.12);
       background: var(--glass-hover);
@@ -701,13 +642,8 @@
       transform: rotate(-45deg) translateY(2px);
       transition: 0.3s;
     }
-    #backToTop:hover::after {
-      border-color: var(--text-primary);
-    }
+    #backToTop:hover::after { border-color: var(--text-primary); }
 
-    /* ============================================
-       TOAST
-       ============================================ */
     #toast {
       position: fixed;
       bottom: 3rem;
@@ -727,14 +663,8 @@
       transition: 0.3s;
       box-shadow: var(--glass-shadow);
     }
-    #toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ============================================
-       FOOTER
-       ============================================ */
     footer {
       position: relative;
       z-index: 2;
@@ -748,9 +678,6 @@
       border-top: 1px solid var(--glass-border);
     }
 
-    /* ============================================
-       RESPONSIVE
-       ============================================ */
     @media (max-width: 1024px) {
       #home .container {
         grid-template-columns: 1fr;
@@ -779,7 +706,7 @@
         top: 52px;
         left: 0;
         right: 0;
-        background: rgba(20, 20, 22, 0.96);
+        background: rgba(11, 11, 14, 0.96);
         backdrop-filter: blur(var(--glass-blur));
         border: 1px solid var(--glass-border);
         border-radius: var(--radius-sm);
@@ -788,17 +715,9 @@
         gap: 0.1rem;
         box-shadow: var(--glass-shadow);
       }
-      .nav-links.active {
-        display: flex;
-      }
-      .nav-links a {
-        padding: 0.4rem 1rem;
-        width: 100%;
-        text-align: center;
-      }
-      .mobile-toggle {
-        display: block;
-      }
+      .nav-links.active { display: flex; }
+      .nav-links a { padding: 0.4rem 1rem; width: 100%; text-align: center; }
+      .mobile-toggle { display: block; }
       section { padding: 70px 1rem 50px; }
       .hero-title { font-size: 2.6rem; }
       .section-title { font-size: 2rem; }
@@ -806,6 +725,7 @@
       .projects-grid { grid-template-columns: 1fr; }
       .lib-grid { gap: 0.3rem; }
       .lib-card { font-size: 0.55rem; padding: 0.25rem 0.8rem; }
+      .showcase-item .video-controls { opacity: 1; }
     }
 
     @media (max-width: 480px) {
@@ -823,32 +743,24 @@
       .section-title em { color: #0066cc !important; }
       .project-card, .showcase-item { border: 1px solid #ddd !important; box-shadow: none !important; background: #fafafa !important; }
       .fade-up { opacity: 1 !important; transform: none !important; }
+      .showcase-item .video-controls { display: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- LOADER -->
   <div id="loader">
     <div class="loader-ring"></div>
     <div class="loader-text">Loading</div>
   </div>
 
-  <!-- TOAST -->
   <div id="toast"></div>
-
-  <!-- SCROLL PROGRESS -->
   <div class="scroll-progress" id="scrollProgress"></div>
-
-  <!-- BACK TO TOP -->
   <div id="backToTop"></div>
 
-  <!-- ============================================================
-  NAV — Dark Glass
-  ============================================================ -->
   <nav id="navbar">
     <div class="nav-brand">
-      Yarik1 <span>· Systems</span>
+      Yarik1 <span>· Roblox Developer</span>
     </div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="active">Home</a></li>
@@ -860,9 +772,6 @@
     <button class="mobile-toggle" id="menuBtn">☰</button>
   </nav>
 
-  <!-- ============================================================
-  HOME
-  ============================================================ -->
   <section id="home">
     <div class="container">
       <div class="hero-content">
@@ -891,9 +800,6 @@
     </div>
   </section>
 
-  <!-- ============================================================
-  SHOWCASE
-  ============================================================ -->
   <section id="showcase">
     <div class="container">
       <div class="section-header fade-up">
@@ -902,34 +808,52 @@
         <p class="section-desc">Live examples of production systems in action.</p>
       </div>
       <div class="showcase-grid">
-        <div class="showcase-item fade-up">
-          <video src="./assets/showcase1.mp4" muted loop autoplay playsinline></video>
+        <div class="showcase-item fade-up" data-video="showcase1">
+          <video src="./assets/showcase1.mp4" muted loop playsinline preload="metadata"></video>
           <div class="showcase-overlay">
-            <span class="showcase-tag">Replica</span>
-            <span class="showcase-desc">Round System · State Sync</span>
+            <span class="tag">RNG Roll</span>
+            <span class="desc">Random Number Generation · Spin System</span>
+          </div>
+          <div class="video-controls">
+            <button class="play-btn" aria-label="Play">▶</button>
+            <span class="time">0:00 / 0:00</span>
+            <div class="progress">
+              <div class="bar"></div>
+            </div>
           </div>
         </div>
-        <div class="showcase-item fade-up">
-          <video src="./assets/showcase2.mp4" muted loop autoplay playsinline></video>
+        <div class="showcase-item fade-up" data-video="showcase2">
+          <video src="./assets/showcase2.mp4" muted loop playsinline preload="metadata"></video>
           <div class="showcase-overlay">
-            <span class="showcase-tag">BridgeNet2</span>
-            <span class="showcase-desc">Network Layer · Remote Transport</span>
+            <span class="tag">Advanced Spin Wheel</span>
+            <span class="desc">Weighted Probability · Reward Distribution</span>
+          </div>
+          <div class="video-controls">
+            <button class="play-btn" aria-label="Play">▶</button>
+            <span class="time">0:00 / 0:00</span>
+            <div class="progress">
+              <div class="bar"></div>
+            </div>
           </div>
         </div>
-        <div class="showcase-item fade-up">
-          <video src="./assets/showcase3.mp4" muted loop autoplay playsinline></video>
+        <div class="showcase-item fade-up" data-video="showcase3">
+          <video src="./assets/showcase3.mp4" muted loop playsinline preload="metadata"></video>
           <div class="showcase-overlay">
-            <span class="showcase-tag">ECS</span>
-            <span class="showcase-desc">Jolt + Jecs · Physics Framework</span>
+            <span class="tag">Duel Framework</span>
+            <span class="desc">PvP System · Matchmaking · ELO</span>
+          </div>
+          <div class="video-controls">
+            <button class="play-btn" aria-label="Play">▶</button>
+            <span class="time">0:00 / 0:00</span>
+            <div class="progress">
+              <div class="bar"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-  TOOLCHAIN
-  ============================================================ -->
   <section id="toolchain">
     <div class="container">
       <div class="section-header fade-up">
@@ -958,9 +882,6 @@
     </div>
   </section>
 
-  <!-- ============================================================
-  PROJECTS
-  ============================================================ -->
   <section id="projects">
     <div class="container">
       <div class="section-header fade-up">
@@ -1002,14 +923,14 @@
             <span class="project-stat"><span class="dot"></span>PEAK 84 CCU</span>
           </div>
         </a>
-        <a href="https://www.roblox.com/games/117527250434588/Incremental-Template" target="_blank" class="project-card fade-up">
+        <a href="https://www.roblox.com/games/133449673832287/RNG" target="_blank" class="project-card fade-up">
           <div class="project-thumb">
             <div class="shimmer"></div>
-            <img data-src="https://t3.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Incremental Template" loading="lazy" />
+            <img data-src="https://tr.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Pickaxe RNG" loading="lazy" />
           </div>
           <div class="project-body">
-            <h3 class="project-name">Incremental Template</h3>
-            <p class="project-role">Architecture Engineer</p>
+            <h3 class="project-name">Pickaxe RNG</h3>
+            <p class="project-role">Lead Developer</p>
             <span class="project-stat"><span class="dot"></span>DEVELOPMENT</span>
           </div>
         </a>
@@ -1017,9 +938,6 @@
     </div>
   </section>
 
-  <!-- ============================================================
-  CONTACT
-  ============================================================ -->
   <section id="contact">
     <div class="container">
       <div class="section-header fade-up">
@@ -1046,24 +964,16 @@
     </div>
   </section>
 
-  <!-- ============================================================
-  FOOTER
-  ============================================================ -->
-  <footer>Yarik1 · Systems Engineering · 2026</footer>
+  <footer>Yarik1 · Roblox Developer · 2026</footer>
 
-  <!-- ============================================================
-  SCRIPT
-  ============================================================ -->
   <script>
     (function() {
       'use strict';
 
-      // ——— Loader ———
       window.addEventListener('load', () => {
         setTimeout(() => document.getElementById('loader')?.classList.add('hidden'), 1000);
       });
 
-      // ——— Toast ———
       function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -1072,27 +982,23 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 1600);
       }
 
-      // ——— Scroll Progress ———
       const sp = document.getElementById('scrollProgress');
       window.addEventListener('scroll', () => {
         const h = document.documentElement.scrollHeight - window.innerHeight;
         sp.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
       });
 
-      // ——— Back to Top ———
       const btt = document.getElementById('backToTop');
       window.addEventListener('scroll', () => {
         btt.classList.toggle('visible', window.scrollY > 400);
       });
       btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-      // ——— Nav scroll effect ———
       const nav = document.getElementById('navbar');
       window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 40);
       });
 
-      // ——— Keyboard ———
       document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
         const map = { '1': 'home', '2': 'showcase', '3': 'toolchain', '4': 'projects', '5': 'contact' };
@@ -1103,7 +1009,6 @@
         if (e.key === '0') window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // ——— Fade-up ———
       const fades = document.querySelectorAll('.fade-up');
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
@@ -1115,7 +1020,6 @@
       }, { threshold: 0.12 });
       fades.forEach(el => obs.observe(el));
 
-      // ——— Lazy images ———
       const imgs = document.querySelectorAll('.project-thumb img[data-src]');
       const imgObs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
@@ -1129,18 +1033,15 @@
       }, { threshold: 0.1 });
       imgs.forEach(img => imgObs.observe(img));
 
-      // ——— Copy Discord ———
       document.getElementById('copyDiscord')?.addEventListener('click', () => {
         navigator.clipboard.writeText('glogangs').then(() => showToast('Copied!'));
       });
 
-      // ——— Export Dossier ———
       document.getElementById('exportDossier')?.addEventListener('click', () => {
         showToast('Preparing dossier…');
         setTimeout(() => window.print(), 300);
       });
 
-      // ——— Navigation ———
       const menuBtn = document.getElementById('menuBtn');
       const navLinks = document.getElementById('navLinks');
       menuBtn?.addEventListener('click', () => {
@@ -1154,7 +1055,6 @@
         });
       });
 
-      // ——— Nav active ———
       const sections = document.querySelectorAll('section[id]');
       const anchors = document.querySelectorAll('.nav-links a[href^="#"]');
       window.addEventListener('scroll', () => {
@@ -1165,7 +1065,6 @@
         anchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
       }, { passive: true });
 
-      // ——— Smooth scroll ———
       document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', function(e) {
           e.preventDefault();
@@ -1174,7 +1073,111 @@
         });
       });
 
-      console.log('%c[Yarik1] %cDark Glass · refined',
+      // Video controls
+      document.querySelectorAll('.showcase-item').forEach(item => {
+        const video = item.querySelector('video');
+        const playBtn = item.querySelector('.play-btn');
+        const timeDisplay = item.querySelector('.time');
+        const progressBar = item.querySelector('.bar');
+
+        let isPlaying = false;
+
+        function togglePlay() {
+          if (video.paused) {
+            video.play();
+            isPlaying = true;
+            playBtn.textContent = '⏸';
+          } else {
+            video.pause();
+            isPlaying = false;
+            playBtn.textContent = '▶';
+          }
+        }
+
+        function updateProgress() {
+          if (video.duration) {
+            const percent = (video.currentTime / video.duration) * 100;
+            progressBar.style.width = percent + '%';
+            const mins = Math.floor(video.currentTime / 60);
+            const secs = Math.floor(video.currentTime % 60);
+            const totalMins = Math.floor(video.duration / 60);
+            const totalSecs = Math.floor(video.duration % 60);
+            timeDisplay.textContent =
+              mins + ':' + (secs < 10 ? '0' : '') + secs +
+              ' / ' +
+              totalMins + ':' + (totalSecs < 10 ? '0' : '') + totalSecs;
+          }
+        }
+
+        video.addEventListener('timeupdate', updateProgress);
+        video.addEventListener('loadedmetadata', updateProgress);
+
+        // Click on video toggles play/pause
+        video.addEventListener('click', togglePlay);
+
+        // Play button
+        playBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          togglePlay();
+        });
+
+        // Progress bar click
+        const progress = item.querySelector('.progress');
+        progress.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const rect = this.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          if (video.duration) {
+            video.currentTime = pos * video.duration;
+          }
+        });
+
+        // Hover: play sound
+        let hoverTimeout;
+        item.addEventListener('mouseenter', () => {
+          if (video.muted) {
+            video.muted = false;
+            // Restore previous volume if needed
+          }
+          // If video is paused, start playing on hover with sound
+          if (video.paused) {
+            video.play().catch(() => {});
+          }
+        });
+
+        // Добавляем логику для остановки при уходе мыши
+        item.addEventListener('mouseleave', () => {
+          // Если видео играет и не было нажато на play — оставляем играть
+          // Но если было нажато play — не трогаем
+          // Проверяем, играет ли видео и не было ли клика по play
+          if (!isPlaying && !video.paused) {
+            // Автоматическое воспроизведение по ховеру — останавливаем
+            // но только если не было ручного запуска
+            if (!item.dataset.manuallyStarted) {
+              video.pause();
+            }
+          }
+        });
+
+        // Если пользователь кликнул play — запоминаем
+        playBtn.addEventListener('click', function() {
+          item.dataset.manuallyStarted = 'true';
+        });
+        video.addEventListener('click', function() {
+          item.dataset.manuallyStarted = 'true';
+        });
+
+        // Stop video when leaving page
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            document.querySelectorAll('.showcase-item video').forEach(v => v.pause());
+            document.querySelectorAll('.play-btn').forEach(b => b.textContent = '▶');
+            isPlaying = false;
+          }
+        });
+      });
+
+      console.log('%c[Yarik1] %cRoblox Developer · portfolio refined',
         'color:#0a84ff;font-weight:700', 'color:#8e8e93');
     })();
   </script>
