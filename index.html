@@ -335,6 +335,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      background: #0b0b0e;
     }
     .showcase-item .video-overlay {
       position: absolute;
@@ -342,12 +343,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.25);
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      background: rgba(0, 0, 0, 0.3);
+      opacity: 1;
+      transition: opacity 0.4s ease;
       pointer-events: none;
     }
-    .showcase-item:hover .video-overlay { opacity: 1; }
     .showcase-item .video-overlay .play-icon {
       width: 56px;
       height: 56px;
@@ -363,6 +363,7 @@
       transition: 0.3s;
       pointer-events: none;
     }
+    .showcase-item .video-overlay.hidden { opacity: 0; pointer-events: none; }
     .showcase-item:hover .video-overlay .play-icon { transform: scale(1.05); border-color: rgba(255, 255, 255, 0.5); }
     .showcase-item .bottom {
       position: absolute;
@@ -714,6 +715,7 @@
       .section-title em { color: #0066cc !important; }
       .project-card, .showcase-item { border: 1px solid #ddd !important; box-shadow: none !important; background: #fafafa !important; }
       .fade-up { opacity: 1 !important; transform: none !important; }
+      .showcase-item .video-overlay { display: none !important; }
     }
   </style>
 </head>
@@ -779,7 +781,7 @@
       </div>
       <div class="showcase-grid">
         <div class="showcase-item fade-up">
-          <video src="./assets/showcase1.mp4" muted loop playsinline preload="metadata"></video>
+          <video src="./assets/showcase1.mp4" muted playsinline preload="metadata"></video>
           <div class="video-overlay">
             <div class="play-icon">▶</div>
           </div>
@@ -789,7 +791,7 @@
           </div>
         </div>
         <div class="showcase-item fade-up">
-          <video src="./assets/showcase2.mp4" muted loop playsinline preload="metadata"></video>
+          <video src="./assets/showcase2.mp4" muted playsinline preload="metadata"></video>
           <div class="video-overlay">
             <div class="play-icon">▶</div>
           </div>
@@ -799,7 +801,7 @@
           </div>
         </div>
         <div class="showcase-item fade-up">
-          <video src="./assets/showcase3.mp4" muted loop playsinline preload="metadata"></video>
+          <video src="./assets/showcase3.mp4" muted playsinline preload="metadata"></video>
           <div class="video-overlay">
             <div class="play-icon">▶</div>
           </div>
@@ -881,10 +883,21 @@
             <span class="project-stat"><span class="dot"></span>PEAK 84 CCU</span>
           </div>
         </a>
+        <a href="https://www.roblox.com/games/117527250434588/Incremental-Template" target="_blank" class="project-card fade-up">
+          <div class="project-thumb">
+            <div class="shimmer"></div>
+            <img data-src="https://t3.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Incremental Template" loading="lazy" />
+          </div>
+          <div class="project-body">
+            <h3 class="project-name">Incremental Template</h3>
+            <p class="project-role">Architecture Engineer</p>
+            <span class="project-stat"><span class="dot"></span>DEVELOPMENT</span>
+          </div>
+        </a>
         <a href="https://www.roblox.com/games/133449673832287/RNG" target="_blank" class="project-card fade-up">
           <div class="project-thumb">
             <div class="shimmer"></div>
-            <img data-src="https://tr.rbxcdn.com/180DAY-586d3a8e3fe2ae8314ede2cfa73c6986" alt="Pickaxe RNG" loading="lazy" />
+            <img data-src="https://placehold.co/768x432/1a1a2e/0a84ff?text=Pickaxe+RNG" alt="Pickaxe RNG" loading="lazy" />
           </div>
           <div class="project-body">
             <h3 class="project-name">Pickaxe RNG</h3>
@@ -1031,64 +1044,79 @@
         });
       });
 
-      // Simple video controls — play/pause on click, sound on hover
+      // Video: play/pause on click, hover for sound
       document.querySelectorAll('.showcase-item').forEach(item => {
         const video = item.querySelector('video');
         const overlay = item.querySelector('.video-overlay');
-        const playIcon = overlay?.querySelector('.play-icon');
-
-        let hoverPlay = false;
 
         // Click toggles play/pause
         item.addEventListener('click', function(e) {
           if (e.target.closest('.bottom')) return;
+
           if (video.paused) {
             video.muted = false;
             video.play().then(() => {
-              if (playIcon) playIcon.textContent = '⏸';
-              hoverPlay = true;
+              overlay.classList.add('hidden');
             }).catch(() => {});
           } else {
             video.pause();
-            if (playIcon) playIcon.textContent = '▶';
-            hoverPlay = false;
+            overlay.classList.remove('hidden');
           }
         });
 
-        // Hover: play with sound
+        // Hover: unmute and play if paused
         item.addEventListener('mouseenter', () => {
-          if (video.paused) {
-            video.muted = false;
+          video.muted = false;
+          if (video.paused && !video.ended) {
             video.play().catch(() => {});
-            if (playIcon) playIcon.textContent = '⏸';
-            hoverPlay = true;
-          } else {
-            video.muted = false;
           }
         });
 
-        // Leave: pause only if it was started by hover
+        // Leave: pause only if video was started by hover
         item.addEventListener('mouseleave', () => {
           if (video.paused) return;
-          if (hoverPlay) {
+          // Check if video was playing, but not if user manually played it
+          // We use a flag: if user clicked play, we don't pause on leave
+          if (!item.dataset.manuallyStarted) {
             video.pause();
-            if (playIcon) playIcon.textContent = '▶';
-            hoverPlay = false;
+            overlay.classList.remove('hidden');
           }
         });
 
-        // Update play icon when video ends
-        video.addEventListener('ended', () => {
-          if (playIcon) playIcon.textContent = '▶';
-          hoverPlay = false;
+        // If user clicks play, mark as manually started
+        item.addEventListener('click', function(e) {
+          if (e.target.closest('.bottom')) return;
+          item.dataset.manuallyStarted = 'true';
         });
 
-        // Handle visibility change — pause all
+        // When video ends, show overlay
+        video.addEventListener('ended', () => {
+          overlay.classList.remove('hidden');
+          item.dataset.manuallyStarted = 'false';
+        });
+
+        // Hide overlay when playing
+        video.addEventListener('play', () => {
+          if (!video.paused) {
+            overlay.classList.add('hidden');
+          }
+        });
+
+        video.addEventListener('pause', () => {
+          if (video.paused && !video.ended) {
+            overlay.classList.remove('hidden');
+          }
+        });
+
+        // Handle visibility change
         document.addEventListener('visibilitychange', () => {
           if (document.hidden) {
-            document.querySelectorAll('.showcase-item video').forEach(v => v.pause());
-            document.querySelectorAll('.play-icon').forEach(icon => icon.textContent = '▶');
-            hoverPlay = false;
+            document.querySelectorAll('.showcase-item video').forEach(v => {
+              v.pause();
+            });
+            document.querySelectorAll('.showcase-item .video-overlay').forEach(o => {
+              o.classList.remove('hidden');
+            });
           }
         });
       });
