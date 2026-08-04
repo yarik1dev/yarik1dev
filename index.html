@@ -381,11 +381,6 @@
       letter-spacing: 1.5px;
       color: var(--accent);
     }
-    .showcase-item .bottom .desc {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
 
     .lib-grid {
       display: flex;
@@ -787,7 +782,6 @@
           </div>
           <div class="bottom">
             <div class="tag">RNG Roll</div>
-            <div class="desc">Random Number Generation · Spin System</div>
           </div>
         </div>
         <div class="showcase-item fade-up">
@@ -797,7 +791,6 @@
           </div>
           <div class="bottom">
             <div class="tag">Advanced Spin Wheel</div>
-            <div class="desc">Weighted Probability · Reward Distribution</div>
           </div>
         </div>
         <div class="showcase-item fade-up">
@@ -807,7 +800,6 @@
           </div>
           <div class="bottom">
             <div class="tag">Duel Framework</div>
-            <div class="desc">PvP System · Matchmaking · ELO</div>
           </div>
         </div>
       </div>
@@ -1075,8 +1067,6 @@
         // Leave: pause only if video was started by hover
         item.addEventListener('mouseleave', () => {
           if (video.paused) return;
-          // Check if video was playing, but not if user manually played it
-          // We use a flag: if user clicked play, we don't pause on leave
           if (!item.dataset.manuallyStarted) {
             video.pause();
             overlay.classList.remove('hidden');
